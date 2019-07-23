@@ -2,6 +2,8 @@
 
 ## Description :
 Création site avec fournisseurs, produits, clients, et entrepôt.  
+Les gérants d'entrepôt selectionne des produits proposés par des fournisseurs.  
+Les fournisseurs proposent des produits.
 Pas de logo.  
 *Nom du site*: WPS simply.  
 *Nom de domaine*: WPSsimply.com
@@ -17,7 +19,7 @@ Il ne peut être gérant que d'un entrepôt.
 ![Schema UML](/www/public/assets/img/warehouse.png "Schema UML")
 
 ## Couleurs :
-Sombres : gris/noir principalement, mis en évidence avec du orange pour les liens.
+Sombres : gris/noir principalement, mis en évidence avec du orange pour les liens ou boutons.
 
 ## Pages :
     * Pages fournisseurs : une avec la liste de tous puis une avec chaque fournisseur et leurs produits.
@@ -41,10 +43,22 @@ Sombres : gris/noir principalement, mis en évidence avec du orange pour les lie
     * Ajout d'entrepôt et modification
       * URL : WPSsimply.com/warehouse/add *&&* WPSsimply.com/warehouse/slug-id/edit
 
+    * Section Administration
+      * URL : WPSsimply.com/admin
+        * Ajout de fournisseur et modification
+          * URL : WPSsimply.com/admin/supplier/add *&&* WPSsimply.com/admin/supplier/slug-id/edit
+        * Ajout d'entrepôt et modification
+          * URL : WPSsimply.com/admin/warehouse/add *&&* WPSsimply.com/admin/warehouse/slug-id/edit
+        * Ajout de produit et modification
+          * URL : WPSsimply.com/admin/product/add *&&* WPSsimply.com/admin/product/slug-id/edit
+        * Modification utilisateur
+          * URL : WPSsimply.com/admin/user/id
+
 ## Fonctionnalités : 
-* Ajouter un produit si on est fournisseur.
 * Devenir fournisseur.
-* Ajouter un warehouse.
+* Ajouter un produit si on est fournisseur.
+* Devenir gérant d'entrepôt.
+* Ajouter un warehouse si on est gérant.
 * Sélectionner des produits pour son warehouse.
 
 ## Maquette(s) :

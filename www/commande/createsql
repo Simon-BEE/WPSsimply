@@ -62,109 +62,65 @@ $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
  */
 
 echo "[";
-$etape = $pdo->exec("CREATE TABLE post(
-            id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-            name VARCHAR(255) NOT NULL,
-            slug VARCHAR(255) NOT NULL,
-            content TEXT(650000) NOT NULL,
-            created_at DATETIME NOT NULL,
+$etape = $pdo->exec("CREATE TABLE supplier(
+            `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+            `social` VARCHAR(255) NOT NULL,
+            `address` VARCHAR(255) NOT NULL,
+            `user_id` INT UNSIGNED NOT NULL
             PRIMARY KEY(id)
         )");
 echo "||";
-$etape = $pdo->exec("CREATE TABLE category(
-            id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-            name VARCHAR(255) NOT NULL,
-            slug VARCHAR(255) NOT NULL,
+
+$etape = $pdo->exec("CREATE TABLE product(
+            `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+            `name` VARCHAR(255) NOT NULL,
+            `supplier_id` INT UNSIGNED NOT NULL,
+            `toxicity` tinyint(1) NOT NULL DEFAULT 0,
+            `volume` FLOAT NOT NULL,
             PRIMARY KEY(id)
         )");
 echo "||";
-$pdo->exec("CREATE TABLE post_category(
-            post_id INT UNSIGNED NOT NULL,
-            category_id INT UNSIGNED NOT NULL,
-            PRIMARY KEY(post_id, category_id),
-            CONSTRAINT fk_post
-                FOREIGN KEY(post_id)
-                REFERENCES post(id)
-                ON DELETE CASCADE
-                ON UPDATE RESTRICT,
-            CONSTRAINT fk_category
-                FOREIGN KEY(category_id)
-                REFERENCES category(id)
-                ON DELETE CASCADE
-                ON UPDATE RESTRICT
+
+$pdo->exec("CREATE TABLE product_warehouse(
+            product_id INT UNSIGNED NOT NULL,
+            warehouse_id INT UNSIGNED NOT NULL
         )");
 echo "||";
 
-$pdo->exec("CREATE TABLE `beer` (
+$pdo->exec("CREATE TABLE `warehouse` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
-    `title` varchar(255) NOT NULL,
-    `img` text NOT NULL,
-    `content` longtext NOT NULL,
-    `price_ht` float NOT NULL,
-    `stock` int(11) NULL,
+    `name` varchar(255) NOT NULL,
+    `city_id` INT NOT NULL,
+    `surface` FLOAT NOT NULL,
+    `address` varchar(255) NOT NULL,
+    `user_id` INT UNSIGNED NOT NULL,
     PRIMARY KEY(id)
   )");
-  echo '||';
+echo "||";
 
-  $pdo->exec("CREATE TABLE `order` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `user_infos_id` int(11) NOT NULL,
-    `price_ht` float NOT NULL,
-    `port` float NOT NULL DEFAULT 0,
-    `tva` float NOT NULL,
-    `status_id` int(11) NOT NULL,
-    `token` varchar(10) NOT NULL,
-    `created_at` timestamp NULL DEFAULT current_timestamp(),
-    PRIMARY KEY(id)
-  )");
-
-$pdo->exec("CREATE TABLE `order_line` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `beer_id` int(11) NOT NULL,
-  `beer_price_ht` float NOT NULL,
-  `beer_qty` int(11) NOT NULL,
-  `token` varchar(10) NOT NULL,
+$pdo->exec("CREATE TABLE city(
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
   PRIMARY KEY(id)
 )");
+echo "||";
 
-$pdo->exec("CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mail` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `token` varchar(24) NOT NULL,
-  `verify` tinyint(1) NOT NULL DEFAULT 0,  
-  `created_at` timestamp NULL DEFAULT current_timestamp(),
+$pdo->exec("CREATE TABLE user(
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `mail` VARCHAR(255) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `role` INT UNSIGNED NOT NULL,
   PRIMARY KEY(id)
 )");
+echo "||";
 
-$pdo->exec("CREATE TABLE `user_infos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `lastname` varchar(255) NOT NULL,
-  `firstname` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `zip_code` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `country` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
+$pdo->exec("CREATE TABLE `role`(
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `status` VARCHAR(255) NOT NULL,
   PRIMARY KEY(id)
 )");
-
-$pdo->exec("CREATE TABLE `status` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `label` varchar(255) NOT NULL,
-  PRIMARY KEY(id)
-)");
-
-$pdo->exec("CREATE TABLE `config` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tva`float NOT NULL,
-  `port`float NOT NULL,
-  `ship_limit`float NOT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp(),
-  PRIMARY KEY(id)
-)");
+echo "||";
 
 echo "||||||||||||]";
 
