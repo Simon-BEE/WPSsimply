@@ -9,4 +9,5 @@ $app::load();
 
 $app->getRouter($basePath)
     ->get('/', 'Site#index', 'home')
+    ->match('/login', 'user#login', 'login')
     ->run();

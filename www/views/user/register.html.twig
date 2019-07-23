@@ -1,0 +1,48 @@
+{% extends '/layout/default.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <form action="POST" class="form-group">
+        <div class="form-row mb-5">
+            <label for="name">Nom complet</label>
+            <input type="text" name="name" class="form-control" id="name" aria-describedby="name" placeholder="Entrez votre nom complet">
+        </div>
+
+        <div class="form-row mb-5">
+            <label for="email">Adresse email</label>
+            <input type="email" name="mail" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Entrez votre email">
+            <small id="emailHelp" class="form-text text-muted">Veuillez rentrer une adresse email correcte.</small>
+        </div>
+
+        <div class="form-row mb-5">
+            <label for="password">Mot de passe</label>
+            <input type="password" name="password" class="form-control" id="password" aria-describedby="password" placeholder="Entrez votre mot de passe">
+            <small id="password" class="form-text text-muted">Veuillez rentrer un mot de passe de 8 caratères minimum.</small>
+        </div>
+
+        <div class="form-row mb-5">
+            <label for="password_confirm">Verification de mot de passe</label>
+            <input type="password" name="password_confirm" class="form-control" id="password_confirm" aria-describedby="password_confirm" placeholder="Entrez à nouveau votre mot de passe">
+        </div>
+
+        <p>Selectionner votre rôle:</p>
+        <div>
+            <input type="radio" id="role1" name="role" value="role">
+            <label for="role1">Huey</label>
+        </div>
+
+        <div>
+            <input type="radio" id="role2" name="role" value="role">
+            <label for="role2">Dewey</label>
+        </div>
+
+        <div class="form-row mb-5">
+            <button type="button" class="btn btn-warning">S'enregistrer</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

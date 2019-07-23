@@ -1,0 +1,25 @@
+{% extends '/layout/default.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <form action="POST" class="form-group">
+            <div class="form-row mb-5">
+                <label for="email">Adresse email</label>
+                <input type="email" name="mail" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Entrez votre email">
+            </div>
+
+            <div class="form-row mb-5">
+                <label for="password">Mot de passe</label>
+                <input type="password" name="password" class="form-control" id="password" aria-describedby="password" placeholder="Entrez votre mot de passe">
+            </div>
+
+            <div class="form-row mb-5">
+                <button type="button" class="btn btn-warning">Se connecter</button>
+            </div>
+    </form>
+</div>
+
+{% endblock %}

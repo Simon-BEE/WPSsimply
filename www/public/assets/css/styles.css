@@ -1,0 +1,33 @@
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+}
+
+img{
+    border-radius: 5%;
+}
+
+strong{
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+footer {
+    flex-shrink: 0;
+    color: #fff;
+}
+
+footer a {
+    color: #efefef;
+}
