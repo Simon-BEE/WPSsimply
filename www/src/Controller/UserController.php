@@ -52,13 +52,15 @@ class UserController extends Controller
      *
      * @return string
      */
-    public function subscribe(): string
+    public function register(): string
     {
         $form = new FormController();
         $form->field('mail', ["require", "verify"])
-            ->field('password', ["require", "verify", "length" => 8]);
+            ->field('password', ["require", "verify", "length" => 6])
+            ->field('name', ['require'])
+            ->field('role', ['require']);
         $errors =  $form->hasErrors();
-
+        
         if (!isset($errors["post"])) {
             $datas = $form->getDatas();
             if (empty($errors)) {
@@ -68,27 +70,28 @@ class UserController extends Controller
                 }
 
                 $datas["password"] = password_hash($datas["password"], PASSWORD_BCRYPT);
-                $datas["token"] = substr(md5(uniqid()), 0, 10);
                 if (!$userTable->newUser($datas)) {
                     throw new \Exception("erreur de base de donné");
                 }
 
-                $this->flash()->addSuccess("vous êtes bien enregistré");
-                $mail = new MailController();
-                $mail->object("validez votre compte")
-                    ->to($datas["mail"])
-                    ->message('confirmation', compact("datas"))
-                    ->send();
-                $this->flash()->addSuccess("vous avez reçu un mail");
-                header('location: ' . $this->generateUrl("usersLogin"));
+                // $this->flash()->addSuccess("vous êtes bien enregistré");
+                // $mail = new MailController();
+                // $mail->object("validez votre compte")
+                //     ->to($datas["mail"])
+                //     ->message('confirmation', compact("datas"))
+                //     ->send();
+                // $this->flash()->addSuccess("vous avez reçu un mail");
+                
+                header('location: ' . $this->generateUrl("login"));
                 exit();
             }
+            die('ici');
             unset($datas["password"]);
 
         } else {
             unset($errors);
         }
 
-        return $this->render('user/subscribe', compact("errors", "datas"));
+        return $this->render('user/register.html', compact("errors", "datas"));
     }
 }

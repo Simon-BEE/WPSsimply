@@ -17,7 +17,7 @@ class FormController
     public function __construct()
     {
         if (count($_POST) > 0) {
-             $this->postDatas = $_POST;
+            $this->postDatas = $_POST;
         } else {
             $this->addError("post", "no-data");
         }
