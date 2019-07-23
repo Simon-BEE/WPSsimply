@@ -11,6 +11,8 @@ Un fournisseur peut proposer plusieurs produits.
 Un produit ne peut avoir qu'un fournisseur.
 Un même produit peut être stocké dans plusieurs entrepôts.
 Il n'y a qu'un seul entrepôt par ville.
+Un utilisateur peut etre fournisseur ou gérant d'entrepôt.
+Il ne peut être gérant que d'un entrepôt.
 
 ![Schema UML](/www/public/assets/img/warehouse.png "Schema UML")
 
@@ -40,10 +42,10 @@ Sombres : gris/noir principalement, mis en évidence avec du orange pour les lie
       * URL : WPSsimply.com/warehouse/add *&&* WPSsimply.com/warehouse/slug-id/edit
 
 ## Fonctionnalités : 
-Ajouter un produit si on est fournisseur .
-Devenir fournisseur .
-Ajouter un warehouse.
-Sélectionner des produits pour son warehouse.
+* Ajouter un produit si on est fournisseur.
+* Devenir fournisseur.
+* Ajouter un warehouse.
+* Sélectionner des produits pour son warehouse.
 
 ## Maquette(s) :
 
