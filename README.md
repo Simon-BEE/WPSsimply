@@ -1,18 +1,18 @@
 # WPS simply.
 
 ## Description :
-Création site avec fournisseurs, produits, clients, et entrepôt.
-Pas de logo.
-*Nom du site*: WPS simply.
+Création site avec fournisseurs, produits, clients, et entrepôt.  
+Pas de logo.  
+*Nom du site*: WPS simply.  
 *Nom de domaine*: WPSsimply.com
 
 ## Schéma :
-Un fournisseur peut proposer plusieurs produits.
-Un produit ne peut avoir qu'un fournisseur.
-Un même produit peut être stocké dans plusieurs entrepôts.
-Il n'y a qu'un seul entrepôt par ville.
-Un utilisateur peut etre fournisseur ou gérant d'entrepôt.
-Il ne peut être gérant que d'un entrepôt.
+Un fournisseur peut proposer plusieurs produits.  
+Un produit ne peut avoir qu'un fournisseur.  
+Un même produit peut être stocké dans plusieurs entrepôts.  
+Il n'y a qu'un seul entrepôt par ville.  
+Un utilisateur peut etre fournisseur ou gérant d'entrepôt.  
+Il ne peut être gérant que d'un entrepôt.  
 
 ![Schema UML](/www/public/assets/img/warehouse.png "Schema UML")
 
