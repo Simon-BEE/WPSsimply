@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/styles.css">
+        {% block stylesheets %}{% endblock %}
+        <title>WPS | {% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <a class="navbar-brand" href="/">WPS simply.</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Warehouses</a>
+						</li>
+						<li class="nav-item">
+                            <a class="nav-link" href="/">Products</a>
+						</li>
+						<li class="nav-item">
+                            <a class="nav-link" href="/">Suppliers</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        {% if not app.user %}
+                        <li class="nav-item"><a href="#" class="btn btn-outline-dark">Sign In</a></li>
+                        <li class="nav-item"><a href="#" class="btn btn-outline-dark">Sign Out</a></li>
+                        {% else %}
+                        <li class="nav-item"><a href="#" class="btn btn-outline-danger">Log Out</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container mt-5">
+        {% block body %}{% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small blue pt-4 bg-primary">
+            <div class="container-fluid text-center text-md-left">
+                <div class="row">
+                    <div class="col-md-6 mt-md-0 mt-3">
+                        <h5 class="text-uppercase text-white">Footer Content</h5>
+                        <p>Here you can use rows and columns to organize your footer content.</p>
+                    </div>
+                    <hr class="clearfix w-100 d-md-none pb-3">
+                    <div class="col-md-3 mb-md-0 mb-3">
+                        <h5 class="text-uppercase text-white">Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#!" class="text-warning">Link 1</a></li>
+                            <li><a href="#!" class="text-warning">Link 1</a></li>
+                            <li><a href="#!" class="text-warning">Link 1</a></li>
+                            <li><a href="#!" class="text-warning">Link 1</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 mb-md-0 mb-3">
+                        <h5 class="text-uppercase text-white">Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#!" class="text-warning">Link 1</a></li>
+                            <li><a href="#!" class="text-warning">Link 1</a></li>
+                            <li><a href="#!" class="text-warning">Link 1</a></li>
+                            <li><a href="#!" class="text-warning">Link 1</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright text-center py-3">© 2019 Copyright:
+                <a href="/" class="text-white"> eSchool.com</a>
+            </div>
+        </footer>
+        <!-- Footer -->
+        {% block javascripts %}{% endblock %}
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
