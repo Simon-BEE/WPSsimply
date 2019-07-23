@@ -1,0 +1,21 @@
+{% extends '/layout/default.twig' %}
+
+{% block title %}Page profil{% endblock %}
+
+{% block body %}
+
+<h1 class="display-3">Votre page profil</h1>
+
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus corrupti ullam vitae vero dignissimos aut officiis cum sequi veniam, dolores reprehenderit provident sapiente aspernatur pariatur molestias. Iure necessitatibus culpa exercitationem consequuntur ratione ullam amet laboriosam. Non error delectus modi ex perspiciatis iusto animi nobis veritatis. Aperiam porro assumenda quia ducimus esse nostrum quaerat quibusdam officiis blanditiis consequatur dicta, ut, illo repellendus sequi. Voluptatum veniam eum dolorum, quo doloribus rem facere repellat repudiandae recusandae, doloremque molestiae error laboriosam aliquid libero. Eaque?</p>
+
+<h2 class="display-5">
+    {% if user.role is same as(1)  %}
+        Fournisseur
+    {% else %}
+        Gérant d'entrepôt
+    {% endif %}
+</h2>
+
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id repudiandae recusandae similique itaque quia, veniam omnis exercitationem! Possimus consequatur aspernatur perspiciatis necessitatibus dolore error eligendi aliquam sed numquam excepturi maxime culpa provident in harum vero voluptatem amet sequi ratione eius veritatis, reiciendis illo corrupti enim. Vel, placeat! Suscipit adipisci, numquam magni, atque pariatur perferendis sequi hic quibusdam quia vero consequuntur a explicabo eum voluptatibus eaque? Aut voluptatibus dignissimos voluptatum accusamus.</p>
+
+{% endblock %}

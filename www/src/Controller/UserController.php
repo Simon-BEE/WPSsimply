@@ -34,6 +34,8 @@ class UserController extends Controller
                 $user = $this->user->getUser($datas["mail"], $datas["password"]);
                 if ($user) {
                     $this->flash()->addSuccess("le POST est super top");
+                    $_SESSION['auth'] = $user;
+                    header('location: /profile');
                 } else {
                     $this->flash()->addAlert("pas cool");
                 }
@@ -74,14 +76,14 @@ class UserController extends Controller
                     throw new \Exception("erreur de base de donné");
                 }
 
-                // $this->flash()->addSuccess("vous êtes bien enregistré");
+                $this->flash()->addSuccess("vous êtes bien enregistré");
                 // $mail = new MailController();
                 // $mail->object("validez votre compte")
                 //     ->to($datas["mail"])
                 //     ->message('confirmation', compact("datas"))
                 //     ->send();
                 // $this->flash()->addSuccess("vous avez reçu un mail");
-                
+
                 header('location: ' . $this->generateUrl("login"));
                 exit();
             }
@@ -93,5 +95,21 @@ class UserController extends Controller
         }
 
         return $this->render('user/register.html', compact("errors", "datas"));
+    }
+
+    public function profile()
+    {
+        if (!$_SESSION['auth']) {
+            \header('location: /');
+        }
+        $user = $_SESSION['auth'];
+        
+        return $this->render('user/profile.html');
+    }
+
+    public function logout()
+    {
+        unset($_SESSION['auth']);
+        header('location: /');
     }
 }

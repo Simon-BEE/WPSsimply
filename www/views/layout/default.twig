@@ -24,21 +24,21 @@
                             <a class="nav-link" href="{{ uri("home") }}">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Warehouses</a>
+                            <a class="nav-link" href="/">Entrepôts</a>
 						</li>
 						<li class="nav-item">
-                            <a class="nav-link" href="/">Products</a>
+                            <a class="nav-link" href="/">Produits</a>
 						</li>
 						<li class="nav-item">
-                            <a class="nav-link" href="/">Suppliers</a>
+                            <a class="nav-link" href="/">Fournisseurs</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
-                        {% if not app.user %}
+                        {% if not session.auth %}
                         <li class="nav-item"><a href="{{ uri("login") }}" class="btn btn-outline-info">Sign In</a></li>
                         <li class="nav-item"><a href="{{ uri("register") }}" class="btn btn-outline-warning">Sign Up</a></li>
                         {% else %}
-                        <li class="nav-item"><a href="#" class="btn btn-outline-danger">Log Out</a></li>
+                        <li class="nav-item"><a href="{{ uri("logout") }}" class="btn btn-outline-danger">Log Out</a></li>
                         {% endif %}
                     </ul>
                 </div>
