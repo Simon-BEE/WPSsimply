@@ -1,0 +1,19 @@
+{% extends '/layout/default.twig' %}
+
+{% block title %}Fournisseur : {{ supplier.social }}{% endblock %}
+
+{% block body %}
+<div class="container mb-5 mt-3">
+    <h2 class="display-5 text-center">{{ supplier.social }}</h2>
+    <small>{{ supplier.address }}</small>
+</div>
+<div class="container">
+    {% if products %}
+    il y a des produits !! 
+    {% else %}
+    Ce fournisseur n'a pas renseigné encore de produits !
+    {% endif %}
+    
+</div>
+
+{% endblock %}

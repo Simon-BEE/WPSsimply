@@ -1,0 +1,27 @@
+{% extends '/layout/default.twig' %}
+
+{% block title %}Remplissez votre profil fournisseur{% endblock %}
+
+{% block body %}
+<div class="container mb-5 mt-3">
+    <h2 class="display-5 text-center">Remplissez votre profil fournisseur</h2>
+</div>
+<div class="container">
+    <form method="POST" action="" class="form-group">
+            <div class="form-row mb-5">
+                <label for="social">Raison sociale de la société</label>
+                <input type="text" name="social" class="form-control" id="social" aria-describedby="emailHelp" placeholder="Entrez votre raison sociale">
+            </div>
+
+            <div class="form-row mb-5">
+                <label for="address">Adresse de la société</label>
+                <input type="text" name="address" class="form-control" id="address" aria-describedby="address" placeholder="Entrez l'adresse complète">
+            </div>
+
+            <div class="form-row mb-5">
+                <button type="submit" class="btn btn-warning">Sauvegarder votre profil</button>
+            </div>
+    </form>
+</div>
+
+{% endblock %}

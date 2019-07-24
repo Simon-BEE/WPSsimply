@@ -31,7 +31,7 @@ abstract class Table
             // $newTable = M
         for ($i=1; $i < strlen($class_name); $i++) {
             if (ctype_upper($class_name[$i])) {
-                   $newTable .= "_";
+                    $newTable .= "_";
             }
                 $newTable .= $class_name[$i];
         }

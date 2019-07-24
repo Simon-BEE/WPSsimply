@@ -4,18 +4,61 @@
 
 {% block body %}
 
-<h1 class="display-3">Votre page profil</h1>
+<div class="container mb-5">
+    <h1 class="display-3">Votre page profil</h1>
+    {{ user.name }}
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus corrupti ullam vitae vero dignissimos aut officiis cum sequi veniam, dolores reprehenderit provident sapiente aspernatur pariatur molestias. Iure necessitatibus culpa exercitationem consequuntur ratione ullam amet laboriosam. Non error delectus modi ex perspiciatis iusto animi nobis veritatis. Aperiam porro assumenda quia ducimus esse nostrum quaerat quibusdam officiis blanditiis consequatur dicta, ut, illo repellendus sequi. Voluptatum veniam eum dolorum, quo doloribus rem facere repellat repudiandae recusandae, doloremque molestiae error laboriosam aliquid libero. Eaque?</p>
+</div>
 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus corrupti ullam vitae vero dignissimos aut officiis cum sequi veniam, dolores reprehenderit provident sapiente aspernatur pariatur molestias. Iure necessitatibus culpa exercitationem consequuntur ratione ullam amet laboriosam. Non error delectus modi ex perspiciatis iusto animi nobis veritatis. Aperiam porro assumenda quia ducimus esse nostrum quaerat quibusdam officiis blanditiis consequatur dicta, ut, illo repellendus sequi. Voluptatum veniam eum dolorum, quo doloribus rem facere repellat repudiandae recusandae, doloremque molestiae error laboriosam aliquid libero. Eaque?</p>
+<div class="container mb-5">
+    <h2 class="display-5">
+        {% if user.role is same as('1')  %}
+            Fournisseur
+        {% else %}
+            Gérant d'entrepôt
+        {% endif %}
+    </h2>
 
-<h2 class="display-5">
-    {% if user.role is same as(1)  %}
-        Fournisseur
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id repudiandae recusandae similique itaque quia, veniam omnis exercitationem! Possimus consequatur aspernatur perspiciatis necessitatibus dolore error eligendi aliquam sed numquam excepturi maxime culpa provident in harum vero voluptatem amet sequi ratione eius veritatis, reiciendis illo corrupti enim. Vel, placeat! Suscipit adipisci, numquam magni, atque pariatur perferendis sequi hic quibusdam quia vero consequuntur a explicabo eum voluptatibus eaque? Aut voluptatibus dignissimos voluptatum accusamus.</p>
+</div>
+
+<div class="container">
+    {% if user.role is same as('1')  %}
+        <h2 class="h2 mb-5">Votre société</h2>
+        {% if supplier %}
+        <div class="container d-flex justify-content-center mb-5">
+            <div class="card border-warning mb-3" style="max-width: 20rem;">
+                <div class="card-header">{{ supplier.social }}</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ supplier.social }}</h4>
+                    <p class="card-text">{{ supplier.address }}</p>
+                    <p><a href="{{ supplier.url }}" class="btn btn-outline-warning">Plus d'infos</a></p>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p>Vous n'avez pas encore renseigné votre profil fournisseur. <a href="{{ uri("supplier_add") }}" class="text-warning">Inscrivez-le!</a></p>
+        {% endif %}
+        
     {% else %}
-        Gérant d'entrepôt
+        <h2 class="h2">Gérer votre entrepôt !</h2>
+        {% if warehouse %}
+        <div class="container justify-content-center">
+            <div class="card border-warning mb-3" style="max-width: 20rem;">
+                <div class="card-header">{{ warehouse.name }}</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ warehouse.name }}</h4>
+                    <p class="card-text">{{ warehouse.address }}</p>
+                    <p class="card-text">{{ warehouse.surface }}m2</p>
+                    <p><a href="{{ uri('warehouse_show') }}" class="btn btn-outline-warning">Plus d'infos</a></p>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p>Vous n'avez pas encore renseigné d'entrepôt. <a href="#" class="text-warning">Inscrivez-le!</a></p>
+        {% endif %}
     {% endif %}
-</h2>
+</div>
 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id repudiandae recusandae similique itaque quia, veniam omnis exercitationem! Possimus consequatur aspernatur perspiciatis necessitatibus dolore error eligendi aliquam sed numquam excepturi maxime culpa provident in harum vero voluptatem amet sequi ratione eius veritatis, reiciendis illo corrupti enim. Vel, placeat! Suscipit adipisci, numquam magni, atque pariatur perferendis sequi hic quibusdam quia vero consequuntur a explicabo eum voluptatibus eaque? Aut voluptatibus dignissimos voluptatum accusamus.</p>
 
 {% endblock %}

@@ -12,6 +12,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->loadModel('user');
+        $this->loadModel('supplier');
     }
 
     /**
@@ -103,8 +104,12 @@ class UserController extends Controller
             \header('location: /');
         }
         $user = $_SESSION['auth'];
+
+        if ($this->supplier->find($user->getId(), 'user_id')) {
+            $supplier = $this->supplier->find($user->getId(), 'user_id');
+        }
         
-        return $this->render('user/profile.html');
+        return $this->render('user/profile.html', ['user' => $user, 'supplier' => $supplier]);
     }
 
     public function logout()
