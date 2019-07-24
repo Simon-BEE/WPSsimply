@@ -1,0 +1,27 @@
+{% extends '/layout/default.twig' %}
+
+{% block title %}Modifier les informations de votre société{% endblock %}
+
+{% block body %}
+<div class="container mb-5 mt-3">
+    <h2 class="display-5 text-center">Modifier les informations de votre société</h2>
+</div>
+<div class="container">
+    <form method="POST" action="" class="form-group">
+            <div class="form-row mb-5">
+                <label for="social">Raison sociale de la société</label>
+                <input type="text" name="social" class="form-control" id="social" value="{{ supplier.social }}" placeholder="Entrez votre raison sociale">
+            </div>
+
+            <div class="form-row mb-5">
+                <label for="address">Adresse de la société</label>
+                <input type="text" name="address" class="form-control" id="address" value="{{ supplier.address }}" placeholder="Entrez l'adresse complète">
+            </div>
+
+            <div class="form-row mb-5">
+                <button type="submit" class="btn btn-warning">Modifier</button>
+            </div>
+    </form>
+</div>
+
+{% endblock %}

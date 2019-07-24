@@ -12,9 +12,31 @@ class SupplierController extends Controller
         $this->loadModel('supplier');
     }
 
+    public function index()
+    {
+        $paginatedQuery = new PaginatedQueryAppController(
+            $this->supplier,
+            $this->generateUrl('suppliers_all')
+        );
+        $suppliers = $paginatedQuery->getItems();
+        $pagination = $paginatedQuery->getNavHtml();
+        
+        return $this->render('supplier/index.html', ['suppliers' => $suppliers, 'pagination' => $pagination]);
+    }
+
+    public function show($slug, $id)
+    {
+        $supplier = $this->supplier->find($id);
+        if ($supplier->getUserId() === $_SESSION['auth']->getId()) {
+            $mine = true;
+        }
+        return $this->render('supplier/show.html', ['supplier' => $supplier, 'mine' => $mine]);
+    }
+
     public function add()
     {
-        if ($this->supplier->find($_SESSION['auth']->getId(), 'user_id')) {
+        if ($this->supplier->find($_SESSION['auth']->getId(), 'user_id') &&
+        ($_SESSION['auth']->getRole() != 1)) {
             header('location: /');
         }
 
@@ -41,9 +63,30 @@ class SupplierController extends Controller
         return $this->render('supplier/add.html');
     }
 
-    public function show($slug, $id)
+    public function edit($slug, $id)
     {
         $supplier = $this->supplier->find($id);
-        return $this->render('supplier/show.html', ['supplier' => $supplier]);
+        if ($_SESSION['auth']->getId() !== $supplier->getUserId()) {
+            die('la');
+            header('location: '. $this->generateUrl('supplier_show', ['slug' => $slug, 'id' => $id]));
+        }
+
+        $form = new FormController();
+        $form->field('social', ['require'])
+            ->field('address', ['require']);
+        $errors =  $form->hasErrors();
+        
+        if (!isset($errors["post"])) {
+            $datas = $form->getDatas();
+            if (empty($errors)) {
+                
+                $this->supplier->update($id, 'id', $datas);
+                $this->flash()->addSuccess('Votre société a bien été modifié!');
+                
+                header('location: '. $this->generateUrl('supplier_show', ['slug' => $slug, 'id' => $id]));
+                exit();
+            }
+        }
+        return $this->render('supplier/edit.html', ['supplier' => $supplier]);
     }
 }

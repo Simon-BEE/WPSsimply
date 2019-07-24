@@ -1,0 +1,23 @@
+{% extends '/layout/default.twig' %}
+
+{% block title %}Produit : {{ product.name }}{% endblock %}
+
+{% block body %}
+<div class="container mb-5 mt-3">
+    <div class="row">
+        <div class="col-10">
+            <h2 class="display-5 text-center">{{ product.name }}</h2>
+        </div>
+        {% if mine %}
+        <div class="col-2">
+            <a href="{{ product.url }}/edit" class="btn btn-danger">editer</a>
+        </div>
+        {% endif %}
+    </div>
+    <small>Palette d'{{ product.volume }} m3</small>
+    <p class="mb-5 mt-5 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae nemo nobis odit reprehenderit nesciunt eos ad vel officia aut, accusantium hic ullam obcaecati consectetur voluptatum eligendi veritatis nam voluptas? Eligendi dolorem rerum molestias asperiores consequatur consectetur nobis, quasi assumenda, illum itaque soluta, sed blanditiis provident aperiam repellat autem voluptates non.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, officia assumenda a maiores asperiores ullam animi rem doloribus voluptatem inventore, accusantium ipsam quisquam velit modi mollitia officiis temporibus reprehenderit illum, veritatis laudantium blanditiis. Eligendi natus commodi iusto fugiat laborum labore ratione nemo repellendus autem nobis.</p>
+    <p>Nom du fournisseur : {{ supplier.social }}</p>
+</div>
+
+{% endblock %}

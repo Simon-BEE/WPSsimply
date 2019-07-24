@@ -55,7 +55,7 @@
             </div>
         </div>
         {% else %}
-        <p>Vous n'avez pas encore renseigné d'entrepôt. <a href="#" class="text-warning">Inscrivez-le!</a></p>
+        <p>Vous n'avez pas encore renseigné d'entrepôt. <a href="{{ uri("warehouse_add") }}" class="text-warning">Inscrivez-le!</a></p>
         {% endif %}
     {% endif %}
 </div>

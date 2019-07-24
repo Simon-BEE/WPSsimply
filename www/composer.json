@@ -2,7 +2,8 @@
     "require": {
         "altorouter/altorouter": "1.2.0",
         "twig/twig": "2.11.2",
-        "swiftmailer/swiftmailer": "^6.0"
+        "swiftmailer/swiftmailer": "^6.0",
+        "pagerfanta/pagerfanta": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "1.8.0",

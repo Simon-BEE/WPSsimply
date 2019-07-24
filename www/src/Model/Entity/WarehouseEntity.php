@@ -2,6 +2,7 @@
 namespace App\Model\Entity;
 
 use Core\Model\Entity;
+use Cocur\Slugify\Slugify;
 
 class WarehouseEntity extends Entity
 {
@@ -60,5 +61,15 @@ class WarehouseEntity extends Entity
     public function setUserId($user_id)
     {
         return $this->user_id = $user_id;
+    }
+
+    public function getUrl()
+    {
+        $slugify = new Slugify();
+        $slug = $slugify->slugify($this->getName());
+        return \App\App::getInstance()->getRouter()->url(
+            'warehouse_show', [
+                'slug' => $slug, 'id' => $this->getId()
+            ]);
     }
 }

@@ -10,13 +10,16 @@ main {
 }
 
 img{
-    border-radius: 5%;
+    border-radius: 5px;
 }
 
 strong{
     font-weight: bold;
 }
 
+.color-title{
+    color: #ed9d2b;
+}
 
 
 

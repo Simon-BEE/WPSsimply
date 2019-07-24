@@ -124,4 +124,10 @@ abstract class Table
             );
         }
     }
+
+    public function allByLimit(int $limit, int $offset)
+    {
+        return $this->query("SELECT * FROM {$this->table} ORDER BY id DESC LIMIT {$limit}  OFFSET {$offset}");
+    }
+    
 }

@@ -1,0 +1,26 @@
+{% extends '/layout/default.twig' %}
+
+{% block title %}Entrepôt : {{ warehouse.name }}{% endblock %}
+
+{% block body %}
+<div class="container mb-5 mt-3">
+    <div class="row">
+        <div class="col-8">
+            <h2 class="display-5 text-center">{{ warehouse.name }}</h2>
+        </div>
+        <div class="col-2">
+            <a href="{{ warehouse.url }}/edit" class="btn btn-danger">editer</a>
+        </div>
+    </div>
+    <small>{{ warehouse.address }}, {{ city }}</small>
+</div>
+<div class="container">
+    {% if products %}
+    il y a des produits !! 
+    {% else %}
+    Cette entrepôt ne dispose, actuellement, pas de produits!
+    {% endif %}
+    
+</div>
+
+{% endblock %}

@@ -4,8 +4,21 @@
 
 {% block body %}
 <div class="container mb-5 mt-3">
-    <h2 class="display-5 text-center">{{ supplier.social }}</h2>
+    <div class="row">
+        <div class="col-7">
+            <h2 class="display-5 text-center">{{ supplier.social }}</h2>
+        </div>
+        {% if mine %}
+        <div class="col-2">
+            <a href="{{ supplier.url }}/edit" class="btn btn-danger">editer</a>
+        </div>
+        <div class="col-3">
+            <a href="{{ uri('product_add') }}" class="btn btn-warning">Ajouter un produit</a>
+        </div>
+        {% endif %}
+    </div>
     <small>{{ supplier.address }}</small>
+    <p class="mb-5 mt-5 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae nemo nobis odit reprehenderit nesciunt eos ad vel officia aut, accusantium hic ullam obcaecati consectetur voluptatum eligendi veritatis nam voluptas? Eligendi dolorem rerum molestias asperiores consequatur consectetur nobis, quasi assumenda, illum itaque soluta, sed blanditiis provident aperiam repellat autem voluptates non.</p>
 </div>
 <div class="container">
     {% if products %}
@@ -13,7 +26,6 @@
     {% else %}
     Ce fournisseur n'a pas renseigné encore de produits !
     {% endif %}
-    
 </div>
 
 {% endblock %}

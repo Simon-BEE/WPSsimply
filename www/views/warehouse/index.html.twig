@@ -1,0 +1,20 @@
+{% extends '/layout/default.twig' %}
+
+{% block title %}Tous les fournisseurs{% endblock %}
+
+{% block body %}
+<div class="container mb-5 mt-3">
+    <h2 class="display-5 text-center">Tous les entrepôts</h2>
+    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe dignissimos voluptatibus qui quis eligendi reprehenderit dolores magnam officia numquam non.</small>
+</div>
+<section class="row container mb-5 mt-5">
+{% for warehouse in warehouses %}
+    {% include "/warehouse/card.html.twig" %}
+{% endfor %}
+</section>
+
+<div class="container mb-5 mt-5">
+    {{ pagination | raw }}
+</div>
+
+{% endblock %}
