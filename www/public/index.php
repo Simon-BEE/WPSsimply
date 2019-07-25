@@ -13,7 +13,7 @@ $app->getRouter($basePath)
     //Utilisateurs
     ->match('/login', 'user#login', 'login')
     ->match('/register', 'user#register', 'register')
-    ->get('/profile', 'user#profile', 'profile')
+    ->match('/profile', 'user#profile', 'profile')
     ->get('/logout', 'user#logout', 'logout')
 
     //Fournisseurs

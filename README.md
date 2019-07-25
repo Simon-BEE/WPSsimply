@@ -32,6 +32,11 @@ La police sans-serif utilisée par le thème bootswatch : **"Nunito Sans"**.
 Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 
 ## Pages :
+
+    * Pages générales : accueil, mentions légales
+      * URL : WPSsimply.com/
+      * URL : WPSsimply/legal-notices
+
     * Pages fournisseurs : une avec la liste de tous puis une avec chaque fournisseur et leurs produits.
       * URL:  WPSsimply.com/suppliers *&&*  WPSsimply.com/supplier/slug-id
     * Pages warehouses : une avec la liste de tous puis une avec chaque warehouse et leurs produits.
@@ -43,7 +48,7 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
       * URL : WPSsimply.com/login
     * Page d'inscription
       * URL : WPSsimply.com/register
-    * Page de profil affichant son rôle (fournisseur, ou gérant warehouse)
+    * Page de profil affichant son rôle (fournisseur, ou gérant warehouse) et possibilité de modification de ses données personnelles
       * URL : WPSsimply.com/profile
 
     * Ajout de produit et modification
@@ -71,10 +76,10 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 * Ajouter un warehouse si on est gérant.
 * Sélectionner des produits pour son warehouse.
 
-##TODO :
+## TODO :
 * Refaire première maquette (home mobile)
 * Commenter le code
-* Possibiliter de modifier ses infos persos
+* ~~Possibiliter de modifier ses infos persos~~
 * Espace Admin
 * Ajouter des mentions légales
 * Ajouter une page 404

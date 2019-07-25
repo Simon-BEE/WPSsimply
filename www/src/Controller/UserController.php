@@ -34,14 +34,14 @@ class UserController extends Controller
             if (empty($errors)) {
                 $user = $this->user->getUser($datas["mail"], $datas["password"]);
                 if ($user) {
-                    $this->flash()->addSuccess("le POST est super top");
+                    $this->flash()->addSuccess("Vous êtes bien connecté");
                     $_SESSION['auth'] = $user;
                     header('location: /profile');
                 } else {
-                    $this->flash()->addAlert("pas cool");
+                    $this->flash()->addAlert("L'adresse email et/ou le mot de passe est/son incorrect/s");
                 }
             } else {
-                $this->flash()->addAlert("appprend a remplir un formulaire");
+                $this->flash()->addAlert("Le formulaire est map rempli");
             }
             unset($datas['password']);
         }
@@ -69,26 +69,19 @@ class UserController extends Controller
             if (empty($errors)) {
                 $userTable = $this->user;
                 if ($userTable->find($datas["mail"], "mail")) {
-                    throw new \Exception("utilisateur existe deja");
+                    throw new \Exception("L'tilisateur existe déjà");
                 }
 
                 $datas["password"] = password_hash($datas["password"], PASSWORD_BCRYPT);
                 if (!$userTable->newUser($datas)) {
-                    throw new \Exception("erreur de base de donné");
+                    throw new \Exception("Erreur en base de données, veuillez réessayer ultérieurement");
                 }
 
-                $this->flash()->addSuccess("vous êtes bien enregistré");
-                // $mail = new MailController();
-                // $mail->object("validez votre compte")
-                //     ->to($datas["mail"])
-                //     ->message('confirmation', compact("datas"))
-                //     ->send();
-                // $this->flash()->addSuccess("vous avez reçu un mail");
+                $this->flash()->addSuccess("Vous êtes bien enregistré");
 
                 header('location: ' . $this->generateUrl("login"));
                 exit();
             }
-            die('ici');
             unset($datas["password"]);
 
         } else {
@@ -98,7 +91,13 @@ class UserController extends Controller
         return $this->render('user/register.html', compact("errors", "datas"));
     }
 
-    public function profile()
+    /**
+     * Affichage de la vu du profil 
+     * et traitement de modifications de ses infos perso
+     *
+     * @return string
+     */
+    public function profile():string
     {
         if (!$_SESSION['auth']) {
             \header('location: /');
@@ -108,11 +107,37 @@ class UserController extends Controller
         if ($this->supplier->find($user->getId(), 'user_id')) {
             $supplier = $this->supplier->find($user->getId(), 'user_id');
         }
-        
+
+        $form = new FormController();
+        $form->field('mail', ['require'])
+            ->field('password', ["verify", "length" => 6])
+            ->field('name', ['require']);
+        $errors =  $form->hasErrors();
+    
+        if (!isset($errors["post"])) {
+            $datas = $form->getDatas();
+            if (empty($errors)) {
+                $datas["password"] = password_hash($datas["password"], PASSWORD_BCRYPT);
+
+                if (!$this->user->update($user->getId(), 'id', $datas)) {
+                    throw new \Exception("Erreur en base de données, veuillez réessayer ultérieurement");
+                }
+
+                $this->flash()->addSuccess('Vos informations ont bien été mises à jour');
+                $user = $this->user->getUserByid($user->getId());
+            }else{
+                $this->flash()->addAlert('Veuillez remplir tous les champs correctement !');
+            }
+        }
         return $this->render('user/profile.html', ['user' => $user, 'supplier' => $supplier]);
     }
 
-    public function logout()
+    /**
+     * Methode pour se déconnecter
+     *
+     * @return void
+     */
+    public function logout():void
     {
         unset($_SESSION['auth']);
         header('location: /');

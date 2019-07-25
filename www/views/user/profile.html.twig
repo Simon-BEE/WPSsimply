@@ -6,7 +6,6 @@
 
 <div class="container mb-5">
     <h1 class="display-3">Votre page profil</h1>
-    {{ user.name }}
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus corrupti ullam vitae vero dignissimos aut officiis cum sequi veniam, dolores reprehenderit provident sapiente aspernatur pariatur molestias. Iure necessitatibus culpa exercitationem consequuntur ratione ullam amet laboriosam. Non error delectus modi ex perspiciatis iusto animi nobis veritatis. Aperiam porro assumenda quia ducimus esse nostrum quaerat quibusdam officiis blanditiis consequatur dicta, ut, illo repellendus sequi. Voluptatum veniam eum dolorum, quo doloribus rem facere repellat repudiandae recusandae, doloremque molestiae error laboriosam aliquid libero. Eaque?</p>
 </div>
 
@@ -58,6 +57,40 @@
         <p>Vous n'avez pas encore renseigné d'entrepôt. <a href="{{ uri("warehouse_add") }}" class="text-warning">Inscrivez-le!</a></p>
         {% endif %}
     {% endif %}
+</div>
+
+<div class="container mb-5 mt-5">
+    <h2 class="display-5 text-center">Modifier vos informations personnelles</h2>
+</div>
+
+<div class="container">
+    <form action="" method="post" class="form-group">
+        <div class="form-row mb-5">
+            <label for="name">Nom complet</label>
+            <input type="text" name="name" class="form-control" id="name" value="{{ user.name }}" placeholder="Entrez votre nom complet" required>
+        </div>
+
+        <div class="form-row mb-5">
+            <label for="email">Adresse email</label>
+            <input type="email" name="mail" class="form-control" id="email" value="{{ user.mail }}" placeholder="Entrez votre email" required>
+            <small id="emailHelp" class="form-text text-muted">Veuillez rentrer une adresse email correcte.</small>
+        </div>
+
+        <div class="form-row mb-5">
+            <label for="password">Entrer votre mot de passe ou un nouveau</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Entrez votre mot de passe" required>
+            <small id="password" class="form-text text-muted">Veuillez rentrer un mot de passe de 6 caratères minimum.</small>
+        </div>
+
+        <div class="form-row mb-5">
+            <label for="password_confirm">Verification de mot de passe</label>
+            <input type="password" name="password_confirm" class="form-control" id="password_confirm" placeholder="Entrez à nouveau votre mot de passe" required>
+        </div>
+
+        <div class="form-row mb-5">
+            <button type="submit" class="btn btn-warning">S'enregistrer</button>
+        </div>
+    </form>
 </div>
 
 
