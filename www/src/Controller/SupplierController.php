@@ -27,8 +27,10 @@ class SupplierController extends Controller
     public function show($slug, $id)
     {
         $supplier = $this->supplier->find($id);
-        if ($supplier->getUserId() === $_SESSION['auth']->getId()) {
-            $mine = true;
+        if ($_SESSION['auth']) {
+            if ($supplier->getUserId() === $_SESSION['auth']->getId()) {
+                $mine = true;
+            }
         }
         return $this->render('supplier/show.html', ['supplier' => $supplier, 'mine' => $mine]);
     }

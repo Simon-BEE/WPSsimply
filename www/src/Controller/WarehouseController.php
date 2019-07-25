@@ -61,6 +61,11 @@ class WarehouseController extends Controller
     public function show($slug, $id)
     {
         $warehouse = $this->warehouse->find($id);
+        if ($_SESSION['auth']) {
+            if ($warehouse->getUserId() === $_SESSION['auth']->getId()) {
+                $mine = true;
+            }
+        }
         $city = $this->city->find($warehouse->getCityId())->getName();
         return $this->render('warehouse/show.html', ['warehouse' => $warehouse, 'city' => $city]);
     }

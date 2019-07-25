@@ -2,6 +2,7 @@
 namespace App\Model\Entity;
 
 use Core\Model\Entity;
+use Cocur\Slugify\Slugify;
 
 class UserEntity extends Entity
 {
@@ -57,4 +58,6 @@ class UserEntity extends Entity
         $password = password_hash(htmlspecialchars($password), PASSWORD_BCRYPT);
         $this->password = $password;
     }
+
+    
 }

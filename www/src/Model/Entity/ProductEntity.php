@@ -2,6 +2,7 @@
 namespace App\Model\Entity;
 
 use Core\Model\Entity;
+use Cocur\Slugify\Slugify;
 
 class ProductEntity extends Entity
 {
@@ -54,5 +55,15 @@ class ProductEntity extends Entity
     public function setVolume($volume)
     {
         return $this->volume = $volume;
+    }
+
+    public function getUrl()
+    {
+        $slugify = new Slugify();
+        $slug = $slugify->slugify($this->getName());
+        return \App\App::getInstance()->getRouter()->url(
+            'product_show', [
+                'slug' => $slug, 'id' => $this->getId()
+            ]);
     }
 }

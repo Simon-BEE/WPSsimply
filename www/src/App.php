@@ -35,8 +35,9 @@ class App
             $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
             $whoops->register();
         }
-        define('TVA', 1.2);
-        session_start();
+        if (session_status() != PHP_SESSION_ACTIVE) {
+            session_start();
+        }
         $numPage = URLController::getPositiveInt('page');
 
         if ($numPage !== null) {
