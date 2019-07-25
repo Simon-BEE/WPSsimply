@@ -1,0 +1,41 @@
+{% extends '/layout/default.twig' %}
+
+{% block title %}Ajouter un nouveau produit{% endblock %}
+
+{% block body %}
+<div class="container mb-5 mt-3">
+    <h2 class="display-5 text-center">Modifier un produit</h2>
+</div>
+<div class="container">
+    <form method="POST" action="" class="form-group">
+            <div class="form-row mb-5">
+                <label for="name">Nom du produit</label>
+                <input type="text" name="name" class="form-control" id="name" value="{{ product.name }}" placeholder="Entrez le nom du produit">
+            </div>
+
+            <div class="form-row mb-5">
+                <label for="volume">Volume du produit</label>
+                <input type="text" name="volume" class="form-control" id="volume" value="{{ product.volume }}" placeholder="Indiquez le volume du produit">
+                <small>En mètre carré (m2)</small>
+            </div>
+
+            <div class="form-group mb-5">
+                <p>Toxicité du produit:</p>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="toxicity1" class="custom-control-input" name="toxicity" value="1">
+                    <label for="toxicity1" class="custom-control-label">Non</label>
+                </div>
+
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="toxicity2" class="custom-control-input" name="toxicity" value="2">
+                    <label for="toxicity2" class="custom-control-label">Oui</label>
+                </div>
+            </div>
+
+            <div class="form-row mb-5">
+                <button type="submit" class="btn btn-warning">Ajouter votre produit</button>
+            </div>
+    </form>
+</div>
+
+{% endblock %}

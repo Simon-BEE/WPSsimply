@@ -41,7 +41,7 @@ class ProductController extends Controller
 
                 $datas['supplier_id'] = $_SESSION['auth']->getId();
                 $this->product->create($datas);
-                $this->flash()->addSuccess('Votre société a bien été renseigné!');
+                $this->flash()->addSuccess('Votre produit a bien été ajouté!');
                 $slugify = new Slugify();
                 $product = $this->product->find($this->product->last());
                 $slug = $slugify->slugify($product->getName());
@@ -52,6 +52,42 @@ class ProductController extends Controller
         }
 
         return $this->render('product/add.html');
+    }
+
+    public function edit($slug, $id)
+    {
+        $product = $this->product->find($id);
+        if ($_SESSION['auth']->getRole() != 1) {
+            header('location: /');
+        }
+
+        $form = new FormController();
+        $form->field('name', ['require'])
+            ->field('toxicity', ['require'])
+            ->field('volume', ['require']);
+        $errors =  $form->hasErrors();
+        
+        if (!isset($errors["post"])) {
+            $datas = $form->getDatas();
+
+            if (empty($errors)) {
+
+                if ($datas['toxicity'] == 1) {
+                    $datas['toxicity'] = '0';
+                }else{
+                    $datas['toxicity'] = '1';
+                }
+
+                $this->product->update($id, 'id', $datas);
+                $this->flash()->addSuccess('Votre produit a bien été modifié!');
+                
+                $url = $this->generateUrl('product_show', ['slug' => $slug, 'id' => $id]);
+                header('location: '.$url);
+                exit();
+            }
+        }
+
+        return $this->render('product/edit.html', ['product' => $product]);
     }
 
     public function show($slug, $id)
@@ -65,16 +101,16 @@ class ProductController extends Controller
             }
 
             $warehouse = $this->warehouse->find($_SESSION['auth']->getId(), 'user_id');
-            $already = $this->productWarehouse->existing($id, $warehouse->getId());
-            if (!empty($_POST) && !$already) {
-                $fields['product_id'] = $id;
-                $fields['warehouse_id'] = $warehouse->getId();
-                
-                $this->productWarehouse->create($fields);
-                dd('ok');
-            }
-
             if ($warehouse) {
+            $already = $this->productWarehouse->existing($id, $warehouse->getId());
+                if (!empty($_POST) && !$already) {
+                    $fields['product_id'] = $id;
+                    $fields['warehouse_id'] = $warehouse->getId();
+                    
+                    $this->productWarehouse->create($fields);
+                    dd('ok');
+                }
+
                 if ($already) {
                     $addProduct = 'already';
                 }else{
