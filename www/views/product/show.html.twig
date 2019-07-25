@@ -14,10 +14,10 @@
         </div>
         {% endif %}
     </div>
-    <small>Palette d'{{ product.volume }} m3</small>
+    <small>Palette de {{ product.volume }} m3</small>
     <p class="mb-5 mt-5 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae nemo nobis odit reprehenderit nesciunt eos ad vel officia aut, accusantium hic ullam obcaecati consectetur voluptatum eligendi veritatis nam voluptas? Eligendi dolorem rerum molestias asperiores consequatur consectetur nobis, quasi assumenda, illum itaque soluta, sed blanditiis provident aperiam repellat autem voluptates non.</p>
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, officia assumenda a maiores asperiores ullam animi rem doloribus voluptatem inventore, accusantium ipsam quisquam velit modi mollitia officiis temporibus reprehenderit illum, veritatis laudantium blanditiis. Eligendi natus commodi iusto fugiat laborum labore ratione nemo repellendus autem nobis.</p>
-    <p>Nom du fournisseur : {{ supplier.social }}</p>
+    <p>Nom du fournisseur : <a href="{{ urlSupplier }}" class="text-warning">{{ supplier.social }}</a></p>
 </div>
 
 {% if addProduct %}

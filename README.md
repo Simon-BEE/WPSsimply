@@ -1,9 +1,14 @@
 # WPS simply.
 
+## Dates :
+**Debut** : 23/07/2019  
+**Fin** : 07/08/2019
+**Présentation** : du 08/08/2019 au 09/08/2019
+
 ## Description :
 Création site avec fournisseurs, produits, clients, et entrepôt.  
 Les gérants d'entrepôt selectionne des produits proposés par des fournisseurs.  
-Les fournisseurs proposent des produits.
+Les fournisseurs proposent des produits.  
 Pas de logo.  
 *Nom du site*: WPS simply.  
 *Nom de domaine*: WPSsimply.com
@@ -19,7 +24,12 @@ Il ne peut être gérant que d'un entrepôt.
 ![Schema UML](/www/public/assets/img/warehouse.png "Schema UML")
 
 ## Couleurs :
-Sombres : gris/noir principalement, mis en évidence avec du orange pour les liens ou boutons.
+Utilisation d'un thème Bootstwatch (modification stylistique de Bootstrap) : **LUX**.
+Sombres : **gris/noir** principalement, mis en évidence avec du **orange** pour les liens ou boutons.
+
+## Typographies :
+La police sans-serif utilisée par le thème bootswatch : **"Nunito Sans"**.  
+Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 
 ## Pages :
     * Pages fournisseurs : une avec la liste de tous puis une avec chaque fournisseur et leurs produits.
@@ -60,6 +70,24 @@ Sombres : gris/noir principalement, mis en évidence avec du orange pour les lie
 * Devenir gérant d'entrepôt.
 * Ajouter un warehouse si on est gérant.
 * Sélectionner des produits pour son warehouse.
+
+##TODO :
+* Refaire première maquette (home mobile)
+* Commenter le code
+* Possibiliter de modifier ses infos persos
+* Espace Admin
+* Ajouter des mentions légales
+* Ajouter une page 404
+* Implementer la connexion via Google et Facebook
+
+Optionnel :
+* Faire des propositions de Fournisseurs à Gérants d'entrepôt (proposition de produit)
+* Ajouter un produit si seulement il nous reste de la place
+
+Pour la présentation :
+* ~~Rechercher les fonts utilisées par bootswatch LUX~~
+* Ecrire un texte (~2min) en anglais pour présenter le projet
+* Faire un fichier de présentation (slides/powerpoint/...)
 
 ## Maquettes :
 

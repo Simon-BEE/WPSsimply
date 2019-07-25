@@ -51,6 +51,18 @@
         </header>
 
         <main class="container mt-5">
+        {% for success in flash("success") %}
+		<div class="alert alert-success text-center col-4 offset-4 mt-2 mb-5" role="alert">
+			{{ success }}
+		</div>
+		{% endfor %}
+
+		{% for errors in flash("alert") %}
+		<div class="alert alert-danger text-center col-4 offset-4 mt-2 mb-5" role="alert">
+			{{ errors }}
+		</div>
+		{% endfor %}
+
         {% block body %}{% endblock %}
         </main>
 

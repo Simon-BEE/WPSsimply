@@ -17,12 +17,15 @@ class WarehouseController extends Controller
 
     public function index()
     {
-        $paginatedQuery = new PaginatedQueryAppController(
-            $this->warehouse,
-            $this->generateUrl('warehouses_all')
-        );
-        $warehouses = $paginatedQuery->getItems();
-        $pagination = $paginatedQuery->getNavHtml();
+        $all = $this->warehouse->all();
+        if ($all) {
+            $paginatedQuery = new PaginatedQueryAppController(
+                $this->warehouse,
+                $this->generateUrl('warehouses_all')
+            );
+            $warehouses = $paginatedQuery->getItems();
+            $pagination = $paginatedQuery->getNavHtml();
+        }
         return $this->render('warehouse/index.html', ['warehouses' => $warehouses, 'pagination' => $pagination]);
     }
 
@@ -69,18 +72,21 @@ class WarehouseController extends Controller
             }
         }
         $productsArray = $this->productWarehouse->findAll($id, 'warehouse_id');
-        foreach ($productsArray as $line) {
-            $productsId[] = $line->getProductId();
-        }
-        foreach ($productsId as $value) {
-            $products[] = $this->product->find($value);
+        if ($productsArray) {
+            foreach ($productsArray as $line) {
+                $productsId[] = $line->getProductId();
+            }
+            foreach ($productsId as $value) {
+                $products[] = $this->product->find($value);
+            }
         }
         
         $city = $this->city->find($warehouse->getCityId())->getName();
-        return $this->render('warehouse/show.html', ['warehouse' => $warehouse, 
-        'city' => $city, 
-        'mine' => $mine,
-        'products' => $products]);
+        return $this->render('warehouse/show.html', [
+            'warehouse' => $warehouse, 
+            'city' => $city, 
+            'mine' => $mine,
+            'products' => $products]);
     }
 
     public function edit($slug, $id)

@@ -10,16 +10,20 @@ class SupplierController extends Controller
     public function __construct()
     {
         $this->loadModel('supplier');
+        $this->loadModel('product');
     }
 
     public function index()
     {
-        $paginatedQuery = new PaginatedQueryAppController(
-            $this->supplier,
-            $this->generateUrl('suppliers_all')
-        );
-        $suppliers = $paginatedQuery->getItems();
-        $pagination = $paginatedQuery->getNavHtml();
+        $all = $this->supplier->all();
+        if ($all) {
+            $paginatedQuery = new PaginatedQueryAppController(
+                $this->supplier,
+                $this->generateUrl('suppliers_all')
+            );
+            $suppliers = $paginatedQuery->getItems();
+            $pagination = $paginatedQuery->getNavHtml();
+        }
         
         return $this->render('supplier/index.html', ['suppliers' => $suppliers, 'pagination' => $pagination]);
     }
@@ -32,7 +36,8 @@ class SupplierController extends Controller
                 $mine = true;
             }
         }
-        return $this->render('supplier/show.html', ['supplier' => $supplier, 'mine' => $mine]);
+        $productsArray = $this->product->findAll($supplier->getId(), 'supplier_id');
+        return $this->render('supplier/show.html', ['supplier' => $supplier, 'mine' => $mine, 'products' => $productsArray]);
     }
 
     public function add()

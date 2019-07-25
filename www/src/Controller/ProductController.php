@@ -39,13 +39,17 @@ class ProductController extends Controller
                     $datas['toxicity'] = '1';
                 }
 
-                $datas['supplier_id'] = $_SESSION['auth']->getId();
+                $supplier_id = $this->supplier->find($_SESSION['auth']->getId(), 'user_id')->getId();
+                $datas['supplier_id'] = $supplier_id;
+
                 $this->product->create($datas);
                 $this->flash()->addSuccess('Votre produit a bien été ajouté!');
+
                 $slugify = new Slugify();
                 $product = $this->product->find($this->product->last());
                 $slug = $slugify->slugify($product->getName());
                 $url = $this->generateUrl('product_show', ['slug' => $slug, 'id' => $product->getId()]);
+                
                 header('location: '.$url);
                 exit();
             }
@@ -57,6 +61,7 @@ class ProductController extends Controller
     public function edit($slug, $id)
     {
         $product = $this->product->find($id);
+
         if ($_SESSION['auth']->getRole() != 1) {
             header('location: /');
         }
@@ -71,7 +76,6 @@ class ProductController extends Controller
             $datas = $form->getDatas();
 
             if (empty($errors)) {
-
                 if ($datas['toxicity'] == 1) {
                     $datas['toxicity'] = '0';
                 }else{
@@ -92,11 +96,10 @@ class ProductController extends Controller
 
     public function show($slug, $id)
     {
-        
         $product = $this->product->find($id);
-        $supplier = $this->supplier->find($product->getSupplierId(), 'user_id');
+        $supplier = $this->supplier->find($product->getSupplierId(), 'id');
         if ($_SESSION['auth']) {
-            if ($product->getSupplierId() === $_SESSION['auth']->getId()) {
+            if ($supplier->getUserId() === $_SESSION['auth']->getId()) {
                 $mine = true;
             }
 
@@ -108,7 +111,6 @@ class ProductController extends Controller
                     $fields['warehouse_id'] = $warehouse->getId();
                     
                     $this->productWarehouse->create($fields);
-                    dd('ok');
                 }
 
                 if ($already) {
@@ -118,21 +120,32 @@ class ProductController extends Controller
                 }
             }
         }
+
+        $slugify = new Slugify();
+        $slugSupplier = $slugify->slugify($supplier->getSocial());
+        $idSupplier = $supplier->getId();
+        $urlSupplier = $this->generateUrl('supplier_show', ['slug' => $slugSupplier, 'id' => $idSupplier]);
+        
         return $this->render('product/show.html', [
             'product' => $product, 
             'mine' => $mine, 
             'supplier' => $supplier,
-            'addProduct' => $addProduct]);
+            'addProduct' => $addProduct,
+            'urlSupplier' => $urlSupplier]);
     }
 
     public function index()
     {
-        $paginatedQuery = new PaginatedQueryAppController(
-            $this->product,
-            $this->generateUrl('products_all')
-        );
-        $products = $paginatedQuery->getItems();
-        $pagination = $paginatedQuery->getNavHtml();
+        $all = $this->product->all();
+
+        if ($all) {
+            $paginatedQuery = new PaginatedQueryAppController(
+                $this->product,
+                $this->generateUrl('products_all')
+            );
+            $products = $paginatedQuery->getItems();
+            $pagination = $paginatedQuery->getNavHtml();
+        }
 
         return $this->render('/product/index.html', ['products' => $products, 'pagination' => $pagination]);
     }

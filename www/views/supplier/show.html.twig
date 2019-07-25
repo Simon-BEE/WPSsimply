@@ -20,9 +20,11 @@
     <small>{{ supplier.address }}</small>
     <p class="mb-5 mt-5 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae nemo nobis odit reprehenderit nesciunt eos ad vel officia aut, accusantium hic ullam obcaecati consectetur voluptatum eligendi veritatis nam voluptas? Eligendi dolorem rerum molestias asperiores consequatur consectetur nobis, quasi assumenda, illum itaque soluta, sed blanditiis provident aperiam repellat autem voluptates non.</p>
 </div>
-<div class="container">
+<div class="container row">
     {% if products %}
-    il y a des produits !! 
+        {% for product in products %}
+            {% include "product/card.html.twig" %}
+        {% endfor %}
     {% else %}
     Ce fournisseur n'a pas renseigné encore de produits !
     {% endif %}
