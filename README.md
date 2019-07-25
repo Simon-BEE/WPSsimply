@@ -33,41 +33,44 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 
 ## Pages :
 
-    * Pages générales : accueil, mentions légales
-      * URL : WPSsimply.com/
-      * URL : WPSsimply/legal-notices
+* **Pages générales** : accueil, mentions légales et 404
+  * URL : WPSsimply.com/
+  * URL : WPSsimply.com/legal-notices
+  * URL : WPSsimply.com/404
 
-    * Pages fournisseurs : une avec la liste de tous puis une avec chaque fournisseur et leurs produits.
-      * URL:  WPSsimply.com/suppliers *&&*  WPSsimply.com/supplier/slug-id
-    * Pages warehouses : une avec la liste de tous puis une avec chaque warehouse et leurs produits.
-      * URL:  WPSsimply.com/warehouses *&&*  WPSsimply.com/warehouse/slug-id
-    * Pages produits : une avec tous les produits puis une avec produit et leur fournisseur et quel(s) warehouse ils sont.
-      * URL:  WPSsimply.com/products *&&*  WPSsimply.com/product/slug-id
+* **Pages fournisseurs** : une avec la liste de tous puis une avec chaque fournisseur et leurs produits.
+  * URL:  WPSsimply.com/suppliers *&&*  WPSsimply.com/supplier/slug-id
+* **Pages warehouses** : une avec la liste de tous puis une avec chaque warehouse et leurs produits.
+  * URL:  WPSsimply.com/warehouses *&&*  WPSsimply.com/warehouse/slug-id
+* **Pages produits** : une avec tous les produits puis une avec produit et leur fournisseur et quel(s) warehouse ils sont.
+  * URL:  WPSsimply.com/products *&&*  WPSsimply.com/product/slug-id
 
-    * Page de connexion
-      * URL : WPSsimply.com/login
-    * Page d'inscription
-      * URL : WPSsimply.com/register
-    * Page de profil affichant son rôle (fournisseur, ou gérant warehouse) et possibilité de modification de ses données personnelles
-      * URL : WPSsimply.com/profile
+* **Page de connexion**
+  * URL : WPSsimply.com/login
+* **Page d'inscription**
+  * URL : WPSsimply.com/register
+* **Page de profil** affichant son rôle (fournisseur, ou gérant warehouse) et possibilité de modification de ses données personnelles
+  * URL : WPSsimply.com/profile
 
-    * Ajout de produit et modification
-      * URL : WPSsimply.com/product/add *&&* WPSsimply.com/product/slug-id/edit
+* **Ajout de produit et modification**
+  * URL : WPSsimply.com/product/add *&&* WPSsimply.com/product/slug-id/edit
+* **Ajout de fournisseur et modification**
+  * URL : WPSsimply.com/supplier/add *&&* WPSsimply.com/supplier/slug-id/edit
+* **Ajout d'entrepôt et modification**
+  * URL : WPSsimply.com/warehouse/add *&&* WPSsimply.com/warehouse/slug-id/edit
+
+* Section Administration
+  * URL : WPSsimply.com/admin
     * Ajout de fournisseur et modification
-      * URL : WPSsimply.com/supplier/add *&&* WPSsimply.com/supplier/slug-id/edit
+      * URL : WPSsimply.com/admin/supplier/add *&&* WPSsimply.com/admin/supplier/slug-id/edit
     * Ajout d'entrepôt et modification
-      * URL : WPSsimply.com/warehouse/add *&&* WPSsimply.com/warehouse/slug-id/edit
+      * URL : WPSsimply.com/admin/warehouse/add *&&* WPSsimply.com/admin/warehouse/slug-id/edit
+    * Ajout de produit et modification
+      * URL : WPSsimply.com/admin/product/add *&&* WPSsimply.com/admin/product/slug-id/edit
+    * Modification utilisateur
+      * URL : WPSsimply.com/admin/user/id
 
-    * Section Administration
-      * URL : WPSsimply.com/admin
-        * Ajout de fournisseur et modification
-          * URL : WPSsimply.com/admin/supplier/add *&&* WPSsimply.com/admin/supplier/slug-id/edit
-        * Ajout d'entrepôt et modification
-          * URL : WPSsimply.com/admin/warehouse/add *&&* WPSsimply.com/admin/warehouse/slug-id/edit
-        * Ajout de produit et modification
-          * URL : WPSsimply.com/admin/product/add *&&* WPSsimply.com/admin/product/slug-id/edit
-        * Modification utilisateur
-          * URL : WPSsimply.com/admin/user/id
+> ***En gras** les pages effectuées*
 
 ## Fonctionnalités : 
 * Devenir fournisseur.
@@ -79,14 +82,14 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 ## TODO :
 * Refaire première maquette (home mobile)
 * Commenter le code
-* ~~Possibiliter de modifier ses infos persos~~
+* ~~Possibilité de modifier ses infos persos~~
 * Espace Admin
-* Ajouter des mentions légales
-* Ajouter une page 404
+* ~~Ajouter des mentions légales~~
+* ~~Ajouter une page 404~~
 * Implementer la connexion via Google et Facebook
 
 Optionnel :
-* Faire des propositions de Fournisseurs à Gérants d'entrepôt (proposition de produit)
+* Faire des propositions de Fournisseurs aux Gérants d'entrepôt (proposition de produit)
 * Ajouter un produit si seulement il nous reste de la place
 
 Pour la présentation :

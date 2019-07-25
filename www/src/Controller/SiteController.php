@@ -9,4 +9,14 @@ class SiteController extends Controller
     {
         return $this->render("site/index.html");
     }
+
+    public function notices()
+    {
+        return $this->render('site/mentions.html');
+    }
+
+    public function notfound()
+    {
+        return $this->render('site/404.html');
+    }
 }

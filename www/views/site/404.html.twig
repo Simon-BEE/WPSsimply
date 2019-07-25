@@ -1,0 +1,25 @@
+{% extends '/layout/default.twig' %}
+
+{% block stylesheets %}
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Cabin:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:900" rel="stylesheet">
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="assets/css/404.css" />
+{% endblock %}
+
+{% block title %}404 NOT FOUND{% endblock %}
+
+{% block body %}
+
+	<div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+				<h3>Oups! Page introuvable</h3>
+				<h1><span>4</span><span>0</span><span>4</span></h1>
+			</div>
+			<h2>Nous sommes désolés, la page demandée est inconnue de nos serveurs</h2>
+		</div>
+	</div>
+
+{% endblock %}

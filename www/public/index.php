@@ -8,7 +8,13 @@ $app->setStartTime();
 $app::load();
 
 $app->getRouter($basePath)
+    //Site
     ->get('/', 'Site#index', 'home')
+    ->get('/legal-notices', 'site#notices', 'legal_notices')
+    ->get('/404', 'site#notfound', 'not_found')
+
+    //Administration
+    ->get('/admin', 'admin\Admin#index', 'admin')
 
     //Utilisateurs
     ->match('/login', 'user#login', 'login')
