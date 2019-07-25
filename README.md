@@ -61,6 +61,15 @@ Sombres : gris/noir principalement, mis en évidence avec du orange pour les lie
 * Ajouter un warehouse si on est gérant.
 * Sélectionner des produits pour son warehouse.
 
-## Maquette(s) :
+## Maquettes :
 
 ![Maquette home](/www/public/assets/img/wps_home.png "Maquette home")
+
+![Maquette form](/www/public/assets/img/maq01.png "Maquette form")
+![Maquette listing](/www/public/assets/img/maq02.png "Maquette listing")
+
+![Maquette home large](/www/public/assets/img/maq03.png "Maquette home large")
+
+![Maquette listing large](/www/public/assets/img/maq04.png "Maquette listing large")
+
+![Maquette form large](/www/public/assets/img/maq05.png "Maquette form large")
