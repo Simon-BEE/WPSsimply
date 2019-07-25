@@ -11,6 +11,8 @@ class WarehouseController extends Controller
     {
         $this->loadModel('warehouse');
         $this->loadModel('city');
+        $this->loadModel('productWarehouse');
+        $this->loadModel('product');
     }
 
     public function index()
@@ -66,8 +68,19 @@ class WarehouseController extends Controller
                 $mine = true;
             }
         }
+        $productsArray = $this->productWarehouse->findAll($id, 'warehouse_id');
+        foreach ($productsArray as $line) {
+            $productsId[] = $line->getProductId();
+        }
+        foreach ($productsId as $value) {
+            $products[] = $this->product->find($value);
+        }
+        
         $city = $this->city->find($warehouse->getCityId())->getName();
-        return $this->render('warehouse/show.html', ['warehouse' => $warehouse, 'city' => $city]);
+        return $this->render('warehouse/show.html', ['warehouse' => $warehouse, 
+        'city' => $city, 
+        'mine' => $mine,
+        'products' => $products]);
     }
 
     public function edit($slug, $id)

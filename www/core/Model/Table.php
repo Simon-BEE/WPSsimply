@@ -57,6 +57,11 @@ abstract class Table
         return $this->query("SELECT * FROM {$this->table} WHERE $column=?", [$id], true);
     }
 
+    public function findAll($id, $column = 'id')
+    {
+        return $this->query("SELECT * FROM {$this->table} WHERE $column=?", [$id]);
+    }
+
     public function all()
     {
         return $this->query("SELECT * FROM $this->table");

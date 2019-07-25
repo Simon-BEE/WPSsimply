@@ -5,20 +5,31 @@
 {% block body %}
 <div class="container mb-5 mt-3">
     <div class="row">
-        <div class="col-8">
+        <div class="col-7">
             <h2 class="display-5 text-center">{{ warehouse.name }}</h2>
         </div>
         {% if mine %}
         <div class="col-2">
             <a href="{{ warehouse.url }}/edit" class="btn btn-danger">editer</a>
         </div>
+        <div class="col-3">
+            <a href="{{ uri('products_all') }}" class="btn btn-warning">Choisir un produit</a>
+        </div>
         {% endif %}
     </div>
     <small>{{ warehouse.address }}, {{ city }}</small>
 </div>
-<div class="container">
+
+<div class="container mb-5 mt-5">
+<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nostrum, fugiat iste id voluptatum perferendis deleniti animi quis nisi facilis debitis consequuntur perspiciatis error necessitatibus. Error provident reiciendis tempore accusantium quas harum, vitae minus similique! Consequatur alias laudantium quasi! Quibusdam?</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe quam consequatur aperiam rerum dolor in. Libero temporibus, ea nobis praesentium voluptatem fuga cupiditate. Veniam molestias aut dicta error laudantium in, est unde aliquid veritatis repellat sed doloribus totam illum non ipsa! Praesentium cum et voluptatum totam voluptatem cumque porro. Obcaecati recusandae a facere. Illo consectetur accusamus nobis voluptatibus reiciendis officia vitae quisquam, fugiat doloribus. Sint, autem. At doloribus ab facilis ipsa similique, illum repudiandae amet error tempora, blanditiis ad, inventore id fugit. Et optio quod, velit tenetur magnam debitis, sunt, incidunt quasi animi iusto quo officia nihil illum?</p>
+</div>
+
+<div class="container row">
     {% if products %}
-    il y a des produits !! 
+        {% for product in products %}
+            {% include "product/card.html.twig" %}
+        {% endfor %} 
     {% else %}
     Cette entrepôt ne dispose, actuellement, pas de produits!
     {% endif %}

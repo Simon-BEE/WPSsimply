@@ -12,6 +12,8 @@ class ProductController extends Controller
     {
         $this->loadModel('product');
         $this->loadModel('supplier');
+        $this->loadModel('warehouse');
+        $this->loadModel('productWarehouse');
     }
 
     public function add()
@@ -54,14 +56,37 @@ class ProductController extends Controller
 
     public function show($slug, $id)
     {
+        
         $product = $this->product->find($id);
         $supplier = $this->supplier->find($product->getSupplierId(), 'user_id');
         if ($_SESSION['auth']) {
             if ($product->getSupplierId() === $_SESSION['auth']->getId()) {
                 $mine = true;
             }
+
+            $warehouse = $this->warehouse->find($_SESSION['auth']->getId(), 'user_id');
+            $already = $this->productWarehouse->existing($id, $warehouse->getId());
+            if (!empty($_POST) && !$already) {
+                $fields['product_id'] = $id;
+                $fields['warehouse_id'] = $warehouse->getId();
+                
+                $this->productWarehouse->create($fields);
+                dd('ok');
+            }
+
+            if ($warehouse) {
+                if ($already) {
+                    $addProduct = 'already';
+                }else{
+                    $addProduct = 'ok';
+                }
+            }
         }
-        return $this->render('product/show.html', ['product' => $product, 'mine' => $mine, 'supplier' => $supplier]);
+        return $this->render('product/show.html', [
+            'product' => $product, 
+            'mine' => $mine, 
+            'supplier' => $supplier,
+            'addProduct' => $addProduct]);
     }
 
     public function index()

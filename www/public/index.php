@@ -31,7 +31,7 @@ $app->getRouter($basePath)
     //Produits
     ->match('/product/add', 'product#add', 'product_add')
     ->get('/products', 'product#index', 'products_all')
-    ->get('/product/[*:slug]-[i:id]', 'product#show', 'product_show')
+    ->match('/product/[*:slug]-[i:id]', 'product#show', 'product_show')
     ->match('/product/[*:slug]-[i:id]/edit', 'product#edit', 'product_edit')
     
     ->run();

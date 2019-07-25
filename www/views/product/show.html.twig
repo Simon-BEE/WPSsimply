@@ -20,4 +20,18 @@
     <p>Nom du fournisseur : {{ supplier.social }}</p>
 </div>
 
+{% if addProduct %}
+    <div class="container">
+    {% if addProduct is same as('ok') %}
+    <form action="" method="post">
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        <button type="submit" class="btn btn-warning">Ajouter le produit à votre entrepôt</button>
+    </form>
+    {% else %}
+    <p class="text-warning">Produit déjà ajouté à votre entrepôt !</p>        
+    {% endif %}
+    </div>
+{% endif %}
+
+
 {% endblock %}
