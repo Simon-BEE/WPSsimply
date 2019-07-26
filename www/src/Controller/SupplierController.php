@@ -58,9 +58,11 @@ class SupplierController extends Controller
                 $datas['user_id'] = $_SESSION['auth']->getId();
                 $this->supplier->create($datas);
                 $this->flash()->addSuccess('Votre société a bien été renseigné!');
+
                 $slugify = new Slugify();
                 $supplier = $this->supplier->find($this->supplier->last());
                 $slug = $slugify->slugify($supplier->getSocial());
+                
                 $url = $this->generateUrl('supplier_show', ['slug' => $slug, 'id' => $supplier->getId()]);
                 header('location: '.$url);
                 exit();

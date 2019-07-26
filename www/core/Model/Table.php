@@ -52,6 +52,12 @@ abstract class Table
         return $this->query("SELECT MAX(id) as lastId FROM {$this->table}", null, true)->lastId;
     }
 
+    public function findLast()
+    {
+        $id = $this->query("SELECT MAX(id) as lastId FROM {$this->table}", null, true)->lastId;
+        return $this->query("SELECT * FROM {$this->table} WHERE id = $id", null, true);
+    }
+
     public function find($id, $column = 'id')
     {
         return $this->query("SELECT * FROM {$this->table} WHERE $column=?", [$id], true);
@@ -62,9 +68,9 @@ abstract class Table
         return $this->query("SELECT * FROM {$this->table} WHERE $column=?", [$id]);
     }
 
-    public function all()
+    public function all($order = "")
     {
-        return $this->query("SELECT * FROM $this->table");
+        return $this->query("SELECT * FROM $this->table $order");
     }
 
     public function create($fields, $class = false)

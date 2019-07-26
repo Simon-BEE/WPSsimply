@@ -1,0 +1,42 @@
+{% extends '/layout/admin.html.twig' %}
+
+{% block title %}Fournisseurs - Section sous haute-surveillance{% endblock %}
+
+{% block body %}
+<div class="title-content">
+    <h2>Fournisseurs</h2>
+</div>
+
+<div class="desc-content">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima placeat impedit dolor enim laudantium libero quae illo molestias, iusto molestiae doloremque excepturi expedita, natus, quod repellendus veniam eligendi necessitatibus architecto perspiciatis tempore! Exercitationem a libero doloribus placeat facilis est quasi saepe ullam eveniet repudiandae autem, adipisci cupiditate inventore nulla beatae? Excepturi saepe quas, omnis incidunt quaerat tempore dolore architecto. Cumque vel placeat eos quod odio aspernatur consectetur eius laudantium vitae expedita quos quam minus dignissimos mollitia suscipit amet excepturi quisquam, assumenda accusantium architecto voluptatem omnis. Sapiente eveniet asperiores rem dolores, cumque harum, impedit vero neque eligendi quod, sunt modi nobis!</p>
+    <p><a href="{{ uri('admin_supplier_add') }}">Vous pouvez ajouter un nouveau fournisseur en cliquant ici</a>.</p>
+</div>
+
+<div class="title-content">
+    <h3>Liste de tous les fournisseurs</h3>
+</div>
+
+<div class="listing">
+    <div class="two-col cards">
+        {% for supplier in suppliers %}
+        <div class="one-col card">
+            <div class="card-header">
+                <h4>{{ supplier.id }} {{ supplier.social }}</h4>
+            </div>
+            <div class="card-body">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta beatae vel earum a itaque vitae corporis optio cupiditate ipsum veniam.</p>
+                <p>{{ supplier.address }}</p>
+            </div>
+            <div class="card-foot">
+                <p><a href="/admin{{ supplier.url }}" class="button">Plus...</a></p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="pagination">
+    {{ pagination | raw }}
+</div>
+
+{% endblock %}

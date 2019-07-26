@@ -65,4 +65,11 @@ abstract class Controller
     {
         return  URLController::getUri($name, $params);
     }
+
+    protected function onlyAdmin(){
+        if (empty($_SESSION['auth']) || $_SESSION['auth']->getRole() != 7) {
+            header('location: /');
+            exit();
+        }
+    }
 }

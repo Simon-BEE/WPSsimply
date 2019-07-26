@@ -7,14 +7,14 @@
     <title>WPSadmin | {% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="/assets/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 <body>
     <header class="principal">
         <div class="title">
             <h1>Bienvenue Administrateur!</h1>
         </div>
-        <section class="head-content">{{ title }}coucou</section>
+        <section class="head-content">{{ title }}</section>
     </header>
     <main>
 
@@ -25,8 +25,8 @@
                 </div>
                 <nav class="menu">
                     <ul>
-                        <li><i class="fas fa-home"></i> <a href="#">Accueil</a></li>
-                        <li><i class="fas fa-user-tie"></i> <a href="#">Fournisseurs</a></li>
+                        <li><i class="fas fa-home"></i> <a href="{{ uri('admin') }}">Accueil</a></li>
+                        <li><i class="fas fa-user-tie"></i> <a href="{{ uri('admin_supplier_all') }}">Fournisseurs</a></li>
                         <li><i class="fas fa-warehouse"></i> <a href="#">Entrepôts</a></li>
                         <li><i class="fas fa-box-open"></i> <a href="#">Marchandises</a></li>
                         <li><i class="fas fa-male"></i> <a href="#">Utilisateurs</a></li>
@@ -39,9 +39,21 @@
         </aside>
 
         <section class="content">
-        {% block body %}{% endblock %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+            <script src="/assets/js/script.js"></script>
+            {% for success in flash("success") %}
+            <script>flash('{{success}}', 'success')</script>
+            {% endfor %}
+
+            {% for errors in flash("alert") %}
+            <script>flash('{{alert}}', 'error')</script>
+            {% endfor %}
+
+            {% block body %}{% endblock %}
         </section>
 
     </main>
+    {% block javascript %}{% endblock %}
 </body>
 </html>

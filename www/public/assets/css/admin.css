@@ -2,14 +2,19 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
 
 /*  REINITIALISATION  */
-ul, li, h1, body {
+ul, li, h1, body, h2, h3, h4 {
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
 /*  GENERAL  */
 body {
     font-family: 'Nunito Sans', sans-serif;
+}
+
+p{
+    text-align: justify;
 }
 
 a{
@@ -29,6 +34,10 @@ h1, h2, h3, h4{
     letter-spacing: 2px;
 }
 
+.grey{
+    color: #999;
+}
+
 /*  HEADER  */
 
 header.principal{
@@ -46,11 +55,11 @@ header.principal{
 /*  SECTION GAUCHE   */
 
 aside.aside-principal{
-    width: 17%;
+    width: 20%;
+    height: -webkit-fill-available;
     background-color: #fff;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: space-between;
     box-shadow: 0px 1px 20px #efefef;
 }
@@ -76,17 +85,15 @@ nav.menu{
 
 nav.menu ul{
     display: flex;
-    width: 272px;
+    width: 100%;
     flex-direction: column;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
 }
 
 nav.menu ul li{
     width: 100%;
-    list-style: none;
     display: inline-block;
     background-color: #fff;
     padding: 5% 0;
@@ -96,13 +103,18 @@ nav.menu ul li{
 }
 
 nav.menu ul li:hover {
-    background-color: #D50000;
+    background-color: #E53935;
 }
 
 nav.menu ul li > *{
     color: #fff;
     margin: 10px;
     text-align: center;
+}
+
+.comeback{
+    text-align: center;
+    margin-bottom: 4%;
 }
 
 
@@ -119,10 +131,120 @@ section.content{
 
 .two-col{
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-between;
     padding: 3% 0;
 }
 
 .one-col{
     margin: 0 2% 0 0;
+    width: 45%;
+}
+
+/*   CARD   */
+.card{
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(220,220,220,0.3);
+    text-align: justify;
+}
+
+.two-col.cards{
+    justify-content: space-around;
+}
+
+.one-col.card{
+    width: 30%;
+}
+
+.card-header{
+    border-radius: 20px 20px 0 0;
+    border-bottom: 1px solid  rgba(220,220,220,0.3);
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #f44336;
+    color: #fff;
+}
+
+.card-foot{
+    border-top: 1px solid  rgba(220,220,220,0.3);
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    background-color: #f44336;
+    border-radius: 10px;
+    color: #fff;
+    padding: 10px;
+    box-shadow: 0 0 20px rgba(220,220,220,0.3);
+    border: 2px solid #efefef;
+}
+
+.button:hover, .button:focus, .button:active{
+    background-color: #E53935;
+    color: #fff;
+}
+
+.card-header h4, .card-body p{
+    padding: 10px;
+}
+
+/*   PAGINATION   */
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.pagination li{
+    background-color: #f44336;
+    border-radius: 50%;
+    padding: 5px 10px;
+}
+
+.pagination li a{
+    color: #fff;
+}
+
+/*   FORMULAIRES   */
+
+.formulaire, .form{
+    display: flex;
+    flex-direction: column;
+    padding: 2% 2% 2% 0;
+}
+
+.form-row{
+    display: flex;
+    flex-direction: column;
+    margin: 1% 0;
+}
+
+.form-info{
+    margin: 1% 0;
+}
+
+.form-input{
+    padding: 1% 2%;
+    border-radius: 5px;
+    border: 1px solid #efefef;
+    margin-top: 1%;
+}
+
+.form-input, .form-input::placeholder{
+    color: #afafaf;
+    letter-spacing: 1px;
+}
+
+.form-row .button{
+    width: 10%;
+}
+
+.form select{
+    padding: 1% 2%;
+    border-radius: 5px;
+    border: 1px solid #efefef;
+    margin-top: 1%;
+    background: none;
 }

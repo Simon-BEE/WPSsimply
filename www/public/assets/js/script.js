@@ -1,22 +1,24 @@
-function calcPrice(obj, id, originalPrice, ajax=false)
-{
-	var qty = obj.value;
-
-	var pHT = originalPrice;
-
-	pHT = (pHT * qty);
-	var pTTC =  pHT * 1.2;
-
-	document.getElementById('PHT_'+id).innerHTML = String(pHT.toFixed(2)).replace('.', ',')+"€";
-	document.getElementById('PTTC_'+id).innerHTML = String(pTTC.toFixed(2)).replace('.', ',')+"€";
+function flash(message, type = 'success') {
+	toastr.options = {
+		"closeButton": true,
+		"debug": false,
+		"newestOnTop": false,
+		"progressBar": true,
+		"positionClass": "toast-top-right",
+		"preventDuplicates": false,
+		"onclick": null,
+		"showDuration": "300",
+		"hideDuration": "1000",
+		"timeOut": "5000",
+		"extendedTimeOut": "1000",
+		"showEasing": "swing",
+		"hideEasing": "linear",
+		"showMethod": "fadeIn",
+		"hideMethod": "fadeOut"
+	}
+	toastr[type](message)
 }
 
-function getProductsModal(title, img, content, price, id) {
-	$('#modal-message').removeAttr('class').text('');
-
-	$('#modal-title').text(title);
-	$('#modal-body-img').attr('src', img).attr('alt', title);
-	$('#modal-body').text(content);
-	$('#modal-body-price').text(price+'€');
-	$('#product_id').attr('onclick', 'addToCart('+id+')');
-}
+$( function() {
+    $( "#accordion" ).accordion();
+} );

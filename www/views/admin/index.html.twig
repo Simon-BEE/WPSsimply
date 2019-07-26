@@ -18,10 +18,13 @@
             <h2>Fournisseurs</h2>
         </div>
         <div class="desc-content">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quae unde sed minus minima reprehenderit non! Similique aspernatur error nostrum commodi velit quas magni, fuga distinctio, sit dicta minima deleniti asperiores aperiam qui provident ipsa id labore, hic atque ex veritatis esse quo! Incidunt molestias dignissimos cupiditate ipsum maxime officiis magni laborum tempore, iure provident quod exercitationem aut. Ex quos eligendi atque deserunt non cupiditate sit iure ipsam.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quae unde sed minus minima reprehenderit non! Similique aspernatur error nostrum commodi velit quas magni, fuga distinctio.</p>
+        </div>
+        <div class="last">
+            <p>Le dernier fournisseur enregistré est : {{ lastSupplier.social }}</p>
         </div>
         <div class="link-content">
-            <a href="#">Accéder à tous les fournisseurs...</a>
+            <a href="{{ uri('admin_supplier_all') }}">Accéder à tous les fournisseurs...</a>
         </div>
     </div>
 
@@ -30,7 +33,10 @@
             <h2>Entrepôts</h2>
         </div>
         <div class="desc-content">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quae unde sed minus minima reprehenderit non! Similique aspernatur error nostrum commodi velit quas magni, fuga distinctio, sit dicta minima deleniti asperiores aperiam qui provident ipsa id labore, hic atque ex veritatis esse quo! Incidunt molestias dignissimos cupiditate ipsum maxime officiis magni laborum tempore, iure provident quod exercitationem aut. Ex quos eligendi atque deserunt non cupiditate sit iure ipsam.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quae unde sed minus minima reprehenderit non! Similique aspernatur error nostrum commodi velit quas magni, fuga distinctio.</p>
+        </div>
+        <div class="last">
+            <p>Le dernier entrepôt enregistré est : {{ lastWarehouse.name }}</p>
         </div>
         <div class="link-content">
             <a href="#">Accéder à tous les entrepôts...</a>
@@ -44,7 +50,10 @@
             <h2>Marchandises</h2>
         </div>
         <div class="desc-content">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quae unde sed minus minima reprehenderit non! Similique aspernatur error nostrum commodi velit quas magni, fuga distinctio, sit dicta minima deleniti asperiores aperiam qui provident ipsa id labore, hic atque ex veritatis esse quo! Incidunt molestias dignissimos cupiditate ipsum maxime officiis magni laborum tempore, iure provident quod exercitationem aut. Ex quos eligendi atque deserunt non cupiditate sit iure ipsam.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quae unde sed minus minima reprehenderit non! Similique aspernatur error nostrum commodi velit quas magni, fuga distinctio.</p>
+        </div>
+        <div class="last">
+            <p>Le dernier produit ajouté est : {{ lastProduct.name }}</p>
         </div>
         <div class="link-content">
             <a href="#">Accéder à toutes les marchandises...</a>
@@ -56,7 +65,10 @@
             <h2>Utilisateurs</h2>
         </div>
         <div class="desc-content">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quae unde sed minus minima reprehenderit non! Similique aspernatur error nostrum commodi velit quas magni, fuga distinctio, sit dicta minima deleniti asperiores aperiam qui provident ipsa id labore, hic atque ex veritatis esse quo! Incidunt molestias dignissimos cupiditate ipsum maxime officiis magni laborum tempore, iure provident quod exercitationem aut. Ex quos eligendi atque deserunt non cupiditate sit iure ipsam.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quae unde sed minus minima reprehenderit non! Similique aspernatur error nostrum commodi velit quas magni, fuga distinctio.</p>
+        </div>
+        <div class="last">
+            <p>Le dernier utilisateur inscrit est : {{ lastUser.name }}</p>
         </div>
         <div class="link-content">
             <a href="#">Accéder à tous les utilisateurs...</a>

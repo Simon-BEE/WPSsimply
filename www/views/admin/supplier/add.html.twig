@@ -1,0 +1,46 @@
+{% extends '/layout/admin.html.twig' %}
+
+{% block title %}Ajouter un nouveau fournisseur{% endblock %}
+
+{% block body %}
+<div class="">
+    <h2 class="">Ajouter un nouveau fournisseur</h2>
+</div>
+
+<p class="grey">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat inventore velit sapiente sequi nulla earum molestiae aliquam id explicabo vero sit, asperiores ratione rem deleniti, laborum dicta laboriosam harum! Sed illo adipisci voluptatum exercitationem facilis qui dolorum, expedita autem voluptates ipsum quia ducimus quam distinctio delectus minima amet odit necessitatibus fugiat maiores fuga architecto! Consequatur cumque dicta ex vel beatae reprehenderit corrupti, itaque fugiat rem expedita? Laboriosam ipsum dignissimos nemo dolores quod rem culpa recusandae officiis facilis pariatur doloribus consequatur voluptatem iusto eum mollitia deleniti obcaecati hic a consequuntur itaque, esse enim. Nemo molestiae, cumque optio et dolores nesciunt numquam!</p>
+
+<div class="formulaire">
+    <form method="POST" action="" class="form">
+            <div class="form-info">Son futur identifiant fournisseur sera le : <span class="grey">{{ lastId + 1 }}</span></div>
+            <div class="form-row">
+                <label for="social">Raison sociale de la société</label>
+                <input type="text" name="social" class="form-input" id="social" placeholder="Entrez la raison sociale">
+            </div>
+
+            <div class="form-row">
+                <label for="address">Adresse de la société</label>
+                <input type="text" name="address" class="form-input" id="address" placeholder="Entrez l'adresse complète">
+            </div>
+
+            <div class="form-row">
+                <label for="user_id">L'utilisateur qui sera le fournisseur</label>
+                <select name="user_id" id="user_id" class="custom-select">
+                    {% if userCanBeSupplier %}
+                        <option selected="">Sélectionnez l'utilisateur</option>
+                        {% for user in userCanBeSupplier %}
+                        <option value="{{ user.id }}">{{ user.name }}</option>
+                        {% endfor %}
+                    {% else %}
+                        <option selected="">Aucun utilisateur suceptible de devenir fournisseur</option>
+                    {% endif %}
+                    
+                </select>
+            </div>
+
+            <div class="form-row">
+                <button type="submit" class="button">Modifier</button>
+            </div>
+    </form>
+</div>
+
+{% endblock %}
