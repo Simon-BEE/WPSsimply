@@ -15,6 +15,9 @@ $app->getRouter($basePath)
 
     //Administration
     ->get('/admin', 'admin\Admin#index', 'admin')
+    ->get('/admin/supplier', 'admin\Supplier#index', 'admin_supplier_all')
+    ->get('/admin/warehouse', 'admin\Warehouse#index', 'admin_warehouse_all')
+    ->get('/admin/product', 'admin\Product#index', 'admin_product_all')
 
     //Utilisateurs
     ->match('/login', 'user#login', 'login')

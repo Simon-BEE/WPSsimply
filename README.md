@@ -81,6 +81,7 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 
 ## TODO :
 * Refaire première maquette (home mobile)
+* Maquette administration
 * Commenter le code
 * ~~Possibilité de modifier ses infos persos~~
 * Espace Admin

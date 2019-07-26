@@ -6,11 +6,42 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>WPSadmin | {% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="/assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+
 </head>
 <body>
-    <header></header>
+    <header class="principal">
+        <div class="title">
+            <h1>Bienvenue Administrateur!</h1>
+        </div>
+        <section class="head-content">{{ title }}coucou</section>
+    </header>
     <main>
-    {% block body %}{% endblock %}
+
+        <aside class="aside-principal">
+            <div class="top">
+                <div class="img-profile">
+                    <img src="/assets/img/profile_male.png" alt="vector boy">
+                </div>
+                <nav class="menu">
+                    <ul>
+                        <li><i class="fas fa-home"></i> <a href="#">Accueil</a></li>
+                        <li><i class="fas fa-user-tie"></i> <a href="#">Fournisseurs</a></li>
+                        <li><i class="fas fa-warehouse"></i> <a href="#">Entrepôts</a></li>
+                        <li><i class="fas fa-box-open"></i> <a href="#">Marchandises</a></li>
+                        <li><i class="fas fa-male"></i> <a href="#">Utilisateurs</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="comeback">
+                <a href="{{ uri('home') }}">Retour au site</a>
+            </div>
+        </aside>
+
+        <section class="content">
+        {% block body %}{% endblock %}
+        </section>
+
     </main>
 </body>
 </html>

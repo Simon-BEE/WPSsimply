@@ -7,7 +7,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        if (!$_SESSION['auth']->getRole() == 7) {
+        if (empty($_SESSION['auth']) || $_SESSION['auth']->getRole() != 7) {
             header('location: /');
             exit();
         }
