@@ -1,0 +1,44 @@
+{% extends '/layout/admin.html.twig' %}
+
+{% block title %}Utilisateurs - Section sous haute-surveillance{% endblock %}
+
+{% block body %}
+<div class="">
+    <h2 class="">Modifier les informations de cet utilisateur</h2>
+</div>
+
+<p class="grey">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat inventore velit sapiente sequi nulla earum molestiae aliquam id explicabo vero sit, asperiores ratione rem deleniti, laborum dicta laboriosam harum! Sed illo adipisci voluptatum exercitationem facilis qui dolorum, expedita autem voluptates ipsum quia ducimus quam distinctio delectus minima amet odit necessitatibus fugiat maiores fuga architecto! Consequatur cumque dicta ex vel beatae reprehenderit corrupti, itaque fugiat rem expedita? Laboriosam ipsum dignissimos nemo dolores quod rem culpa recusandae officiis facilis pariatur doloribus consequatur voluptatem iusto eum mollitia deleniti obcaecati hic a consequuntur itaque, esse enim. Nemo molestiae, cumque optio et dolores nesciunt numquam!</p>
+
+<div class="formulaire">
+    <form method="POST" action="" class="form">
+            <div class="form-info">Identifiant de l'utilisateur : <span class="grey">{{user.id}}</span></div>
+            <div class="form-row">
+                <label for="name">Nom complet de l'utilisateur</label>
+                <input type="text" name="name" class="form-input" id="name" value="{{ user.name }}" placeholder="Entrez votre nom complet">
+            </div>
+
+            <div class="form-row">
+                <label for="mail">Adresse email de l'utilisateur'</label>
+                <input type="text" name="mail" class="form-input" id="mail" value="{{ user.mail }}" placeholder="Entrez l'adresse complète">
+            </div>
+
+            <div class="form-row">
+                <p>Selectionner son rôle:</p>
+                <div class="">
+                    <input type="radio" id="role1" class="" name="role" value="1" {% if user.role is same as('1') %}checked{% endif %}>
+                    <label for="role1" class="">Fournisseur</label>
+                </div>
+
+                <div class="">
+                    <input type="radio" id="role2" class="" name="role" value="2" {% if user.role is same as('2') %}checked{% endif %}>
+                    <label for="role2" class="">Gérant d'entrepôt</label>
+                </div>
+                <p class="red">Attention si vous changer son rôle, tout ce qui est lié à celui-ci sera supprimé !</p>
+            </div>
+
+            <div class="form-row">
+                <button type="submit" class="button">Modifier</button>
+            </div>
+    </form>
+</div>
+{% endblock %}

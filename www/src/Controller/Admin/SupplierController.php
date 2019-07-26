@@ -29,7 +29,7 @@ class SupplierController extends Controller
         }
         
         return $this->render('admin/supplier/index.html', [
-            'title' => 'Afficher tous les fournisseurs', 
+            'title' => 'Affiche tous les fournisseurs', 
             'suppliers' => $suppliers, 
             'pagination' => $pagination]);
     }

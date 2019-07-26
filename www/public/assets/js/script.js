@@ -18,7 +18,3 @@ function flash(message, type = 'success') {
 	}
 	toastr[type](message)
 }
-
-$( function() {
-    $( "#accordion" ).accordion();
-} );

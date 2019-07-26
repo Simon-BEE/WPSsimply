@@ -1,0 +1,51 @@
+{% extends '/layout/admin.html.twig' %}
+
+{% block title %}Utilisateurs - Section sous haute-surveillance{% endblock %}
+
+{% block body %}
+<div class="title-content">
+    <h2>Utilisateurs</h2>
+</div>
+
+<div class="desc-content">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima placeat impedit dolor enim laudantium libero quae illo molestias, iusto molestiae doloremque excepturi expedita, natus, quod repellendus veniam eligendi necessitatibus architecto perspiciatis tempore! Exercitationem a libero doloribus placeat facilis est quasi saepe ullam eveniet repudiandae autem, adipisci cupiditate inventore nulla beatae? Excepturi saepe quas, omnis incidunt quaerat tempore dolore architecto. Cumque vel placeat eos quod odio aspernatur consectetur eius laudantium vitae expedita quos quam minus dignissimos mollitia suscipit amet excepturi quisquam, assumenda accusantium architecto voluptatem omnis. Sapiente eveniet asperiores rem dolores, cumque harum, impedit vero neque eligendi quod, sunt modi nobis!</p>
+    <p><a href="{{ uri('admin_user_add') }}">Vous pouvez ajouter un nouvel utilisateur en cliquant ici</a>.</p>
+</div>
+
+<div class="title-content">
+    <h3>Liste de tous les fournisseurs</h3>
+</div>
+
+<div class="listing">
+    <div class="two-col cards">
+        {% for user in users %}
+        <div class="one-col card card-user">
+            <div class="card-header">
+                <h4>{{ user.id }} {{ user.name }}</h4>
+            </div>
+            <div class="card-body cb-user">
+                <p>{{ user.mail }}</p>
+                <p>
+                    <strong>Rôle</strong> : 
+                    {% if user.role is same as('1') %}
+                        Fournisseur
+                    {% elseif user.role is same as('7') %}
+                        Administrateur
+                    {% else %}
+                        Gérant d'entrepôt
+                    {% endif %}
+                </p>
+            </div>
+            <div class="card-foot">
+                <p><a href="{{ user.url }}" class="button">Plus...</a></p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="pagination">
+    {{ pagination | raw }}
+</div>
+
+{% endblock %}

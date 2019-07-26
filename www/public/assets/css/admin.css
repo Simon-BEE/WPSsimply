@@ -34,6 +34,12 @@ h1, h2, h3, h4{
     letter-spacing: 2px;
 }
 
+/*   CLASS RAPIDE   */
+
+.red{
+    color: #F44336;
+}
+
 .grey{
     color: #999;
 }
@@ -56,7 +62,6 @@ header.principal{
 
 aside.aside-principal{
     width: 20%;
-    height: -webkit-fill-available;
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -146,10 +151,12 @@ section.content{
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(220,220,220,0.3);
     text-align: justify;
+    margin-bottom: 2%;
 }
 
 .two-col.cards{
     justify-content: space-around;
+    border-bottom: 1px solid #efefef;
 }
 
 .one-col.card{
@@ -189,12 +196,22 @@ section.content{
     padding: 10px;
 }
 
+.card-user{
+    width: 20% !important;
+}
+
+.cb-user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /*   PAGINATION   */
 
 .pagination{
     display: flex;
     justify-content: center;
-    margin-top: 5%;
+    margin-top: 1%;
 }
 
 .pagination li{

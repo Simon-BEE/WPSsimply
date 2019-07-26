@@ -59,5 +59,11 @@ class UserEntity extends Entity
         $this->password = $password;
     }
 
-    
+    public function getUrl()
+    {
+        return \App\App::getInstance()->getRouter()->url(
+            'admin_user_show', [
+                'id' => $this->getId()
+            ]);
+    }
 }
