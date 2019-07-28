@@ -42,15 +42,28 @@ class UserController extends Controller
         $user = $this->user->find($id);
         $role = $user->getRole();
 
-        $form = new FormController();
-        $form->field('name', ['require'])
-            ->field('mail', ['require'])
-            ->field('role', ['require']);
+        if ($role == 7) {
+            $form = new FormController();
+            $form->field('name', ['require'])
+                ->field('mail', ['require']);
+        }else{
+            $form = new FormController();
+            $form->field('name', ['require'])
+                ->field('mail', ['require'])
+                ->field('role', ['require']);
+        }
+
         $errors = $form->hasErrors();
 
         if (!isset($errors['post'])) {
             $datas = $form->getDatas();
             if (empty($errors)) {
+
+                if ($user->getMail() != $datas["mail"]) {
+                    if ($this->user->find($datas["mail"], "mail")) {
+                        throw new \Exception("L'email est déjà utilisé par un autre utilisateur");
+                    }
+                }
 
                 if ($role != $datas['role']) {
 
@@ -80,17 +93,50 @@ class UserController extends Controller
                             $this->productWarehouse->delete($idWarehouse, 'warehouse_id');
                         }
 
-                    }else{
-                        die('c\'est raté');
                     }
                 }
                 $this->user->update($id, 'id', $datas);
                 $this->flash()->addSuccess('Les données de l\'utilisateur ont bien été modifiées');
+                $user = $this->user->find($id);
             }
         }
 
         return $this->render('admin/user/show.html', [
             'title' => 'Modifier un utilisateur', 
             'user' => $user]);
+    }
+
+    public function add()
+    {
+        $this->onlyAdmin();
+
+        $form = new FormController();
+        $form->field('name', ['require'])
+            ->field('mail', ['require'])
+            ->field('password', ['require', "length" => 6])
+            ->field('role', ['require']);
+
+        $errors = $form->hasErrors();
+
+        if (!isset($errors['post'])) {
+            $datas  = $form->getDatas();
+            if (empty($errors)) {
+                $user = $this->user;
+                if ($user->find($datas["mail"], "mail")) {
+                    throw new \Exception("L'email de l'utilisateur existe déjà");
+                }
+                $this->user->create($datas);
+                $this->flash()->addSuccess('L\'utilisateur est bien enregistré');
+                $url = $this->generateUrl('admin_user_show', ['id' => $this->user->last()]);
+                header('location: '.$url);
+                exit();
+            }else{
+                $this->flash()->addAlert('Veillez à bien remplir les champs !');
+            }
+        }
+
+        return $this->render('admin/user/add.html', [
+            'title' => 'Ajouter un nouvel utilisateur'
+        ]);
     }
 }

@@ -21,7 +21,13 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quae unde sed minus minima reprehenderit non! Similique aspernatur error nostrum commodi velit quas magni, fuga distinctio.</p>
         </div>
         <div class="last">
-            <p>Le dernier fournisseur enregistré est : {{ lastSupplier.social }}</p>
+            <p>Le dernier fournisseur enregistré est : 
+            {% if lastSupplier is same as('AUCUN') %}
+                <span class="red">{{ lastSupplier }}</span>
+            {% else %}
+                {{ lastSupplier.social }}
+            {% endif %}
+            </p>
         </div>
         <div class="link-content">
             <a href="{{ uri('admin_supplier_all') }}">Accéder à tous les fournisseurs...</a>
@@ -36,7 +42,13 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quae unde sed minus minima reprehenderit non! Similique aspernatur error nostrum commodi velit quas magni, fuga distinctio.</p>
         </div>
         <div class="last">
-            <p>Le dernier entrepôt enregistré est : {{ lastWarehouse.name }}</p>
+            <p>Le dernier entrepôt enregistré est : 
+            {% if lastWarehouse is same as('AUCUN') %}
+                <span class="red">{{ lastWarehouse }}</span>
+            {% else %}
+                {{ lastWarehouse.name }}
+            {% endif %}
+            </p>
         </div>
         <div class="link-content">
             <a href="#">Accéder à tous les entrepôts...</a>
@@ -53,7 +65,13 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quae unde sed minus minima reprehenderit non! Similique aspernatur error nostrum commodi velit quas magni, fuga distinctio.</p>
         </div>
         <div class="last">
-            <p>Le dernier produit ajouté est : {{ lastProduct.name }}</p>
+            <p>Le dernier produit ajouté est : 
+            {% if lastProduct is same as('AUCUN') %}
+                <span class="red">{{ lastProduct }}</span>
+            {% else %}
+                {{ lastProduct.name }}
+            {% endif %}
+            </p>
         </div>
         <div class="link-content">
             <a href="#">Accéder à toutes les marchandises...</a>
@@ -68,7 +86,13 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quae unde sed minus minima reprehenderit non! Similique aspernatur error nostrum commodi velit quas magni, fuga distinctio.</p>
         </div>
         <div class="last">
-            <p>Le dernier utilisateur inscrit est : {{ lastUser.name }}</p>
+            <p>Le dernier utilisateur inscrit est : 
+            {% if lastUser is same as('AUCUN') %}
+                <span class="red">{{ lastUser }}</span>
+            {% else %}
+                {{ lastUser.name }}
+            {% endif %}
+            </p>
         </div>
         <div class="link-content">
             <a href="#">Accéder à tous les utilisateurs...</a>

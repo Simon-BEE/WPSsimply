@@ -140,5 +140,10 @@ abstract class Table
     {
         return $this->query("SELECT * FROM {$this->table} ORDER BY id DESC LIMIT {$limit}  OFFSET {$offset}");
     }
+
+    public function isNotEmpty()
+    {
+    return $this->query("SELECT id FROM {$this->table}");
+    }
     
 }

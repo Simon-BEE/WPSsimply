@@ -14,33 +14,38 @@
             <div class="form-info">Identifiant de l'utilisateur : <span class="grey">{{user.id}}</span></div>
             <div class="form-row">
                 <label for="name">Nom complet de l'utilisateur</label>
-                <input type="text" name="name" class="form-input" id="name" value="{{ user.name }}" placeholder="Entrez votre nom complet">
+                <input type="text" name="name" class="form-input" id="name" placeholder="Entrez votre nom complet" required>
             </div>
 
             <div class="form-row">
                 <label for="mail">Adresse email de l'utilisateur</label>
-                <input type="text" name="mail" class="form-input" id="mail" value="{{ user.mail }}" placeholder="Entrez l'adresse complète">
+                <input type="text" name="mail" class="form-input" id="mail" placeholder="Entrez l'adresse complète" required>
             </div>
 
-            {% if user.role is same as('7') %}
-                Vous ne pouvez pas changer le rôle d'un administrateur
-            {% else %}
-                <div class="form-row">
-                    <p>Selectionner son rôle:</p>
-                    <div class="">
-                        <input type="radio" id="role1" class="" name="role" value="1" {% if user.role is same as('1') %}checked{% endif %}>
-                        <label for="role1" class="">Fournisseur</label>
-                    </div>
+            <div class="form-row">
+                <label for="password">Mot de passe de l'utilisateur</label>
+                <input type="text" name="password" class="form-input" id="password" placeholder="Entrez un mot de passe" required>
+                <small id="password" class="form-text text-muted">Veuillez rentrer un mot de passe de 6 caratères minimum.</small>
+            </div>
 
-                    <div class="">
-                        <input type="radio" id="role2" class="" name="role" value="2" {% if user.role is same as('2') %}checked{% endif %}>
-                        <label for="role2" class="">Gérant d'entrepôt</label>
-                    </div>
-                    <p class="red">Attention si vous changer son rôle, tout ce qui est lié à celui-ci sera supprimé !</p>
+            <div class="form-row">
+                <p>Selectionner son rôle:</p>
+                <div class="">
+                    <input type="radio" id="role1" class="" name="role" value="1" >
+                    <label for="role1" class="">Fournisseur</label>
                 </div>
-            {% endif %}
-            
 
+                <div class="">
+                    <input type="radio" id="role2" class="" name="role" value="2" >
+                    <label for="role2" class="">Gérant d'entrepôt</label>
+                </div>
+
+                <div class="">
+                    <input type="radio" id="role7" class="" name="role" value="7" >
+                    <label for="role7" class="">Administrateur / <span class="red">Attention rôle ayant accès à tous les droits, dont cet accès Administrateur.</span></label>
+                </div>
+            </div>
+            
             <div class="form-row">
                 <button type="submit" class="button">Modifier</button>
             </div>

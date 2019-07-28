@@ -218,6 +218,7 @@ section.content{
     background-color: #f44336;
     border-radius: 50%;
     padding: 5px 10px;
+    margin: 0 10px;
 }
 
 .pagination li a{

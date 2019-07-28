@@ -24,8 +24,8 @@ $app->getRouter($basePath)
     ->get('/admin/product', 'admin\Product#index', 'admin_product_all')
 
     ->get('/admin/user', 'admin\User#index', 'admin_user_all')
-    ->match('/admin/user/[*:id]', 'admin\User#show', 'admin_user_show')
     ->match('/admin/user/add', 'admin\User#add', 'admin_user_add')
+    ->match('/admin/user/[*:id]', 'admin\User#show', 'admin_user_show')
 
     //Utilisateurs
     ->match('/login', 'user#login', 'login')
