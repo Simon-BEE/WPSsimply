@@ -1,0 +1,48 @@
+{% extends '/layout/admin.html.twig' %}
+
+{% block title %}Entrepôts - Section sous haute-surveillance{% endblock %}
+
+{% block body %}
+<div class="title-content">
+    <h2>Entrepôts</h2>
+</div>
+
+<div class="desc-content">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima placeat impedit dolor enim laudantium libero quae illo molestias, iusto molestiae doloremque excepturi expedita, natus, quod repellendus veniam eligendi necessitatibus architecto perspiciatis tempore! Exercitationem a libero doloribus placeat facilis est quasi saepe ullam eveniet repudiandae autem, adipisci cupiditate inventore nulla beatae? Excepturi saepe quas, omnis incidunt quaerat tempore dolore architecto. Cumque vel placeat eos quod odio aspernatur consectetur eius laudantium vitae expedita quos quam minus dignissimos mollitia suscipit amet excepturi quisquam, assumenda accusantium architecto voluptatem omnis. Sapiente eveniet asperiores rem dolores, cumque harum, impedit vero neque eligendi quod, sunt modi nobis!</p>
+    <p><a href="{{ uri('admin_warehouse_add') }}">Vous pouvez ajouter un nouveau entrepôt en cliquant ici</a>.</p>
+</div>
+
+<div class="title-content">
+    <h3>Liste de tous les Entrepôts</h3>
+</div>
+
+<div class="listing">
+    <div class="two-col cards">
+        {% for warehouse in warehouses %}
+        <div class="one-col card">
+            <div class="card-header">
+                <h4>{{ warehouse.id }} {{ warehouse.name }}</h4>
+            </div>
+            <div class="card-body">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta beatae vel earum a itaque vitae corporis optio cupiditate ipsum veniam.</p>
+                <p>{{ warehouse.address }}, 
+                {% for city in cities %}
+                    {% if warehouse.cityId is same as(city.id) %}
+                        {{ city.name }}
+                    {% endif %}
+                {% endfor %}
+                </p>
+            </div>
+            <div class="card-foot">
+                <p><a href="/admin{{ warehouse.url }}" class="button">Plus...</a></p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="pagination">
+    {{ pagination | raw }}
+</div>
+
+{% endblock %}

@@ -21,6 +21,9 @@ $app->getRouter($basePath)
     ->match('/admin/supplier/[*:slug]-[i:id]', 'admin\Supplier#show', 'admin_supplier_show')
 
     ->get('/admin/warehouse', 'admin\Warehouse#index', 'admin_warehouse_all')
+    ->match('/admin/warehouse/add', 'admin\Warehouse#add', 'admin_warehouse_add')
+    ->match('/admin/warehouse/[*:slug]-[i:id]', 'admin\Warehouse#show', 'admin_warehouse_show')
+
     ->get('/admin/product', 'admin\Product#index', 'admin_product_all')
 
     ->get('/admin/user', 'admin\User#index', 'admin_user_all')

@@ -21,7 +21,7 @@
             <div class="form-row mb-5">
                 <label for="city_id">Dans quelle ville se trouve votre entrepôt?</label>
                 <select name="city_id" id="city_id" class="custom-select">
-                    <option selected="">Sélectionnez votre ville</option>
+                    <option value="" selected>Sélectionnez votre ville</option>
                     {% for city in cities %}
                     <option value="{{ city.id }}">{{ city.name }}</option>
                     {% endfor %}

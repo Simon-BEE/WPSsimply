@@ -88,6 +88,8 @@ class SupplierController extends Controller
                     'slug' => $slugNew, 
                     'id' => $this->supplier->last()]));
                 exit();
+            }else{
+                $this->flash()->addAlert('Veillez à bien remplir tous les champs');
             }
         }
 

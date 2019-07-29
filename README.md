@@ -60,15 +60,16 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
   * URL : WPSsimply.com/warehouse/add *&&* WPSsimply.com/warehouse/slug-id/edit
 
 * Section Administration
-  * URL : WPSsimply.com/admin
-    * Ajout de fournisseur et modification
+    * **Index de l'administration**
+      * URL : WPSsimply.com/admin
+    * **Ajout de fournisseur et modification**
       * URL : WPSsimply.com/admin/supplier/add *&&* WPSsimply.com/admin/supplier/slug-id/edit
-    * Ajout d'entrepôt et modification
+    * **Ajout d'entrepôt et modification**
       * URL : WPSsimply.com/admin/warehouse/add *&&* WPSsimply.com/admin/warehouse/slug-id/edit
     * Ajout de produit et modification
       * URL : WPSsimply.com/admin/product/add *&&* WPSsimply.com/admin/product/slug-id/edit
-    * Modification utilisateur
-      * URL : WPSsimply.com/admin/user/id
+    * **Ajout et modification utilisateur**
+      * URL : WPSsimply.com/admin/user/add *&&* WPSsimply.com/admin/user/id
 
 > ***En gras** les pages effectuées*
 

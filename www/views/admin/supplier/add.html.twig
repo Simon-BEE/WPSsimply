@@ -24,14 +24,14 @@
 
             <div class="form-row">
                 <label for="user_id">L'utilisateur qui sera le fournisseur</label>
-                <select name="user_id" id="user_id" class="custom-select">
+                <select name="user_id" id="user_id" class="custom-select" required>
                     {% if userCanBeSupplier %}
-                        <option selected="">Sélectionnez l'utilisateur</option>
+                        <option value="" selected>Sélectionnez l'utilisateur</option>
                         {% for user in userCanBeSupplier %}
                         <option value="{{ user.id }}">{{ user.name }}</option>
                         {% endfor %}
                     {% else %}
-                        <option selected="">Aucun utilisateur suceptible de devenir fournisseur</option>
+                        <option value="" selected>Aucun utilisateur suceptible de devenir fournisseur</option>
                     {% endif %}
                     
                 </select>

@@ -125,6 +125,7 @@ class UserController extends Controller
                 if ($user->find($datas["mail"], "mail")) {
                     throw new \Exception("L'email de l'utilisateur existe déjà");
                 }
+                $datas["password"] = password_hash($datas["password"], PASSWORD_BCRYPT);
                 $this->user->create($datas);
                 $this->flash()->addSuccess('L\'utilisateur est bien enregistré');
                 $url = $this->generateUrl('admin_user_show', ['id' => $this->user->last()]);

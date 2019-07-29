@@ -1,0 +1,62 @@
+{% extends '/layout/admin.html.twig' %}
+
+{% block title %}Ajouter un entrepôt{% endblock %}
+
+{% block body %}
+<div class="container  mt-3">
+    <h2 class="display-5 text-center">Ajouter votre entrepôt</h2>
+</div>
+
+<p class="grey">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi sint quis magni, exercitationem sit voluptates quaerat quam non amet possimus nemo officiis, quae voluptatibus molestiae minus mollitia magnam voluptatum impedit nesciunt soluta in? Odio quis possimus eligendi voluptates beatae officia consectetur sunt, distinctio aliquid laudantium ut laboriosam earum quia totam, quos saepe? Placeat odio commodi, rerum fugit doloremque nihil? Voluptatum vero id sapiente ipsam, cupiditate libero voluptate eligendi. Ullam repellendus, quam obcaecati nesciunt, laudantium culpa minima architecto facere aliquid quis cum quia dicta. Alias eligendi fugit harum porro architecto repellendus id facere necessitatibus officia vitae.</p>
+
+<div class="formulaire">
+    <div class="form-info">Son futur identifiant de Gérant d'entrepôt sera le : <span class="grey">{{ lastId + 1 }}</span></div>
+    <form method="POST" action="" class="form">
+            <div class="form-row ">
+                <label for="name">Nom de votre entrepôt</label>
+                <input type="text" name="name" class="form-input" id="name" aria-describedby="emailHelp" placeholder="Entrez le nom de votre entrepôt" required>
+            </div>
+
+            <div class="form-row ">
+                <label for="address">Adresse de votre entrepôt</label>
+                <input type="text" name="address" class="form-input" id="address" aria-describedby="address" placeholder="Entrez l'adresse" required>
+            </div>
+
+            <div class="form-row ">
+                <label for="city_id">Dans quelle ville se trouve votre entrepôt?</label>
+                <select name="city_id" id="city_id" class="custom-select" required>
+                    <option value="" selected>Sélectionnez votre ville</option>
+                    {% for city in cities %}
+                    <option value="{{ city.id }}">{{ city.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-row ">
+                <label for="surface">De quelle taille est votre entrepôt?</label>
+                <input type="number" name="surface" class="form-input" id="surface" aria-describedby="surface" placeholder="Rentrer la superficie" required>
+                <small>En mettre carré (m2)</small>
+            </div>
+
+            <div class="form-row">
+                <label for="user_id">L'utilisateur qui sera le gérant d'entrepôt</label>
+                <select name="user_id" id="user_id" class="custom-select" required>
+                    {% if userCanBeWarehouseBoss %}
+                        <option value="">Sélectionnez l'utilisateur</option>
+                        {% for user in userCanBeWarehouseBoss %}
+                        <option value="{{ user.id }}">{{ user.name }}</option>
+                        {% endfor %}
+                    {% else %}
+                        <option value="" selected>Aucun utilisateur suceptible de devenir gérant d'entrepôt</option>
+                    {% endif %}
+                    
+                </select>
+            </div>
+
+            <div class="form-row ">
+                <button type="submit" class="button">Sauvegarder cet entrepôt</button>
+            </div>
+    </form>
+</div>
+
+{% endblock %}
