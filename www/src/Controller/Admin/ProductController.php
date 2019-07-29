@@ -13,6 +13,7 @@ class ProductController extends Controller
         $this->onlyAdmin();
         $this->loadModel('product');
         $this->loadModel('supplier');
+        $this->loadModel('productWarehouse');
     }
 
     public function index()
@@ -37,7 +38,11 @@ class ProductController extends Controller
     public function show($slug, $id)
     {
         $product = $this->product->find($id);
-
+        if (!$product) {
+            header('location: /admin/product');
+            exit();
+        }
+        
         $form = new FormController();
         $form->field('name', ['require'])
             ->field('toxicity', ['require'])
@@ -117,5 +122,14 @@ class ProductController extends Controller
             'title' => 'Ajouter un nouveau produit',
             'suppliers' => $suppliers
         ]);
+    }
+
+    public function delete()
+    {
+        if ($this->product->delete($_POST['id'])) {
+            echo 'ok';
+        }else{
+            echo 'error';
+        }
     }
 }

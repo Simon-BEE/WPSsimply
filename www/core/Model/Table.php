@@ -109,10 +109,10 @@ abstract class Table
         return $this->query("UPDATE {$this->table} SET $sql_part WHERE $column = ?", $attributes, true);
     }
 
-    public function delete($id, $column = 'id')
-    {
-        return $this->query("DELETE FROM {$this->table} WHERE $column = ?", [$id], true);
-    }
+    // public function delete($id, $column = 'id')
+    // {
+    //     return $this->query("DELETE FROM {$this->table} WHERE $column = '$id'");
+    // }
 
     public function query(string $statement, ?array $attributes = null, bool $one = false, ?string $class_name = null)
     {

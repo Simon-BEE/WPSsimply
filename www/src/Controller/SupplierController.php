@@ -31,6 +31,11 @@ class SupplierController extends Controller
     public function show($slug, $id)
     {
         $supplier = $this->supplier->find($id);
+        if (!$supplier) {
+            header('location: /suppliers');
+            exit();
+        }
+
         if ($_SESSION['auth']) {
             if ($supplier->getUserId() === $_SESSION['auth']->getId()) {
                 $mine = true;
@@ -75,6 +80,11 @@ class SupplierController extends Controller
     public function edit($slug, $id)
     {
         $supplier = $this->supplier->find($id);
+        if (!$supplier) {
+            header('location: /suppliers');
+            exit();
+        }
+        
         if ($_SESSION['auth']->getId() !== $supplier->getUserId()) {
             die('la');
             header('location: '. $this->generateUrl('supplier_show', ['slug' => $slug, 'id' => $id]));

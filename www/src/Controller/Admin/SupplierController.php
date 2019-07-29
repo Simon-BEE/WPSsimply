@@ -39,6 +39,11 @@ class SupplierController extends Controller
     {
 
         $supplier = $this->supplier->find($id);
+        if (!$supplier) {
+            header('location: /admin/supplier');
+            exit();
+        }
+        
         $products = $this->product->findAll($id, 'supplier_id');
 
         $form = new FormController();
@@ -100,16 +105,27 @@ class SupplierController extends Controller
             $userSupplier[$value->getId()] = $value;
         }
 
-        foreach ($userSupplier as $key => $value) {
-            if (!$this->supplier->find($key, 'user_id')) {
-                    $becomeSupplier[] = $value;
+        if ($userSupplier) {
+            foreach ($userSupplier as $key => $value) {
+                if (!$this->supplier->find($key, 'user_id')) {
+                        $becomeSupplier[] = $value;
+                }
+                
             }
-            
         }
         $lastId = $this->supplier->last();
         return $this->render('admin/supplier/add.html', [
             'title' => 'Ajouter un fournisseur',
             'lastId' => $lastId, 
             'userCanBeSupplier' => $becomeSupplier]);
+    }
+
+    public function delete()
+    {
+        if ($this->supplier->delete($_POST['id'])) {
+            echo 'ok';
+        }else{
+            echo 'error';
+        }
     }
 }

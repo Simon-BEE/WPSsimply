@@ -66,6 +66,11 @@ class WarehouseController extends Controller
     public function show($slug, $id)
     {
         $warehouse = $this->warehouse->find($id);
+        if (!$warehouse) {
+            header('location: /warehouses');
+            exit();
+        }
+        
         if ($_SESSION['auth']) {
             if ($warehouse->getUserId() === $_SESSION['auth']->getId()) {
                 $mine = true;
@@ -92,6 +97,11 @@ class WarehouseController extends Controller
     public function edit($slug, $id)
     {
         $warehouse = $this->warehouse->find($id);
+        if (!$warehouse) {
+            header('location: /warehouses');
+            exit();
+        }
+
         if ($_SESSION['auth']->getId() !== $warehouse->getUserId()) {
             die('la');
             header('location: '. $this->generateUrl('warehouse_show', ['slug' => $slug, 'id' => $id]));

@@ -18,3 +18,16 @@ function flash(message, type = 'success') {
 	}
 	toastr[type](message)
 }
+
+function deleting(path, id) {
+	if (confirm("Etes vous sur de vouloir supprimer ce produit ?")) {
+		$.post('/'+path+'/delete', {id : id}, function(data){
+			if (data === 'ok') {
+				alert('produit retiré');
+				document.location.reload();
+			}else{
+				alert('error');
+			}
+		})
+	}
+}

@@ -39,14 +39,17 @@ class UserController extends Controller
     public function show($id)
     {
         $user = $this->user->find($id);
+        if (!$user) {
+            header('location: /admin/user');
+            exit();
+        }
         $role = $user->getRole();
 
+        $form = new FormController();
         if ($role == 7) {
-            $form = new FormController();
             $form->field('name', ['require'])
                 ->field('mail', ['require']);
         }else{
-            $form = new FormController();
             $form->field('name', ['require'])
                 ->field('mail', ['require'])
                 ->field('role', ['require']);
@@ -139,5 +142,15 @@ class UserController extends Controller
             'title' => 'Ajouter un nouvel utilisateur',
             'lastUserId' => $lastUserId
         ]);
+    }
+
+    public function delete()
+    {
+        $user = $this->user->find($_POST['id']);
+        if ($this->user->delete($_POST['id'], 'id', $user)) {
+            echo 'ok';
+        }else{
+            echo 'error';
+        }
     }
 }

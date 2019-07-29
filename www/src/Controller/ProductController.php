@@ -61,7 +61,11 @@ class ProductController extends Controller
     public function edit($slug, $id)
     {
         $product = $this->product->find($id);
-
+        if (!$product) {
+            header('location: /products');
+            exit();
+        }
+        
         if ($_SESSION['auth']->getRole() != 1) {
             header('location: /');
         }
@@ -97,6 +101,11 @@ class ProductController extends Controller
     public function show($slug, $id)
     {
         $product = $this->product->find($id);
+        if (!$product) {
+            header('location: /products');
+            exit();
+        }
+
         $supplier = $this->supplier->find($product->getSupplierId(), 'id');
         if ($_SESSION['auth']) {
             if ($supplier->getUserId() === $_SESSION['auth']->getId()) {
@@ -148,5 +157,15 @@ class ProductController extends Controller
         }
 
         return $this->render('/product/index.html', ['products' => $products, 'pagination' => $pagination]);
+    }
+
+    public function delete()
+    {
+        if ($this->product->delete($_POST['id'])) {
+            $this->productWarehouse->delete($_POST['id'], 'warehouse_id');
+            echo 'ok';
+        }else{
+            echo 'error';
+        }
     }
 }

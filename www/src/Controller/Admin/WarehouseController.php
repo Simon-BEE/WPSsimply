@@ -45,6 +45,11 @@ class WarehouseController extends Controller
     public function show($slug, $id)
     {
         $warehouse = $this->warehouse->find($id);
+        if (!$warehouse) {
+            header('location: /admin/warehouse');
+            exit();
+        }
+
         $myProducts = $this->productsInWarehouse($warehouse);
         
         $form = new FormController();
@@ -119,11 +124,12 @@ class WarehouseController extends Controller
             $userWarehouse[$value->getId()] = $value;
         }
 
-        foreach ($userWarehouse as $key => $value) {
-            if (!$this->warehouse->find($key, 'user_id')) {
-                    $becomeWarehouse[] = $value;
+        if ($userWarehouse) {
+            foreach ($userWarehouse as $key => $value) {
+                if (!$this->warehouse->find($key, 'user_id')) {
+                        $becomeWarehouse[] = $value;
+                }
             }
-            
         }
         
         $lastId = $this->warehouse->last();
@@ -178,6 +184,15 @@ class WarehouseController extends Controller
             'products' => $products,
             'warehouse' => $warehouse
         ]);
+    }
+
+    public function delete()
+    {
+        if ($this->warehouse->delete($_POST['id'])) {
+            echo 'ok';
+        }else{
+            echo 'error';
+        }
     }
 
     private function productsInWarehouse(WarehouseEntity $warehouse)

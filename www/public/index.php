@@ -19,18 +19,22 @@ $app->getRouter($basePath)
     ->get('/admin/supplier', 'admin\Supplier#index', 'admin_supplier_all')
     ->match('/admin/supplier/add', 'admin\Supplier#add', 'admin_supplier_add')
     ->match('/admin/supplier/[*:slug]-[i:id]', 'admin\Supplier#show', 'admin_supplier_show')
+    ->post('/admin/supplier/delete', 'admin\Supplier#delete', 'admin_supplier_delete')
 
     ->get('/admin/warehouse', 'admin\Warehouse#index', 'admin_warehouse_all')
     ->match('/admin/warehouse/add', 'admin\Warehouse#add', 'admin_warehouse_add')
     ->match('/admin/warehouse/[*:slug]-[i:id]', 'admin\Warehouse#show', 'admin_warehouse_show')
     ->match('/admin/warehouse/[*:slug]-[i:id]/product', 'admin\Warehouse#addProduct', 'admin_warehouse_product')
+    ->post('/admin/warehouse/delete', 'admin\Warehouse#delete', 'admin_warehouse_delete')
 
     ->get('/admin/product', 'admin\Product#index', 'admin_product_all')
     ->match('/admin/product/add', 'admin\Product#add', 'admin_product_add')
     ->match('/admin/product/[*:slug]-[i:id]', 'admin\Product#show', 'admin_product_show')
+    ->post('/admin/product/delete', 'admin\Product#delete', 'admin_product_delete')
 
     ->get('/admin/user', 'admin\User#index', 'admin_user_all')
     ->match('/admin/user/add', 'admin\User#add', 'admin_user_add')
+    ->match('/admin/user/delete', 'admin\User#delete', 'admin_user_delete')
     ->match('/admin/user/[*:id]', 'admin\User#show', 'admin_user_show')
 
     //Utilisateurs
@@ -56,5 +60,6 @@ $app->getRouter($basePath)
     ->get('/products', 'product#index', 'products_all')
     ->match('/product/[*:slug]-[i:id]', 'product#show', 'product_show')
     ->match('/product/[*:slug]-[i:id]/edit', 'product#edit', 'product_edit')
-    
+    ->post('/product/delete', 'product#delete', 'product_delete')
+
     ->run();

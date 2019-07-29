@@ -123,8 +123,18 @@ echo "Insertion BDD
     $pdo->exec("INSERT INTO `city` SET `name` = '$villes[$i]'");
   }
 
+  echo "|CITY|";
+
   $pdo->exec("INSERT INTO `role` SET `status` = 'Fournisseur'"); 
   $pdo->exec("INSERT INTO `role` SET `status` = 'Gérant d\'entrepôt'"); 
+
+  echo "|ROLE|";
+
+  $password = password_hash('123123', PASSWORD_BCRYPT);
+  $pdo->exec("INSERT INTO `user` (`name`, `mail`, `password`, `role`) VALUES ('Administrateur', 'admin@wpssimply.com', '$password', '7')");
+
+echo "|ADMIN|
+";
 
 echo "Insertion BDD terminée
 ";
