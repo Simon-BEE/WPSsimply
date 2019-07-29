@@ -266,3 +266,18 @@ section.content{
     margin-top: 1%;
     background: none;
 }
+
+.form-check{
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 10% 3% 0;
+}
+
+.form-check label{
+    margin-left: 10px;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+}

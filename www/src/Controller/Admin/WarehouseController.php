@@ -10,15 +10,16 @@ class WarehouseController extends Controller
 {
     public function __construct()
     {
+        $this->onlyAdmin();
         $this->loadModel('warehouse');
         $this->loadModel('city');
         $this->loadModel('user');
+        $this->loadModel('product');
+        $this->loadModel('productWarehouse');
     }
 
     public function index()
     {
-        $this->onlyAdmin();
-
         $all = $this->warehouse->all();
         if ($all) {
             $paginatedQuery = new PaginatedQueryAppController(
@@ -42,7 +43,6 @@ class WarehouseController extends Controller
 
     public function show($slug, $id)
     {
-        $this->onlyAdmin();
 
         $warehouse = $this->warehouse->find($id);
 
@@ -83,7 +83,6 @@ class WarehouseController extends Controller
 
     public function add()
     {
-        $this->onlyAdmin();
 
         $form = new FormController();
         $form->field('name', ['require'])
@@ -124,8 +123,7 @@ class WarehouseController extends Controller
             }
             
         }
-        // dump($userCanBeWarehouseBoss);
-        // dd($userWarehouse);
+        
         $lastId = $this->warehouse->last();
         $cities = $this->city->all();
 
@@ -134,6 +132,52 @@ class WarehouseController extends Controller
             'cities' => $cities,
             'userCanBeWarehouseBoss' => $becomeWarehouse,
             'lastId' => $lastId
+        ]);
+    }
+
+    public function addProduct($slug, $id)
+    {
+        $warehouse = $this->warehouse->find($id);
+        $productsSql = $this->product->all();
+
+        $pwAll = $this->productWarehouse->findAll($id, 'warehouse_id');
+        foreach ($productsSql as $product) {
+            foreach ($pwAll as $key => $pw) {
+                if ($pw->getProductId() != $product->getId()) {
+                    $products[] = $product; 
+                }
+            }
+        }
+        dump($products);
+        dd($pwAll);
+
+        $form = new FormController();
+        foreach ($products as $key => $value) {
+            $form->field('product_id'.$value->getId());
+        }
+        $errors = $form->hasErrors();
+
+        if (!isset($errors['post'])) {
+            $datas = $form->getDatas();
+            if (empty($errors)) {
+                $fields['warehouse_id'] = $id;
+                foreach ($datas as $value) {
+                    if (!empty($value)) {
+                        $fields['product_id'] = $value;
+                        $this->productWarehouse->create($fields);
+                    }
+            }
+                $this->flash()->addSuccess('Le ou les produits ont bien été ajoutés à cet entrepôt');
+            }else{
+                $this->flash()->addAlert('Veillez à choisir au moins un produit');
+            }
+            
+        }
+
+        return $this->render('admin/warehouse/product.html', [
+            'title' => 'Ajouter des produits à un entrepôt',
+            'products' => $products,
+            'warehouse' => $warehouse
         ]);
     }
 }

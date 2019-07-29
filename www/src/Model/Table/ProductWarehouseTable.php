@@ -13,4 +13,9 @@ class ProductWarehouseTable extends Table
             return false;
         }
     }
+
+    public function whereNot($warehouse_id)
+    {
+        return $this->query("SELECT * FROM {$this->table} WHERE NOT warehouse_id = $warehouse_id");
+    }
 }

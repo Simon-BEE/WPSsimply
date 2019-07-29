@@ -63,11 +63,11 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
     * **Index de l'administration**
       * URL : WPSsimply.com/admin
     * **Ajout de fournisseur et modification**
-      * URL : WPSsimply.com/admin/supplier/add *&&* WPSsimply.com/admin/supplier/slug-id/edit
-    * **Ajout d'entrepôt et modification**
-      * URL : WPSsimply.com/admin/warehouse/add *&&* WPSsimply.com/admin/warehouse/slug-id/edit
-    * Ajout de produit et modification
-      * URL : WPSsimply.com/admin/product/add *&&* WPSsimply.com/admin/product/slug-id/edit
+      * URL : WPSsimply.com/admin/supplier/add *&&* WPSsimply.com/admin/supplier/slug-id
+    * **Ajout d'entrepôt et modification** et mettre des produits
+      * URL : WPSsimply.com/admin/warehouse/add *&&* WPSsimply.com/admin/warehouse/slug-id *&&* WPSsimply.com/admin/warehouse/slug-id/product
+    * **Ajout de produit et modification**
+      * URL : WPSsimply.com/admin/product/add *&&* WPSsimply.com/admin/product/slug-id
     * **Ajout et modification utilisateur**
       * URL : WPSsimply.com/admin/user/add *&&* WPSsimply.com/admin/user/id
 
@@ -86,6 +86,7 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 * Commenter le code
 * ~~Possibilité de modifier ses infos persos~~
 * Espace Admin
+* Fonctions delete en admin
 * ~~Ajouter des mentions légales~~
 * ~~Ajouter une page 404~~
 * Implementer la connexion via Google et Facebook

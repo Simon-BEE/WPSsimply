@@ -7,6 +7,7 @@ class AdminController extends Controller
 {
     public function __construct()
     {
+        $this->onlyAdmin();
         $this->loadModel('supplier');
         $this->loadModel('warehouse');
         $this->loadModel('product');
@@ -15,10 +16,6 @@ class AdminController extends Controller
 
     public function index()
     {
-        if (empty($_SESSION['auth']) || $_SESSION['auth']->getRole() != 7) {
-            header('location: /');
-            exit();
-        }
 
         $lastSupplier = (empty($this->supplier->isNotEmpty())) ? "AUCUN" : $this->supplier->findLast();
         $lastWarehouse = (empty($this->warehouse->isNotEmpty())) ? "AUCUN" : $this->warehouse->findLast();

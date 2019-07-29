@@ -10,13 +10,13 @@ class SupplierController extends Controller
 {
     public function __construct()
     {
+        $this->onlyAdmin();
         $this->loadModel('supplier');
         $this->loadModel('user');
     }
 
     public function index()
     {
-        $this->onlyAdmin();
         
         $all = $this->supplier->all();
         if ($all) {
@@ -36,7 +36,6 @@ class SupplierController extends Controller
 
     public function show($slug, $id)
     {
-        $this->onlyAdmin();
 
         $supplier = $this->supplier->find($id);
 
@@ -67,7 +66,6 @@ class SupplierController extends Controller
 
     public function add()
     {
-        $this->onlyAdmin();
 
         $form = new FormController();
         $form->field('social', ['require'])

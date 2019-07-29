@@ -9,6 +9,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
+        $this->onlyAdmin();
         $this->loadModel('user');
         $this->loadModel('supplier');
         $this->loadModel('warehouse');
@@ -18,7 +19,6 @@ class UserController extends Controller
 
     public function index()
     {
-        $this->onlyAdmin();
         
         $all = $this->user->all();
         if ($all) {
@@ -38,7 +38,6 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $this->onlyAdmin();
         $user = $this->user->find($id);
         $role = $user->getRole();
 
@@ -108,7 +107,6 @@ class UserController extends Controller
 
     public function add()
     {
-        $this->onlyAdmin();
 
         $form = new FormController();
         $form->field('name', ['require'])

@@ -1,0 +1,55 @@
+{% extends '/layout/admin.html.twig' %}
+
+{% block title %}Ajouter un nouveau produit{% endblock %}
+
+{% block body %}
+<div class="container mb-5 mt-3">
+    <h2 class="display-5 text-center">Ajouter un nouveau produit</h2>
+</div>
+
+<p class="grey">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto nam aut quisquam. At ut enim possimus. Quo enim temporibus perferendis corporis magnam laboriosam soluta, repudiandae quas itaque? Modi assumenda obcaecati ad eligendi quasi natus porro unde eveniet. Illum eaque est vel non laborum in commodi et, consequuntur nesciunt laudantium illo saepe praesentium pariatur nemo maxime deserunt, porro consectetur eius quos inventore veniam fugit quisquam? Natus quod quasi porro dolorem? Asperiores aliquam corporis nam corrupti nemo delectus necessitatibus debitis totam quidem, consequuntur sed culpa nisi, dolorum praesentium vero magnam. Est aperiam, praesentium inventore quas suscipit quaerat iste molestias sint dignissimos! Nesciunt, dolorem molestias culpa optio voluptatum facere eum consectetur explicabo sed, doloremque enim obcaecati laboriosam eligendi labore quis porro laborum voluptate!</p>
+
+<div class="formulaire">
+    <form method="POST" action="" class="form">
+            <div class="form-row">
+                <label for="name">Nom du produit</label>
+                <input type="text" name="name" class="form-input" id="name" aria-describedby="emailHelp" placeholder="Entrez le nom du produit">
+            </div>
+
+            <div class="form-row">
+                <label for="volume">Volume du produit</label>
+                <input type="text" name="volume" class="form-input" id="volume" aria-describedby="volume" placeholder="Indiquez le volume du produit">
+                <small>En mètre carré (m2)</small>
+            </div>
+
+            <div class="form-row">
+                <p>Toxicité du produit:</p>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="toxicity1" class="custom-control-input" name="toxicity" value="1">
+                    <label for="toxicity1" class="custom-control-label">Non</label>
+                </div>
+
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="toxicity2" class="custom-control-input" name="toxicity" value="2">
+                    <label for="toxicity2" class="custom-control-label">Oui</label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="supplier_id">L'utilisateur qui sera le fournisseur</label>
+                <select name="supplier_id" id="supplier_id" class="custom-select" required>
+                    <option value="" selected>Sélectionnez le fournisseur</option>
+                    {% for supplier in suppliers %}
+                    <option value="{{ supplier.id }}">{{ supplier.social }}</option>
+                    {% endfor %}
+                    
+                </select>
+            </div>
+
+            <div class="form-row">
+                <button type="submit" class="button">Ajouter un produit</button>
+            </div>
+    </form>
+</div>
+
+{% endblock %}

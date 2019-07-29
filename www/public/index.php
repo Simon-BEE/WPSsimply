@@ -23,8 +23,11 @@ $app->getRouter($basePath)
     ->get('/admin/warehouse', 'admin\Warehouse#index', 'admin_warehouse_all')
     ->match('/admin/warehouse/add', 'admin\Warehouse#add', 'admin_warehouse_add')
     ->match('/admin/warehouse/[*:slug]-[i:id]', 'admin\Warehouse#show', 'admin_warehouse_show')
+    ->match('/admin/warehouse/[*:slug]-[i:id]/product', 'admin\Warehouse#addProduct', 'admin_warehouse_product')
 
     ->get('/admin/product', 'admin\Product#index', 'admin_product_all')
+    ->match('/admin/product/add', 'admin\Product#add', 'admin_product_add')
+    ->match('/admin/product/[*:slug]-[i:id]', 'admin\Product#show', 'admin_product_show')
 
     ->get('/admin/user', 'admin\User#index', 'admin_user_all')
     ->match('/admin/user/add', 'admin\User#add', 'admin_user_add')
