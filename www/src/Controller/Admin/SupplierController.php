@@ -13,6 +13,7 @@ class SupplierController extends Controller
         $this->onlyAdmin();
         $this->loadModel('supplier');
         $this->loadModel('user');
+        $this->loadModel('product');
     }
 
     public function index()
@@ -38,6 +39,7 @@ class SupplierController extends Controller
     {
 
         $supplier = $this->supplier->find($id);
+        $products = $this->product->findAll($id, 'supplier_id');
 
         $form = new FormController();
         $form->field('social', ['require'])
@@ -61,7 +63,9 @@ class SupplierController extends Controller
 
         return $this->render('admin/supplier/show.html', [
             'title' => 'Modifier un fournisseur', 
-            'supplier' => $supplier]);
+            'supplier' => $supplier,
+            'products' => $products
+            ]);
     }
 
     public function add()

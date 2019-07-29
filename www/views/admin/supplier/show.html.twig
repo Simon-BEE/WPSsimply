@@ -3,6 +3,25 @@
 {% block title %}Modifier les informations de ce fournisseur{% endblock %}
 
 {% block body %}
+<section class="show">
+    <div class="">
+        <h2 class="">Tous les produits de ce fournisseur</h2>
+    </div>
+
+    {% if products %}
+        <div class="list">
+            <ul>
+        {% for product in products %}
+                <li>{{ product.name }}</li>
+        {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <p>Il n'y a aucun produits affiliés avec ce fournisseur.</p>
+    {% endif %}
+    <p><a href="{{ uri('admin_product_add') }}">Vous pouvez ajouter un nouveau produit en cliquant ici</a>.</p>
+</section>
+
 <div class="">
     <h2 class="">Modifier les informations de ce fournisseur</h2>
 </div>

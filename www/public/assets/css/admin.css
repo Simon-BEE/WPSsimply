@@ -146,6 +146,20 @@ section.content{
     width: 45%;
 }
 
+/*   SECTION SHOW   */
+
+section .show{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 5% 5% 5%;
+}
+
+.list, .list ul{
+    margin: 2% 0;
+    text-align: center;
+}
+
 /*   CARD   */
 .card{
     border-radius: 20px;

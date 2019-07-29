@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 use Cocur\Slugify\Slugify;
 use Core\Controller\Controller;
 use Core\Controller\FormController;
+use App\Model\Entity\WarehouseEntity;
 use App\Controller\PaginatedQueryAppController;
 
 class WarehouseController extends Controller
@@ -44,7 +45,8 @@ class WarehouseController extends Controller
     public function show($slug, $id)
     {
         $warehouse = $this->warehouse->find($id);
-
+        $myProducts = $this->productsInWarehouse($warehouse);
+        
         $form = new FormController();
         $form->field('name', ['require'])
             ->field('surface', ['require'])
@@ -76,7 +78,8 @@ class WarehouseController extends Controller
         return $this->render('admin/warehouse/show.html', [
             'title' => 'Modifier les données de cet entrepôt',
             'warehouse' => $warehouse,
-            'cities' => $cities
+            'cities' => $cities,
+            'products' => $myProducts
         ]);
     }
 
@@ -138,7 +141,7 @@ class WarehouseController extends Controller
     {
         $warehouse = $this->warehouse->find($id);
         
-        $products = $this->notInWarehouse($id);
+        $products = $this->productsNotInWarehouse($id);
         
         $form = new FormController();
 
@@ -177,7 +180,16 @@ class WarehouseController extends Controller
         ]);
     }
 
-    private function notInWarehouse($id)
+    private function productsInWarehouse(WarehouseEntity $warehouse)
+    {
+        $productsId = $this->productWarehouse->findAll($warehouse->getId(), 'warehouse_id');
+        foreach ($productsId as $id) {
+            $products[] = $this->product->find($id->getProductId());
+        }
+        return $products;
+    }
+
+    private function productsNotInWarehouse($id)
     {
         $allProductsSql = $this->product->all();
         $productsInWarehouse = $this->productWarehouse->findAll($id, 'warehouse_id');

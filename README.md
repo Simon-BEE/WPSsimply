@@ -85,7 +85,7 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 * Maquette administration
 * Commenter le code
 * ~~Possibilité de modifier ses infos persos~~
-* Espace Admin
+* ~~Espace Admin~~
 * Fonctions delete en admin
 * ~~Ajouter des mentions légales~~
 * ~~Ajouter une page 404~~
