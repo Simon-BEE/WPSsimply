@@ -16,33 +16,38 @@
     <h3>Liste de tous les Entrepôts</h3>
 </div>
 
-<div class="listing">
-    <div class="two-col cards">
-        {% for warehouse in warehouses %}
-        <div class="one-col card">
-            <div class="card-header">
-                <h4>{{ warehouse.id }} {{ warehouse.name }}</h4>
+{% if warehouses %}
+    <div class="listing">
+        <div class="two-col cards">
+            {% for warehouse in warehouses %}
+            <div class="one-col card">
+                <div class="card-header">
+                    <h4>{{ warehouse.id }} {{ warehouse.name }}</h4>
+                </div>
+                <div class="card-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta beatae vel earum a itaque vitae corporis optio cupiditate ipsum veniam.</p>
+                    <p>{{ warehouse.address }}, 
+                    {% for city in cities %}
+                        {% if warehouse.cityId is same as(city.id) %}
+                            {{ city.name }}
+                        {% endif %}
+                    {% endfor %}
+                    </p>
+                </div>
+                <div class="card-foot">
+                    <p><a href="/admin{{ warehouse.url }}" class="button">Plus...</a></p>
+                </div>
             </div>
-            <div class="card-body">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta beatae vel earum a itaque vitae corporis optio cupiditate ipsum veniam.</p>
-                <p>{{ warehouse.address }}, 
-                {% for city in cities %}
-                    {% if warehouse.cityId is same as(city.id) %}
-                        {{ city.name }}
-                    {% endif %}
-                {% endfor %}
-                </p>
-            </div>
-            <div class="card-foot">
-                <p><a href="/admin{{ warehouse.url }}" class="button">Plus...</a></p>
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-</div>
 
-<div class="pagination">
-    {{ pagination | raw }}
-</div>
+    <div class="pagination">
+        {{ pagination | raw }}
+    </div>
+{% else %}
+    <p>Il n'y a aucun entrepôt enregistré.</p>
+{% endif %}
+
 
 {% endblock %}

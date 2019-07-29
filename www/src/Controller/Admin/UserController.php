@@ -134,8 +134,10 @@ class UserController extends Controller
             }
         }
 
+        $lastUserId = $this->user->last();
         return $this->render('admin/user/add.html', [
-            'title' => 'Ajouter un nouvel utilisateur'
+            'title' => 'Ajouter un nouvel utilisateur',
+            'lastUserId' => $lastUserId
         ]);
     }
 }

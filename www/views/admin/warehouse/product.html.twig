@@ -9,21 +9,26 @@
 
 <p class="grey">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto nam aut quisquam. At ut enim possimus. Quo enim temporibus perferendis corporis magnam laboriosam soluta, repudiandae quas itaque? Modi assumenda obcaecati ad eligendi quasi natus porro unde eveniet. Illum eaque est vel non laborum in commodi et, consequuntur nesciunt laudantium illo saepe praesentium pariatur nemo maxime deserunt, porro consectetur eius quos inventore veniam fugit quisquam? Natus quod quasi porro dolorem? Asperiores aliquam corporis nam corrupti nemo delectus necessitatibus debitis totam quidem, consequuntur sed culpa nisi, dolorum praesentium vero magnam. Est aperiam, praesentium inventore quas suscipit quaerat iste molestias sint dignissimos! Nesciunt, dolorem molestias culpa optio voluptatum facere eum consectetur explicabo sed, doloremque enim obcaecati laboriosam eligendi labore quis porro laborum voluptate!</p>
 
-<div class="formulaire">
-    <p>Choisissez un ou des produits à ajouter à cet entrepôt :</p>
-    <form method="POST" action="" class="form">
-        <div class="form-row form-check">
-        {% for product in products %}
+{% if products %}
+    <div class="formulaire">
+        <p>Choisissez un ou des produits à ajouter à cet entrepôt :</p>
+        <form method="POST" action="" class="form">
             <div class="form-row form-check">
-                <input type="checkbox" id="product{{product.id}}" class="checkbox" name="product_id{{product.id}}" value="{{product.id}}">
-                <label for="product{{product.id}}">{{product.name}}</label>
+            {% for product in products %}
+                <div class="form-row form-check">
+                    <input type="checkbox" id="product{{product.id}}" class="checkbox" name="product_id{{product.id}}" value="{{product.id}}">
+                    <label for="product{{product.id}}">{{product.name}}</label>
+                </div>
+            {% endfor %}
             </div>
-        {% endfor %}
-        </div>
-        <div class="form-row">
-            <button type="submit" class="button">Ajouter un produit</button>
-        </div>
-    </form>
-</div>
+            <div class="form-row">
+                <button type="submit" class="button">Ajouter un produit</button>
+            </div>
+        </form>
+    </div>
+{% else %}
+    <p>Il n'y a aucun produit à rajouter à l'entrepôt.</p>
+{% endif %}
+
 
 {% endblock %}

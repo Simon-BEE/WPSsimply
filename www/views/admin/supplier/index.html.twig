@@ -16,27 +16,32 @@
     <h3>Liste de tous les fournisseurs</h3>
 </div>
 
-<div class="listing">
-    <div class="two-col cards">
-        {% for supplier in suppliers %}
-        <div class="one-col card">
-            <div class="card-header">
-                <h4>{{ supplier.id }} {{ supplier.social }}</h4>
+{% if suppliers %}
+    <div class="listing">
+        <div class="two-col cards">
+            {% for supplier in suppliers %}
+            <div class="one-col card">
+                <div class="card-header">
+                    <h4>{{ supplier.id }} {{ supplier.social }}</h4>
+                </div>
+                <div class="card-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta beatae vel earum a itaque vitae corporis optio cupiditate ipsum veniam.</p>
+                    <p>{{ supplier.address }}</p>
+                </div>
+                <div class="card-foot">
+                    <p><a href="/admin{{ supplier.url }}" class="button">Plus...</a></p>
+                </div>
             </div>
-            <div class="card-body">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta beatae vel earum a itaque vitae corporis optio cupiditate ipsum veniam.</p>
-                <p>{{ supplier.address }}</p>
-            </div>
-            <div class="card-foot">
-                <p><a href="/admin{{ supplier.url }}" class="button">Plus...</a></p>
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-</div>
 
-<div class="pagination">
-    {{ pagination | raw }}
-</div>
+    <div class="pagination">
+        {{ pagination | raw }}
+    </div>
+{% else %}
+    <p>Il n'y aucun fournisseur enregistré</p>
+{% endif %}
+
 
 {% endblock %}

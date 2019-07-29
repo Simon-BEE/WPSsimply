@@ -43,7 +43,6 @@ class WarehouseController extends Controller
 
     public function show($slug, $id)
     {
-
         $warehouse = $this->warehouse->find($id);
 
         $form = new FormController();
@@ -138,23 +137,15 @@ class WarehouseController extends Controller
     public function addProduct($slug, $id)
     {
         $warehouse = $this->warehouse->find($id);
-        $productsSql = $this->product->all();
-
-        $pwAll = $this->productWarehouse->findAll($id, 'warehouse_id');
-        foreach ($productsSql as $product) {
-            foreach ($pwAll as $key => $pw) {
-                if ($pw->getProductId() != $product->getId()) {
-                    $products[] = $product; 
-                }
-            }
-        }
-        dump($products);
-        dd($pwAll);
-
+        
+        $products = $this->notInWarehouse($id);
+        
         $form = new FormController();
-        foreach ($products as $key => $value) {
+
+        foreach ($products as $value) {
             $form->field('product_id'.$value->getId());
         }
+
         $errors = $form->hasErrors();
 
         if (!isset($errors['post'])) {
@@ -168,6 +159,11 @@ class WarehouseController extends Controller
                     }
             }
                 $this->flash()->addSuccess('Le ou les produits ont bien été ajoutés à cet entrepôt');
+                header('location: '. 
+                    $this->generateUrl('admin_warehouse_show', [
+                    'slug' => $slug, 
+                    'id' => $id]));
+                exit();
             }else{
                 $this->flash()->addAlert('Veillez à choisir au moins un produit');
             }
@@ -179,5 +175,38 @@ class WarehouseController extends Controller
             'products' => $products,
             'warehouse' => $warehouse
         ]);
+    }
+
+    private function notInWarehouse($id)
+    {
+        $allProductsSql = $this->product->all();
+        $productsInWarehouse = $this->productWarehouse->findAll($id, 'warehouse_id');
+        $products = [];
+
+        if ($allProductsSql && $productsInWarehouse) {
+            foreach ($allProductsSql as $oneProductSql) {
+                $allProducts[$oneProductSql->getId()] = $oneProductSql;
+            }
+    
+            foreach ($productsInWarehouse as $productInWarehouse) {
+                $allPW[$productInWarehouse->getProductId()] = $productInWarehouse;
+            }
+
+            foreach ($allProducts as $keyAll => $product) {
+                foreach ($allPW as $keyPW => $onePW) {
+                    if (!array_key_exists($keyAll, $allPW)) {
+                        $productsDuplicate[] = $product;
+                    }
+                }
+            }
+
+            if ($productsDuplicate) {
+                $products = array_unique($productsDuplicate, SORT_REGULAR);
+            }
+        }elseif (!$productsInWarehouse){
+            $products = $allProductsSql;
+        }
+        
+        return $products;
     }
 }

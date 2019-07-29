@@ -13,39 +13,44 @@
 </div>
 
 <div class="title-content">
-    <h3>Liste de tous les fournisseurs</h3>
+    <h3>Liste de tous les utilisateurs</h3>
 </div>
 
-<div class="listing">
-    <div class="two-col cards">
-        {% for user in users %}
-        <div class="one-col card card-user">
-            <div class="card-header">
-                <h4>{{ user.id }} {{ user.name }}</h4>
+{% if users %}
+    <div class="listing">
+        <div class="two-col cards">
+            {% for user in users %}
+            <div class="one-col card card-user">
+                <div class="card-header">
+                    <h4>{{ user.id }} {{ user.name }}</h4>
+                </div>
+                <div class="card-body cb-user">
+                    <p>{{ user.mail }}</p>
+                    <p>
+                        <strong>Rôle</strong> : 
+                        {% if user.role is same as('1') %}
+                            Fournisseur
+                        {% elseif user.role is same as('7') %}
+                            Administrateur
+                        {% else %}
+                            Gérant d'entrepôt
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="card-foot">
+                    <p><a href="{{ user.url }}" class="button">Plus...</a></p>
+                </div>
             </div>
-            <div class="card-body cb-user">
-                <p>{{ user.mail }}</p>
-                <p>
-                    <strong>Rôle</strong> : 
-                    {% if user.role is same as('1') %}
-                        Fournisseur
-                    {% elseif user.role is same as('7') %}
-                        Administrateur
-                    {% else %}
-                        Gérant d'entrepôt
-                    {% endif %}
-                </p>
-            </div>
-            <div class="card-foot">
-                <p><a href="{{ user.url }}" class="button">Plus...</a></p>
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-</div>
 
-<div class="pagination">
-    {{ pagination | raw }}
-</div>
+    <div class="pagination">
+        {{ pagination | raw }}
+    </div>
+{% else %}
+    <p>Il n'y a aucun utilisateur, qu'est-ce tu fais là ?</p>
+{% endif %}
+
 
 {% endblock %}
