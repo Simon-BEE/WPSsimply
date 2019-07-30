@@ -10,8 +10,8 @@ Création site avec fournisseurs, produits, clients, et entrepôt.
 Les gérants d'entrepôt selectionne des produits proposés par des fournisseurs.  
 Les fournisseurs proposent des produits.  
 Pas de logo.  
-*Nom du site*: WPS simply.  
-*Nom de domaine*: WPSsimply.com
+Nom du site: **WPS simply**.  
+Nom de domaine: **WPSsimply.com**
 
 ## Schéma :
 Un fournisseur peut proposer plusieurs produits.  
@@ -59,7 +59,7 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 * **Ajout d'entrepôt et modification**
   * URL : WPSsimply.com/warehouse/add *&&* WPSsimply.com/warehouse/slug-id/edit
 
-* Section Administration
+* **Section Administration**
     * **Index de l'administration**
       * URL : WPSsimply.com/admin
     * **Ajout de fournisseur et modification**
@@ -81,15 +81,15 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 * Sélectionner des produits pour son warehouse.
 
 ## TODO :
-* Refaire première maquette (home mobile)
-* Maquette administration
-* Commenter le code
 * ~~Possibilité de modifier ses infos persos~~
 * ~~Espace Admin~~
-* Fonctions delete en admin
+* ~~Fonctions delete en admin~~
 * ~~Ajouter des mentions légales~~
 * ~~Ajouter une page 404~~
-* Implementer la connexion via Google et Facebook
+* ~~Implementer la connexion via Google~~ et Facebook
+* Refaire première maquette (home mobile)
+* Maquette administration
+* Commenter le code *in progress*
 
 Optionnel :
 * Faire des propositions de Fournisseurs aux Gérants d'entrepôt (proposition de produit)
