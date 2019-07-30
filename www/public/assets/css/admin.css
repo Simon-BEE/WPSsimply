@@ -160,6 +160,15 @@ section .show{
     text-align: center;
 }
 
+.fast-menu ul{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.fast-menu ul li{
+    margin: 0 20px 20px 0;
+}
+
 /*   CARD   */
 .card{
     border-radius: 20px;

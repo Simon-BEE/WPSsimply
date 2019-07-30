@@ -3,6 +3,14 @@
 {% block title %}Modifier les informations de cet entrepôt{% endblock %}
 
 {% block body %}
+<div class="fast-menu">
+    <ul>
+        <li><a href="{{ uri('admin_warehouse_all') }}">Tous les entrepôts</a></li>
+        <li>/</li>
+        <li><a href="{{ uri('admin_warehouse_add') }}">Ajouter un entrepôt</a></li>
+    </ul>
+</div>
+
 <section class="show">
     <div class="">
         <h2 class="">Tous les produits de cet entrepôt</h2>

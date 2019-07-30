@@ -5,3 +5,4 @@ www/composer.lock
 www/public/adminer.php
 www/tests/ExoTest/
 www/public/temp
+www/src/Controller/AuthController.php

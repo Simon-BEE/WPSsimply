@@ -3,6 +3,14 @@
 {% block title %}Modifier les informations de ce fournisseur{% endblock %}
 
 {% block body %}
+<div class="fast-menu">
+    <ul>
+        <li><a href="{{ uri('admin_supplier_all') }}">Tous les fournisseurs</a></li>
+        <li>/</li>
+        <li><a href="{{ uri('admin_supplier_add') }}">Ajouter un fournisseur</a></li>
+    </ul>
+</div>
+
 <section class="show">
     <div class="">
         <h2 class="">Tous les produits de ce fournisseur</h2>

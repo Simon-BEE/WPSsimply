@@ -41,6 +41,7 @@ $app->getRouter($basePath)
     ->match('/login', 'user#login', 'login')
     ->match('/register', 'user#register', 'register')
     ->match('/profile', 'user#profile', 'profile')
+    ->match('/google', 'auth#google', 'user_google')
     ->get('/logout', 'user#logout', 'logout')
 
     //Fournisseurs

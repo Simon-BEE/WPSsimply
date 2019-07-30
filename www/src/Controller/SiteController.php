@@ -7,6 +7,7 @@ class SiteController extends Controller
 {
     public function index()
     {
+        //dd($_SESSION["auth"]['google']['email']);
         return $this->render("site/index.html");
     }
 

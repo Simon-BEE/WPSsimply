@@ -23,6 +23,12 @@ class UserController extends Controller
      */
     public function login(): string
     {
+
+        if (!$_SESSION["auth"]["google"]["email"]) {
+            $google = new AuthController();
+            $googleClient = $google->loginByGoogle();
+        }
+
         $form = new FormController();
         $form->field('mail', ["require"])
             ->field('password', ["require"]);
@@ -45,8 +51,11 @@ class UserController extends Controller
             }
             unset($datas['password']);
         }
-
-        return $this->render('user/login.html', compact("datas"));
+        
+        return $this->render('user/login.html', [
+            'datas' => $datas,
+            'googleUrl' => $googleClient->createAuthUrl()
+            ]);
     }
 
     /**
@@ -102,6 +111,7 @@ class UserController extends Controller
         if (!$_SESSION['auth']) {
             \header('location: /');
         }
+        
         $user = $_SESSION['auth'];
 
         if ($this->supplier->find($user->getId(), 'user_id')) {
