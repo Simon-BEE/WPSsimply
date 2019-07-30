@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
 
 /*  REINITIALISATION  */
-ul, li, h1, body, h2, h3, h4 {
+ul, li, h1, body, h2, h3, h4, a {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -34,6 +34,58 @@ h1, h2, h3, h4{
     letter-spacing: 2px;
 }
 
+.footer{
+    text-align: center;
+}
+
+/*   MEDIA QUERIES   */
+
+@media(max-width: 420px){
+    main{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .aside-principal{
+        width: 100% !important;
+        display: flex;
+    }
+
+    .top{
+        height: auto !important;
+    }
+
+    .two-col{
+        flex-direction: column !important;
+        align-items: center;
+    }
+
+    .one-col{
+        width: 100% !important;
+        margin: 2% 0 !important;
+    }
+
+    .one-col.card.card-user{
+        width: 100% !important;
+    }
+
+    .button{
+        width: 35% !important;
+    }
+
+    .fast-menu ul{
+        text-align: center;
+    }
+
+    .head-content{
+        padding-bottom: 2%;
+    }
+
+    .principal{
+        height: 100px !important;
+    }
+}
+
 /*   CLASS RAPIDE   */
 
 .red{
@@ -56,27 +108,34 @@ header.principal{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: #fff;
 }
 
 /*  SECTION GAUCHE   */
 
 aside.aside-principal{
     width: 20%;
-    background-color: #fff;
+    background-color: #f44336;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0px 1px 20px #efefef;
 }
 
+.top{
+    height: 100vh;
+}
+
 .title h1{
     font-size: 1.5em;
+    text-align: center;
 }
 
 .img-profile{
     padding-bottom: 10px;
     text-align: center;
-    margin-top: 5%;
+    padding-top: 5%;
+    background-color: #fff;
 }
 
 .img-profile img{
@@ -99,15 +158,21 @@ nav.menu ul{
 
 nav.menu ul li{
     width: 100%;
+}
+
+nav.menu ul li a{
+    width: 96%;
     display: inline-block;
     background-color: #fff;
-    padding: 5% 0;
+    padding: 6% 2%;
     display: flex;
     justify-content: space-between;
     background-color: #F44336;
+    line-height: 25px;
+    margin: 0!important
 }
 
-nav.menu ul li:hover {
+nav.menu ul li a:hover {
     background-color: #E53935;
 }
 
@@ -120,6 +185,18 @@ nav.menu ul li > *{
 .comeback{
     text-align: center;
     margin-bottom: 4%;
+}
+
+.comeback a{
+    color: #fff;
+}
+
+.comeback a:hover{
+    color: #000;
+}
+
+.icons{
+    width: 25px;
 }
 
 

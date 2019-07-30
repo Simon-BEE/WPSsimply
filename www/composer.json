@@ -4,7 +4,8 @@
         "twig/twig": "2.11.2",
         "swiftmailer/swiftmailer": "^6.0",
         "pagerfanta/pagerfanta": "^2.1",
-        "google/apiclient": "^2.0"
+        "google/apiclient": "^2.0",
+        "facebook/graph-sdk": "^5.7"
     },
     "require-dev": {
         "fzaninotto/faker": "1.8.0",

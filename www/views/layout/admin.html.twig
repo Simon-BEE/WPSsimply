@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 <body>
-    <header class="principal">
+    <header class="principal" id="top">
         <div class="title">
             <h1>Bienvenue Administrateur!</h1>
         </div>
@@ -25,11 +25,11 @@
                 </div>
                 <nav class="menu">
                     <ul>
-                        <li><i class="fas fa-home"></i> <a href="{{ uri('admin') }}">Accueil</a></li>
-                        <li><i class="fas fa-user-tie"></i> <a href="{{ uri('admin_supplier_all') }}">Fournisseurs</a></li>
-                        <li><i class="fas fa-warehouse"></i> <a href="{{ uri('admin_warehouse_all') }}">Entrepôts</a></li>
-                        <li><i class="fas fa-box-open"></i> <a href="{{ uri('admin_product_all') }}">Marchandises</a></li>
-                        <li><i class="fas fa-male"></i> <a href="{{ uri('admin_user_all') }}">Utilisateurs</a></li>
+                        <li><a href="{{ uri('admin') }}"><img src="/assets/img/home.png" alt="home icon" class="icons"> Accueil</a></li>
+                        <li><a href="{{ uri('admin_supplier_all') }}"><img src="/assets/img/supplier.png" alt="supplier icon" class="icons"> Fournisseurs</a></li>
+                        <li><a href="{{ uri('admin_warehouse_all') }}"><img src="/assets/img/store.png" alt="store icon" class="icons"> Entrepôts</a></li>
+                        <li><a href="{{ uri('admin_product_all') }}"><img src="/assets/img/product.png" alt="product icon" class="icons"> Marchandises</a></li>
+                        <li><a href="{{ uri('admin_user_all') }}"><img src="/assets/img/user.png" alt="user icon" class="icons"> Utilisateurs</a></li>
                     </ul>
                 </nav>
             </div>
@@ -54,6 +54,7 @@
         </section>
 
     </main>
+    <footer class="footer"><a href="#top">TOP</a></footer>
     {% block javascript %}{% endblock %}
 </body>
 </html>
