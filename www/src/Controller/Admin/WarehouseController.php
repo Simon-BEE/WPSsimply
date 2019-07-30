@@ -9,6 +9,10 @@ use App\Controller\PaginatedQueryAppController;
 
 class WarehouseController extends Controller
 {
+    /**
+     * Vérifie les droits d'accès
+     * Récupère les tables city, product, warehouse, product_warehouse et user
+     */
     public function __construct()
     {
         $this->onlyAdmin();
@@ -19,7 +23,12 @@ class WarehouseController extends Controller
         $this->loadModel('productWarehouse');
     }
 
-    public function index()
+    /**
+     * Affichage de la vu de tous les entrepôts en admin
+     *
+     * @return string
+     */
+    public function index():string
     {
         $all = $this->warehouse->all();
         if ($all) {
@@ -42,7 +51,13 @@ class WarehouseController extends Controller
         ]);
     }
 
-    public function show($slug, $id)
+    /**
+     * Affichage de la vu de modification d'un entrepôt
+     * et du traitement du formulaire de modification
+     *
+     * @return string
+     */
+    public function show($slug, $id):string
     {
         $warehouse = $this->warehouse->find($id);
         if (!$warehouse) {
@@ -71,10 +86,10 @@ class WarehouseController extends Controller
                 $slugNew = $slugify->slugify($datas['name']);
                 
                 header('location: '. $this->generateUrl('admin_warehouse_show', [
-                    'slug' => $slugNew, 
+                    'slug' => $slugNew,
                     'id' => $id]));
                 exit();
-            }else{
+            } else {
                 $this->flash()->addAlert('Veillez à bien remplir tous les champs');
             }
         }
@@ -88,7 +103,13 @@ class WarehouseController extends Controller
         ]);
     }
 
-    public function add()
+    /**
+     * Affichage de la vu d'ajout d'un entrepôt
+     * et du traitement du formulaire d'ajout
+     *
+     * @return string
+     */
+    public function add():string
     {
 
         $form = new FormController();
@@ -111,10 +132,10 @@ class WarehouseController extends Controller
                 $slugNew = $slugify->slugify($datas['name']);
                 
                 header('location: '. $this->generateUrl('admin_warehouse_show', [
-                    'slug' => $slugNew, 
+                    'slug' => $slugNew,
                     'id' => $this->warehouse->last()]));
                 exit();
-            }else{
+            } else {
                 $this->flash()->addAlert('Veillez à bien remplir tous les champs');
             }
         }
@@ -143,7 +164,13 @@ class WarehouseController extends Controller
         ]);
     }
 
-    public function addProduct($slug, $id)
+    /**
+     * Affichage de la vu pour ajouter un produit a un entrepot
+     * et du traitement du formulaire d'ajout
+     *
+     * @return string
+     */
+    public function addProduct($slug, $id):string
     {
         $warehouse = $this->warehouse->find($id);
         
@@ -166,17 +193,16 @@ class WarehouseController extends Controller
                         $fields['product_id'] = $value;
                         $this->productWarehouse->create($fields);
                     }
-            }
+                }
                 $this->flash()->addSuccess('Le ou les produits ont bien été ajoutés à cet entrepôt');
-                header('location: '. 
+                header('location: '.
                     $this->generateUrl('admin_warehouse_show', [
-                    'slug' => $slug, 
+                    'slug' => $slug,
                     'id' => $id]));
                 exit();
-            }else{
+            } else {
                 $this->flash()->addAlert('Veillez à choisir au moins un produit');
             }
-            
         }
 
         return $this->render('admin/warehouse/product.html', [
@@ -186,16 +212,26 @@ class WarehouseController extends Controller
         ]);
     }
 
-    public function delete()
+    /**
+     * Gere la suppression d'un entrepot
+     *
+     * @return void
+     */
+    public function delete():void
     {
         if ($this->warehouse->delete($_POST['id'])) {
             echo 'ok';
-        }else{
+        } else {
             echo 'error';
         }
     }
 
-    private function productsInWarehouse(WarehouseEntity $warehouse)
+    /**
+     * Retourne tous les produits d'un entrepôt
+     *
+     * @return array
+     */
+    private function productsInWarehouse(WarehouseEntity $warehouse):array
     {
         $productsId = $this->productWarehouse->findAll($warehouse->getId(), 'warehouse_id');
         foreach ($productsId as $id) {
@@ -204,7 +240,12 @@ class WarehouseController extends Controller
         return $products;
     }
 
-    private function productsNotInWarehouse($id)
+    /**
+     * Retourne tous les produits qu'un entrepot peut ajouter
+     *
+     * @return array
+     */
+    private function productsNotInWarehouse($id):array
     {
         $allProductsSql = $this->product->all();
         $productsInWarehouse = $this->productWarehouse->findAll($id, 'warehouse_id');
@@ -230,7 +271,7 @@ class WarehouseController extends Controller
             if ($productsDuplicate) {
                 $products = array_unique($productsDuplicate, SORT_REGULAR);
             }
-        }elseif (!$productsInWarehouse){
+        } elseif (!$productsInWarehouse) {
             $products = $allProductsSql;
         }
         

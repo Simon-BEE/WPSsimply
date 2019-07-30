@@ -8,6 +8,9 @@ use App\Controller\PaginatedQueryAppController;
 
 class ProductController extends Controller
 {
+    /**
+     * Récupère les tables supplier, warehouse, product et product_warehouse
+     */
     public function __construct()
     {
         $this->loadModel('product');
@@ -16,7 +19,13 @@ class ProductController extends Controller
         $this->loadModel('productWarehouse');
     }
 
-    public function add()
+    /**
+     * Affichage de la vu d'ajout d'un produit
+     * et du traitement du formulaire d'ajout
+     *
+     * @return string
+     */
+    public function add():string
     {
         if ($_SESSION['auth']->getRole() != 1) {
             header('location: /');
@@ -32,10 +41,9 @@ class ProductController extends Controller
             $datas = $form->getDatas();
 
             if (empty($errors)) {
-
                 if ($datas['toxicity'] == 1) {
                     $datas['toxicity'] = '0';
-                }else{
+                } else {
                     $datas['toxicity'] = '1';
                 }
 
@@ -58,7 +66,13 @@ class ProductController extends Controller
         return $this->render('product/add.html');
     }
 
-    public function edit($slug, $id)
+    /**
+     * Affichage de la vu de modification d'un produit
+     * et du traitement du formulaire de modification
+     *
+     * @return string
+     */
+    public function edit(string $slug, int $id):string
     {
         $product = $this->product->find($id);
         if (!$product) {
@@ -82,7 +96,7 @@ class ProductController extends Controller
             if (empty($errors)) {
                 if ($datas['toxicity'] == 1) {
                     $datas['toxicity'] = '0';
-                }else{
+                } else {
                     $datas['toxicity'] = '1';
                 }
 
@@ -98,7 +112,12 @@ class ProductController extends Controller
         return $this->render('product/edit.html', ['product' => $product]);
     }
 
-    public function show($slug, $id)
+    /**
+     * Affichage de la vu d'un produit
+     *
+     * @return string
+     */
+    public function show(string $slug, int $id):string
     {
         $product = $this->product->find($id);
         if (!$product) {
@@ -114,7 +133,7 @@ class ProductController extends Controller
 
             $warehouse = $this->warehouse->find($_SESSION['auth']->getId(), 'user_id');
             if ($warehouse) {
-            $already = $this->productWarehouse->existing($id, $warehouse->getId());
+                $already = $this->productWarehouse->existing($id, $warehouse->getId());
                 if (!empty($_POST) && !$already) {
                     $fields['product_id'] = $id;
                     $fields['warehouse_id'] = $warehouse->getId();
@@ -124,7 +143,7 @@ class ProductController extends Controller
 
                 if ($already) {
                     $addProduct = 'already';
-                }else{
+                } else {
                     $addProduct = 'ok';
                 }
             }
@@ -136,14 +155,19 @@ class ProductController extends Controller
         $urlSupplier = $this->generateUrl('supplier_show', ['slug' => $slugSupplier, 'id' => $idSupplier]);
         
         return $this->render('product/show.html', [
-            'product' => $product, 
-            'mine' => $mine, 
+            'product' => $product,
+            'mine' => $mine,
             'supplier' => $supplier,
             'addProduct' => $addProduct,
             'urlSupplier' => $urlSupplier]);
     }
 
-    public function index()
+    /**
+     * Affichage de la vu de tous les produits
+     *
+     * @return string
+     */
+    public function index():string
     {
         $all = $this->product->all();
 
@@ -159,12 +183,17 @@ class ProductController extends Controller
         return $this->render('/product/index.html', ['products' => $products, 'pagination' => $pagination]);
     }
 
-    public function delete()
+    /**
+     * Gère la suppression d'un produit
+     *
+     * @return void
+     */
+    public function delete():void
     {
         if ($this->product->delete($_POST['id'])) {
             $this->productWarehouse->delete($_POST['id'], 'warehouse_id');
             echo 'ok';
-        }else{
+        } else {
             echo 'error';
         }
     }

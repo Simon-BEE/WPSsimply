@@ -2,7 +2,7 @@
 
 namespace Core\Controller;
 
-class URLController 
+class URLController
 {
     public static function getInt(string $name, ?int $default = null): ?int
     {

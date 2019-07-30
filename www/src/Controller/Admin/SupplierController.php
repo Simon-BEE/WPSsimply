@@ -8,6 +8,10 @@ use App\Controller\PaginatedQueryAppController;
 
 class SupplierController extends Controller
 {
+    /**
+     * Vérifie les droits d'accès
+     * Récupère les tables supplier, product et user
+     */
     public function __construct()
     {
         $this->onlyAdmin();
@@ -16,7 +20,12 @@ class SupplierController extends Controller
         $this->loadModel('product');
     }
 
-    public function index()
+    /**
+     * Affichage de la vu de tous les fournisseurs en admin
+     *
+     * @return string
+     */
+    public function index():string
     {
         
         $all = $this->supplier->all();
@@ -30,12 +39,18 @@ class SupplierController extends Controller
         }
         
         return $this->render('admin/supplier/index.html', [
-            'title' => 'Affiche tous les fournisseurs', 
-            'suppliers' => $suppliers, 
+            'title' => 'Affiche tous les fournisseurs',
+            'suppliers' => $suppliers,
             'pagination' => $pagination]);
     }
 
-    public function show($slug, $id)
+    /**
+     * Affichage de la vu pour modifier un fournisseur
+     * Et traitement de son formulaire
+     *
+     * @return string
+     */
+    public function show(string $slug, int $id): string
     {
 
         $supplier = $this->supplier->find($id);
@@ -54,7 +69,6 @@ class SupplierController extends Controller
         if (!isset($errors['post'])) {
             $datas = $form->getDatas();
             if (empty($errors)) {
-                
                 $this->supplier->update($id, 'id', $datas);
                 $this->flash()->addSuccess('Votre société a bien été modifié!');
 
@@ -67,13 +81,19 @@ class SupplierController extends Controller
         }
 
         return $this->render('admin/supplier/show.html', [
-            'title' => 'Modifier un fournisseur', 
+            'title' => 'Modifier un fournisseur',
             'supplier' => $supplier,
             'products' => $products
             ]);
     }
 
-    public function add()
+    /**
+     * Affichage de la vu pour ajouter un fournisseur
+     * Et traitement de son formulaire
+     *
+     * @return string
+     */
+    public function add():string
     {
 
         $form = new FormController();
@@ -92,10 +112,10 @@ class SupplierController extends Controller
                 $slugNew = $slugify->slugify($datas['social']);
                 
                 header('location: '. $this->generateUrl('admin_supplier_show', [
-                    'slug' => $slugNew, 
+                    'slug' => $slugNew,
                     'id' => $this->supplier->last()]));
                 exit();
-            }else{
+            } else {
                 $this->flash()->addAlert('Veillez à bien remplir tous les champs');
             }
         }
@@ -110,21 +130,25 @@ class SupplierController extends Controller
                 if (!$this->supplier->find($key, 'user_id')) {
                         $becomeSupplier[] = $value;
                 }
-                
             }
         }
         $lastId = $this->supplier->last();
         return $this->render('admin/supplier/add.html', [
             'title' => 'Ajouter un fournisseur',
-            'lastId' => $lastId, 
+            'lastId' => $lastId,
             'userCanBeSupplier' => $becomeSupplier]);
     }
 
-    public function delete()
+    /**
+     * Gère la suppression d'un fournisseur
+     *
+     * @return void
+     */
+    public function delete():void
     {
         if ($this->supplier->delete($_POST['id'])) {
             echo 'ok';
-        }else{
+        } else {
             echo 'error';
         }
     }

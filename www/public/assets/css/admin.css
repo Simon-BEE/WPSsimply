@@ -36,6 +36,7 @@ h1, h2, h3, h4{
 
 .footer{
     text-align: center;
+    display: none;
 }
 
 /*   MEDIA QUERIES   */
@@ -83,6 +84,10 @@ h1, h2, h3, h4{
 
     .principal{
         height: 100px !important;
+    }
+
+    .footer{
+        display: block;
     }
 }
 
@@ -161,10 +166,10 @@ nav.menu ul li{
 }
 
 nav.menu ul li a{
-    width: 96%;
+    width: 90%;
     display: inline-block;
     background-color: #fff;
-    padding: 6% 2%;
+    padding: 6% 5%;
     display: flex;
     justify-content: space-between;
     background-color: #F44336;

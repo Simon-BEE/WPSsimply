@@ -9,9 +9,9 @@ use Twig\TwigFunction;
 class FlashExtension extends AbstractExtension
 {
     /**
-     * Stockage de la session ;) 
+     * Stockage de la session ;)
      *
-     * @var FlashService 
+     * @var FlashService
      */
     private $flashService;
 

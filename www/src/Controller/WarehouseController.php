@@ -7,6 +7,9 @@ use Core\Controller\FormController;
 
 class WarehouseController extends Controller
 {
+    /**
+     * Récupère les tables city, warehouse, product et product_warehouse
+     */
     public function __construct()
     {
         $this->loadModel('warehouse');
@@ -15,7 +18,12 @@ class WarehouseController extends Controller
         $this->loadModel('product');
     }
 
-    public function index()
+    /**
+     * Affichage de la vu de tous les entrepôts
+     *
+     * @return string
+     */
+    public function index(): string
     {
         $all = $this->warehouse->all();
         if ($all) {
@@ -29,7 +37,13 @@ class WarehouseController extends Controller
         return $this->render('warehouse/index.html', ['warehouses' => $warehouses, 'pagination' => $pagination]);
     }
 
-    public function add()
+    /**
+     * Affichage de la vu d'ajout d'un entrepôt
+     * et du traitement du formulaire d'ajout
+     *
+     * @return string
+     */
+    public function add(): string
     {
         if ($this->warehouse->find($_SESSION['auth']->getId(), 'user_id') &&
             ($_SESSION['auth']->getRole() != 2)) {
@@ -63,7 +77,12 @@ class WarehouseController extends Controller
         return $this->render('warehouse/add.html', ['cities' => $cities]);
     }
 
-    public function show($slug, $id)
+    /**
+     * Affichage de la vu d'un entrepôt
+     *
+     * @return string
+     */
+    public function show(string $slug, int $id): string
     {
         $warehouse = $this->warehouse->find($id);
         if (!$warehouse) {
@@ -88,13 +107,19 @@ class WarehouseController extends Controller
         
         $city = $this->city->find($warehouse->getCityId())->getName();
         return $this->render('warehouse/show.html', [
-            'warehouse' => $warehouse, 
-            'city' => $city, 
+            'warehouse' => $warehouse,
+            'city' => $city,
             'mine' => $mine,
             'products' => $products]);
     }
 
-    public function edit($slug, $id)
+    /**
+     * Affichage de la vu de modification d'un entrepôt
+     * et du traitement du formulaire de modification
+     *
+     * @return string
+     */
+    public function edit($slug, $id): string
     {
         $warehouse = $this->warehouse->find($id);
         if (!$warehouse) {
@@ -117,7 +142,6 @@ class WarehouseController extends Controller
         if (!isset($errors["post"])) {
             $datas = $form->getDatas();
             if (empty($errors)) {
-                
                 $this->warehouse->update($id, 'id', $datas);
                 $this->flash()->addSuccess('Votre société a bien été modifié!');
                 

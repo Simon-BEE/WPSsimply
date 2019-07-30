@@ -7,6 +7,10 @@ use App\Controller\PaginatedQueryAppController;
 
 class UserController extends Controller
 {
+    /**
+     * Vérifie les droits d'accès
+     * Récupère les tables supplier, product, warehouse, product_warehouse et user
+     */
     public function __construct()
     {
         $this->onlyAdmin();
@@ -17,7 +21,12 @@ class UserController extends Controller
         $this->loadModel('productWarehouse');
     }
 
-    public function index()
+    /**
+     * Affichage de la vu avec tous les utilisateurs inscrits
+     *
+     * @return string
+     */
+    public function index(): string
     {
         
         $all = $this->user->all();
@@ -31,12 +40,18 @@ class UserController extends Controller
         }
         
         return $this->render('admin/user/index.html', [
-            'title' => 'Affiche tous les utilisateurs', 
-            'users' => $users, 
+            'title' => 'Affiche tous les utilisateurs',
+            'users' => $users,
             'pagination' => $pagination]);
     }
 
-    public function show($id)
+    /**
+     * Affichage de la vu d'un utilisateur et modification de celui-ci
+     * Traitement de son formulaire
+     *
+     * @return string
+     */
+    public function show($id):string
     {
         $user = $this->user->find($id);
         if (!$user) {
@@ -49,7 +64,7 @@ class UserController extends Controller
         if ($role == 7) {
             $form->field('name', ['require'])
                 ->field('mail', ['require']);
-        }else{
+        } else {
             $form->field('name', ['require'])
                 ->field('mail', ['require'])
                 ->field('role', ['require']);
@@ -60,7 +75,6 @@ class UserController extends Controller
         if (!isset($errors['post'])) {
             $datas = $form->getDatas();
             if (empty($errors)) {
-
                 if ($user->getMail() != $datas["mail"]) {
                     if ($this->user->find($datas["mail"], "mail")) {
                         throw new \Exception("L'email est déjà utilisé par un autre utilisateur");
@@ -68,7 +82,6 @@ class UserController extends Controller
                 }
 
                 if ($role != $datas['role']) {
-
                     if ($role == 1) {
                         $supplier = $this->supplier->find($id, 'user_id');
                         if ($supplier) {
@@ -86,15 +99,13 @@ class UserController extends Controller
                             $this->supplier->delete($idSupplier);
                             $this->product->delete($idSupplier, 'supplier_id');
                         }
-
-                    }elseif($role == 2){
+                    } elseif ($role == 2) {
                         $warehouse = $this->warehouse->find($id, 'user_id');
                         if ($warehouse) {
                             $idWarehouse = $warehouse->getId();
                             $this->warehouse->delete($idWarehouse);
                             $this->productWarehouse->delete($idWarehouse, 'warehouse_id');
                         }
-
                     }
                 }
                 $this->user->update($id, 'id', $datas);
@@ -104,11 +115,17 @@ class UserController extends Controller
         }
 
         return $this->render('admin/user/show.html', [
-            'title' => 'Modifier un utilisateur', 
+            'title' => 'Modifier un utilisateur',
             'user' => $user]);
     }
 
-    public function add()
+    /**
+     * Affichage de la vu pour ajouter un utilisateur
+     * et traitement du formulaire
+     *
+     * @return string
+     */
+    public function add():string
     {
 
         $form = new FormController();
@@ -132,7 +149,7 @@ class UserController extends Controller
                 $url = $this->generateUrl('admin_user_show', ['id' => $this->user->last()]);
                 header('location: '.$url);
                 exit();
-            }else{
+            } else {
                 $this->flash()->addAlert('Veillez à bien remplir les champs !');
             }
         }
@@ -144,12 +161,17 @@ class UserController extends Controller
         ]);
     }
 
-    public function delete()
+    /**
+     * Gere la suppression d'un utilisateur
+     *
+     * @return void
+     */
+    public function delete():void
     {
         $user = $this->user->find($_POST['id']);
-        if ($this->user->delete($_POST['id'], 'id', $user)) {
+        if ($this->user->delete($user, $_POST['id'], 'id')) {
             echo 'ok';
-        }else{
+        } else {
             echo 'error';
         }
     }

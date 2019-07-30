@@ -62,8 +62,10 @@ class ProductEntity extends Entity
         $slugify = new Slugify();
         $slug = $slugify->slugify($this->getName());
         return \App\App::getInstance()->getRouter()->url(
-            'product_show', [
+            'product_show',
+            [
                 'slug' => $slug, 'id' => $this->getId()
-            ]);
+            ]
+        );
     }
 }

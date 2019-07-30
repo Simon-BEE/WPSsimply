@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
+
 use \Core\Controller\PaginatedQueryController;
+
 class PaginatedQueryAppController extends PaginatedQueryController
 {
     public function getNavHtml(): string

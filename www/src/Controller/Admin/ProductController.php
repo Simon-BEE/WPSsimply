@@ -8,6 +8,10 @@ use App\Controller\PaginatedQueryAppController;
 
 class ProductController extends Controller
 {
+    /**
+     * Vérifie les droits d'accès
+     * Récupère les tables supplier, product et product_warehouse
+     */
     public function __construct()
     {
         $this->onlyAdmin();
@@ -16,7 +20,12 @@ class ProductController extends Controller
         $this->loadModel('productWarehouse');
     }
 
-    public function index()
+    /**
+     * Affichage de la vu de tous les produits en admin
+     *
+     * @return string
+     */
+    public function index():string
     {
         $all = $this->product->all();
         if ($all) {
@@ -35,7 +44,13 @@ class ProductController extends Controller
         ]);
     }
 
-    public function show($slug, $id)
+    /**
+     * Affichage de la vu de modification d'un produit
+     * et du traitement du formulaire de modification
+     *
+     * @return string
+     */
+    public function show($slug, $id):string
     {
         $product = $this->product->find($id);
         if (!$product) {
@@ -53,10 +68,9 @@ class ProductController extends Controller
             $datas = $form->getDatas();
 
             if (empty($errors)) {
-
                 if ($datas['toxicity'] == 1) {
                     $datas['toxicity'] = '0';
-                }else{
+                } else {
                     $datas['toxicity'] = '1';
                 }
 
@@ -67,10 +81,10 @@ class ProductController extends Controller
                 $slugNew = $slugify->slugify($datas['name']);
                 
                 header('location: '. $this->generateUrl('admin_product_show', [
-                    'slug' => $slugNew, 
+                    'slug' => $slugNew,
                     'id' => $this->product->last()]));
                 exit();
-            }else{
+            } else {
                 $this->flash()->addAlert('Veillez à bien remplir tous les champs');
             }
         }
@@ -81,7 +95,13 @@ class ProductController extends Controller
         ]);
     }
 
-    public function add()
+    /**
+     * Affichage de la vu d'ajout d'un produit
+     * et du traitement du formulaire d'ajout
+     *
+     * @return string
+     */
+    public function add():string
     {
         $suppliers = $this->supplier->all();
 
@@ -96,10 +116,9 @@ class ProductController extends Controller
             $datas = $form->getDatas();
 
             if (empty($errors)) {
-
                 if ($datas['toxicity'] == 1) {
                     $datas['toxicity'] = '0';
-                }else{
+                } else {
                     $datas['toxicity'] = '1';
                 }
 
@@ -110,25 +129,30 @@ class ProductController extends Controller
                 $slugNew = $slugify->slugify($datas['name']);
                 
                 header('location: '. $this->generateUrl('admin_product_show', [
-                    'slug' => $slugNew, 
+                    'slug' => $slugNew,
                     'id' => $this->product->last()]));
                 exit();
-            }else{
+            } else {
                 $this->flash()->addAlert('Veillez à bien remplir tous les champs');
             }
         }
 
-        return $this->render('admin/product/add.html',[
+        return $this->render('admin/product/add.html', [
             'title' => 'Ajouter un nouveau produit',
             'suppliers' => $suppliers
         ]);
     }
 
-    public function delete()
+    /**
+     * Gère la suppression d'un produit
+     *
+     * @return void
+     */
+    public function delete():void
     {
         if ($this->product->delete($_POST['id'])) {
             echo 'ok';
-        }else{
+        } else {
             echo 'error';
         }
     }

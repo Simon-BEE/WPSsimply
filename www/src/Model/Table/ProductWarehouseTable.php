@@ -7,9 +7,9 @@ class ProductWarehouseTable extends Table
 {
     public function existing($product, $warehouse)
     {
-        if($this->query("SELECT * FROM {$this->table} WHERE product_id = $product AND warehouse_id = $warehouse")){
+        if ($this->query("SELECT * FROM {$this->table} WHERE product_id = $product AND warehouse_id = $warehouse")) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

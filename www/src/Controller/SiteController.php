@@ -5,18 +5,32 @@ use Core\Controller\Controller;
 
 class SiteController extends Controller
 {
-    public function index()
+    /**
+     * Affichage de la vu de la page home
+     *
+     * @return string
+     */
+    public function index():string
     {
-        //dd($_SESSION["auth"]['google']['email']);
         return $this->render("site/index.html");
     }
 
-    public function notices()
+    /**
+     * Affichage de la vu de la page des mentions legales
+     *
+     * @return string
+     */
+    public function notices():string
     {
         return $this->render('site/mentions.html');
     }
 
-    public function notfound()
+    /**
+     * Affichage de la vu de la page 404
+     *
+     * @return string
+     */
+    public function notfound():string
     {
         return $this->render('site/404.html');
     }

@@ -13,7 +13,7 @@
             <a href="{{ product.url }}/edit" class="btn btn-danger">editer</a>
         </div>
         <div class="col-md-2 col-6">
-            <a href="#" class="btn btn-danger" onclick="deleting({{ 'product', product.id }})">SUPPRIMER</a>
+            <a href="#" class="btn btn-danger" onclick="deleting('product', {{product.id}})">SUPPRIMER</a>
         </div>
         {% endif %}
     </div>

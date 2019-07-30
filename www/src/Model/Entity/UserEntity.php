@@ -62,8 +62,10 @@ class UserEntity extends Entity
     public function getUrl()
     {
         return \App\App::getInstance()->getRouter()->url(
-            'admin_user_show', [
+            'admin_user_show',
+            [
                 'id' => $this->getId()
-            ]);
+            ]
+        );
     }
 }

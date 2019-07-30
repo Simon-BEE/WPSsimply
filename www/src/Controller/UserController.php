@@ -9,6 +9,9 @@ use Core\Controller\FormController;
 
 class UserController extends Controller
 {
+    /**
+     * Récupère les tables user et supplier
+     */
     public function __construct()
     {
         $this->loadModel('user');
@@ -16,7 +19,7 @@ class UserController extends Controller
     }
 
     /**
-     * Affichage de la vu de connexion 
+     * Affichage de la vu de connexion
      * et du traitement du formulaire de connexion
      *
      * @return string
@@ -59,7 +62,7 @@ class UserController extends Controller
     }
 
     /**
-     * Affichage de la vu d'inscription 
+     * Affichage de la vu d'inscription
      * et du traitement du formulaire inscription
      *
      * @return string
@@ -92,7 +95,6 @@ class UserController extends Controller
                 exit();
             }
             unset($datas["password"]);
-
         } else {
             unset($errors);
         }
@@ -101,7 +103,7 @@ class UserController extends Controller
     }
 
     /**
-     * Affichage de la vu du profil 
+     * Affichage de la vu du profil
      * et traitement de modifications de ses infos perso
      *
      * @return string
@@ -135,7 +137,7 @@ class UserController extends Controller
 
                 $this->flash()->addSuccess('Vos informations ont bien été mises à jour');
                 $user = $this->user->getUserByid($user->getId());
-            }else{
+            } else {
                 $this->flash()->addAlert('Veuillez remplir tous les champs correctement !');
             }
         }

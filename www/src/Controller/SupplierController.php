@@ -7,13 +7,21 @@ use Core\Controller\FormController;
 
 class SupplierController extends Controller
 {
+    /**
+     * Récupère les tables product et supplier
+     */
     public function __construct()
     {
         $this->loadModel('supplier');
         $this->loadModel('product');
     }
 
-    public function index()
+    /**
+     * Affichage de la vu de tous les fournisseurs
+     *
+     * @return string
+     */
+    public function index(): string
     {
         $all = $this->supplier->all();
         if ($all) {
@@ -28,7 +36,12 @@ class SupplierController extends Controller
         return $this->render('supplier/index.html', ['suppliers' => $suppliers, 'pagination' => $pagination]);
     }
 
-    public function show($slug, $id)
+    /**
+     * Affichage de la vu d'un fournisseur
+     *
+     * @return string
+     */
+    public function show(string $slug, int $id): string
     {
         $supplier = $this->supplier->find($id);
         if (!$supplier) {
@@ -42,10 +55,20 @@ class SupplierController extends Controller
             }
         }
         $productsArray = $this->product->findAll($supplier->getId(), 'supplier_id');
-        return $this->render('supplier/show.html', ['supplier' => $supplier, 'mine' => $mine, 'products' => $productsArray]);
+        return $this->render('supplier/show.html', [
+            'supplier' => $supplier,
+            'mine' => $mine,
+            'products' => $productsArray
+            ]);
     }
 
-    public function add()
+    /**
+     * Affichage de la vu pour ajouter un fournisseur
+     * Et traitement de son formulaire
+     *
+     * @return string
+     */
+    public function add(): string
     {
         if ($this->supplier->find($_SESSION['auth']->getId(), 'user_id') &&
         ($_SESSION['auth']->getRole() != 1)) {
@@ -77,7 +100,13 @@ class SupplierController extends Controller
         return $this->render('supplier/add.html');
     }
 
-    public function edit($slug, $id)
+    /**
+     * Affichage de la vu pour modifier un fournisseur
+     * Et traitement de son formulaire
+     *
+     * @return string
+     */
+    public function edit($slug, $id): string
     {
         $supplier = $this->supplier->find($id);
         if (!$supplier) {
@@ -98,7 +127,6 @@ class SupplierController extends Controller
         if (!isset($errors["post"])) {
             $datas = $form->getDatas();
             if (empty($errors)) {
-                
                 $this->supplier->update($id, 'id', $datas);
                 $this->flash()->addSuccess('Votre société a bien été modifié!');
                 

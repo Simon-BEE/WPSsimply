@@ -143,7 +143,6 @@ abstract class Table
 
     public function isNotEmpty()
     {
-    return $this->query("SELECT id FROM {$this->table}");
+        return $this->query("SELECT id FROM {$this->table}");
     }
-    
 }

@@ -51,8 +51,10 @@ class SupplierEntity extends Entity
         $slugify = new Slugify();
         $slug = $slugify->slugify($this->getSocial());
         return \App\App::getInstance()->getRouter()->url(
-            'supplier_show', [
+            'supplier_show',
+            [
                 'slug' => $slug, 'id' => $this->getId()
-            ]);
+            ]
+        );
     }
 }

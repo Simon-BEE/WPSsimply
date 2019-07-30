@@ -33,7 +33,6 @@ abstract class Controller
             $this->twig->addGlobal('constant', get_defined_constants());
             $this->twig->addExtension(new FlashExtension());
             $this->twig->addExtension(new URIExtension());
-
         }
         return $this->twig;
     }
@@ -66,7 +65,8 @@ abstract class Controller
         return  URLController::getUri($name, $params);
     }
 
-    protected function onlyAdmin(){
+    protected function onlyAdmin()
+    {
         if (empty($_SESSION['auth']) || $_SESSION['auth']->getRole() != 7) {
             header('location: /');
             exit();

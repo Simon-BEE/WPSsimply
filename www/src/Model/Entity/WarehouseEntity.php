@@ -68,8 +68,10 @@ class WarehouseEntity extends Entity
         $slugify = new Slugify();
         $slug = $slugify->slugify($this->getName());
         return \App\App::getInstance()->getRouter()->url(
-            'warehouse_show', [
+            'warehouse_show',
+            [
                 'slug' => $slug, 'id' => $this->getId()
-            ]);
+            ]
+        );
     }
 }
