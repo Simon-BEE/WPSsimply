@@ -87,8 +87,8 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 * ~~Ajouter des mentions légales~~
 * ~~Ajouter une page 404~~
 * ~~Implementer la connexion via Google~~ et Facebook
-* Refaire première maquette (home mobile)
-* Maquette administration
+* ~~Refaire première maquette (home mobile)~~
+* ~~Maquette administration~~
 * Commenter le code *in progress*
 
 Optionnel :
@@ -112,3 +112,7 @@ Pour la présentation :
 ![Maquette listing large](/www/public/assets/img/maq04.png "Maquette listing large")
 
 ![Maquette form large](/www/public/assets/img/maq05.png "Maquette form large")
+
+![Maquette admin mobile](/www/public/assets/img/maq06.png "Maquette admin mobile")
+
+![Maquette admin large](/www/public/assets/img/maq07.png "Maquette admin large")
