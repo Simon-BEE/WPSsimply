@@ -24,7 +24,8 @@
                     <img src="/assets/img/profile_male.png" alt="vector boy">
                 </div>
                 <nav class="menu">
-                    <ul>
+                    <button class="accordion">MENU</button>
+                    <ul class="panel" id="panel">
                         <li><a href="{{ uri('admin') }}"><img src="/assets/img/home.png" alt="home icon" class="icons"> Accueil</a></li>
                         <li><a href="{{ uri('admin_supplier_all') }}"><img src="/assets/img/supplier.png" alt="supplier icon" class="icons"> Fournisseurs</a></li>
                         <li><a href="{{ uri('admin_warehouse_all') }}"><img src="/assets/img/store.png" alt="store icon" class="icons"> Entrepôts</a></li>
@@ -54,7 +55,11 @@
         </section>
 
     </main>
-    <footer class="footer"><a href="#top">TOP</a></footer>
+    <footer class="footer">
+        <a href="#top">TOP</a>
+        <a href="{{ uri('home') }}">Retour au site</a>
+    </footer>
     {% block javascript %}{% endblock %}
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
 </body>
 </html>

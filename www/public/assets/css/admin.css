@@ -86,8 +86,39 @@ h1, h2, h3, h4{
         height: 100px !important;
     }
 
+    .comeback{
+        display: none;
+    }
+
     .footer{
         display: block;
+        background-color: #f44336;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer a{
+        color: #fff;
+    }
+
+    nav.menu{
+        text-align: center;
+    }
+
+    button.accordion{
+        display: inline-block!important;
+        border: none;
+        background-color: #fff;
+        color: #F44336;
+        margin-bottom: 30px;
+    }
+
+    nav.menu ul.panel{
+        display: none;
+    }
+
+    .block {
+        display: block!important;
     }
 }
 
@@ -185,6 +216,10 @@ nav.menu ul li > *{
     color: #fff;
     margin: 10px;
     text-align: center;
+}
+
+button.accordion{
+    display: none;
 }
 
 .comeback{
