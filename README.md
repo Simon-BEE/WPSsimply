@@ -102,7 +102,7 @@ Pour la présentation :
 
 ## Maquettes :
 
-![Maquette home](/www/public/assets/img/wps_home.png "Maquette home")
+![Maquette home](/www/public/assets/img/maq00.png "Maquette home")
 
 ![Maquette form](/www/public/assets/img/maq01.png "Maquette form")
 ![Maquette listing](/www/public/assets/img/maq02.png "Maquette listing")
