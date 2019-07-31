@@ -44,6 +44,11 @@ $app->getRouter($basePath)
     ->match('/google', 'auth#google', 'user_google')
     ->get('/logout', 'user#logout', 'logout')
 
+    //Messagerie
+    ->get('/profile/[i:id]/message', 'message#index', 'messages')
+    ->match('/profile/[i:id]/message/show/[i:contact_id]', 'message#show', 'message_show')
+    ->match('/profile/[i:id]/message/new', 'message#new', 'message_new')
+
     //Fournisseurs
     ->match('/supplier/add', 'supplier#add', 'supplier_add')
     ->get('/suppliers', 'supplier#index', 'suppliers_all')

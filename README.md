@@ -89,10 +89,11 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 * ~~Implementer la connexion via Google~~ et Facebook
 * ~~Refaire première maquette (home mobile)~~
 * ~~Maquette administration~~
+* Boîte de messagerie interne
+* Mettre à jour UML
 * Commenter le code *in progress*
 
 Optionnel :
-* Faire des propositions de Fournisseurs aux Gérants d'entrepôt (proposition de produit)
 * Ajouter un produit si seulement il nous reste de la place
 
 Pour la présentation :

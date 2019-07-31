@@ -16,6 +16,7 @@ class UserController extends Controller
     {
         $this->loadModel('user');
         $this->loadModel('supplier');
+        $this->loadModel('message');
     }
 
     /**
@@ -26,8 +27,9 @@ class UserController extends Controller
      */
     public function login(): string
     {
+        $this->userForbidden();
 
-        if (!$_SESSION["auth"]["google"]["email"]) {
+        if (!$_SESSION["google"]["email"]) {
             $google = new AuthController();
             $googleClient = $google->loginByGoogle();
         }
@@ -69,6 +71,8 @@ class UserController extends Controller
      */
     public function register(): string
     {
+        $this->userForbidden();
+
         $form = new FormController();
         $form->field('mail', ["require", "verify"])
             ->field('password', ["require", "verify", "length" => 6])
@@ -110,9 +114,7 @@ class UserController extends Controller
      */
     public function profile():string
     {
-        if (!$_SESSION['auth']) {
-            \header('location: /');
-        }
+        $this->userOnly();
         
         $user = $_SESSION['auth'];
 
@@ -154,4 +156,5 @@ class UserController extends Controller
         unset($_SESSION['auth']);
         header('location: /');
     }
+
 }

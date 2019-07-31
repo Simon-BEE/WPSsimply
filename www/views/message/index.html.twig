@@ -1,0 +1,48 @@
+{% extends '/layout/default.twig' %}
+
+{% block title %}Votre boîte de réception{% endblock %}
+
+{% block body %}
+<div class="container mb-5">
+    <h2 class="display-5">Bienvenue sur votre boîte de messagerie</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum nesciunt ratione modi beatae odio eaque laudantium maxime, necessitatibus veritatis earum fugit minus pariatur tempora tenetur dicta! Tempore sunt perferendis non dolores quidem, itaque rerum facilis harum consequuntur omnis consequatur, voluptatem saepe nulla mollitia suscipit quae expedita recusandae qui numquam? Numquam labore earum iste vel. Amet, ad maxime! Similique odio ratione, optio magnam necessitatibus possimus deserunt distinctio ex maiores et dignissimos repudiandae animi. Voluptates, illum omnis nemo blanditiis accusantium libero distinctio.</p>
+</div>
+
+<div class="table-responsive container mb-5">
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Lu</th>
+                <th scope="col">Utilisateur</th>
+                <th scope="col">Aperçu du message</th>
+                <th scope="col">Date du dernier message</th>
+            </tr>
+        </thead>
+        <tbody>
+{% if messages is empty %}
+        <tr>
+            <td></td>
+            <td>Vous n'avez aucun message !</td>
+            <td></td>
+            <td></td>
+        </tr>
+{% else %}
+    {% for message in messages %}
+        <tr>
+            <th scope="row">{{ message.read }}</th>
+            <td>{{ message.senderId }}</td>
+            <td>{{ message.message }}</td>
+            <td>{{ message.createdAt }}</td>
+        </tr>
+    {% endfor %}
+{% endif %}
+        </tbody>
+    </table>
+</div>
+    
+<div class="container mb-5">
+    <h2 class="display-5">Ecrivez un nouveau message</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum nesciunt ratione modi beatae odio eaque laudantium maxime, necessitatibus veritatis earum fugit minus pariatur.</p>
+    <a href="{{ uri('message_new', {'id' : user.id }) }}" class="btn btn-warning">Ecrire</a>
+</div>
+{% endblock %}

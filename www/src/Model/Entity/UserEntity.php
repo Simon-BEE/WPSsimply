@@ -68,4 +68,14 @@ class UserEntity extends Entity
             ]
         );
     }
+
+    public function getMessageUrl()
+    {
+        return \App\App::getInstance()->getRouter()->url(
+            'messages',
+            [
+                'id' => $this->getId()
+            ]
+        );
+    }
 }

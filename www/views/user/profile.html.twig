@@ -41,7 +41,7 @@
         <p>Vous n'avez pas encore renseigné votre profil fournisseur. <a href="{{ uri("supplier_add") }}" class="text-warning">Inscrivez-le!</a></p>
         {% endif %}
     {% elseif user.role is same as('7') %}
-        <h2 class="h2">Votre accès à l'administration</h2>
+        <h2 class="display-5">Votre accès à l'administration</h2>
         <div class="mt-3 mb-5">
             <a href="{{ uri('admin') }}" class="btn btn-warning">Direction l'administration</a>
         </div>
@@ -63,6 +63,12 @@
         <p>Vous n'avez pas encore renseigné d'entrepôt. <a href="{{ uri("warehouse_add") }}" class="text-warning">Inscrivez-le!</a></p>
         {% endif %}
     {% endif %}
+</div>
+
+<div class="container mb-5">
+    <h1 class="display-5">Votre messagerie</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus corrupti ullam vitae vero dignissimos aut officiis cum sequi veniam, dolores reprehenderit provident sapiente aspernatur pariatur.</p>
+    <a href="{{ uri('messages', {'id' : user.id }) }}" class="btn btn-warning">Accéder à votre messagerie</a>
 </div>
 
 <div class="container mb-5 mt-5">

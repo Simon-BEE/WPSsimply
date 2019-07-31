@@ -1,0 +1,30 @@
+{% extends '/layout/default.twig' %}
+
+{% block title %}Ecrire un nouveau message{% endblock %}
+
+{% block body %}
+<div class="container mb-5">
+    <h2 class="display-5 mb-4">Ecrivez votre message</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, dolores possimus asperiores est repudiandae delectus necessitatibus quasi culpa consequuntur nostrum veritatis odit doloremque, a ipsum tenetur corrupti suscipit fuga nesciunt ex voluptatum! Corporis autem maiores, suscipit animi expedita accusamus quae sapiente enim, similique, rerum facere consequatur! Ea quos facilis tempora eius, esse nesciunt explicabo ipsam consectetur sint! Veritatis, magnam omnis. Autem non mollitia provident architecto corporis, molestias laboriosam, numquam quasi, neque vero maxime ab.</p>
+</div>
+
+    <div class="container">
+        <form method="post">
+            <div class="form-group">
+                <textarea name="message" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="user">Choisissez le destinataire</label>
+                <select class="form-control" id="user" name="receiver_id">
+                    <option value="" selected>Selectionner un utilisateur</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.name }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-warning">Envoyez votre message</button>
+        </form>
+    </div>
+
+{% endblock %}

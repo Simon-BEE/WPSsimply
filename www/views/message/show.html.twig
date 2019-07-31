@@ -1,0 +1,30 @@
+{% extends '/layout/default.twig' %}
+
+{% block title %}Messages avec {{ user }}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+    {% for message in messages %}
+        <p>{{ message.message | nl2br }}</p>
+    {% endfor %}
+    </div>
+
+    <div class="container">
+        <h2 class="display-5 mb-4">Répondez au message</h2>
+        <form method="post">
+            <div class="form-group">
+                <textarea name="message" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="user">Choisissez le destinataire</label>
+                <select class="form-control" id="user" name="receiver_id">
+                    <option value="">Default select</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-warning">Envoyez votre message</button>
+        </form>
+    </div>
+
+{% endblock %}

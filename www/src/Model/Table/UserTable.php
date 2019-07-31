@@ -45,4 +45,9 @@ class UserTable extends Table
         
         return $this->query("DELETE FROM {$this->table} WHERE $column = '$id'");
     }
+
+    public function allWithoutMe($id)
+    {
+    return $this->query("SELECT * FROM {$this->table} WHERE NOT id = $id");
+    }
 }

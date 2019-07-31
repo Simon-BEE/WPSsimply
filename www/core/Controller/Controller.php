@@ -72,4 +72,40 @@ abstract class Controller
             exit();
         }
     }
+
+    /**
+     * Autorise uniquement les utilisateurs à accèder à la page
+     * 
+     * @return void
+     */
+    protected function userOnly():void
+    {
+        if (!$_SESSION['auth']) {
+            \header('location: /');
+        }
+    }
+
+    /**
+     * Autorise uniquement les utilisateurs précis à accèder à la page
+     * 
+     * @return void
+     */
+    protected function userOnlyById($id):void
+    {
+        if ($_SESSION['auth']->getId() != $id) {
+            \header('location: /');
+        }
+    }
+
+    /**
+     * Autorise uniquement les utilisateurs à accèder à la page
+     * 
+     * @return void
+     */
+    protected function userForbidden():void
+    {
+        if ($_SESSION['auth']) {
+            \header('location: /profile');
+        }
+    }
 }
