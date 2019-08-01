@@ -23,10 +23,10 @@ class MessageController extends Controller
         $this->userOnlyById($id);
         
         $user = $this->user->find($id);
-        $messages = $this->message->findAll($id, 'receiver_id');
+        //$messages = $this->message->findAll($id, 'receiver_id');
+        $messages = $this->message->latestMessages($id, 'receiver_id');
         $users = $this->user->allWithoutMe($id);
-
-
+        //dd($messages);
         return $this->render('message/index.html',[
             'user' => $user,
             'messages' => $messages,
@@ -44,14 +44,34 @@ class MessageController extends Controller
     {
         $this->userOnlyById($id);
         $messages = $this->message->findAllByContact($id, $contact_id);
-        // $myMessages = $this->message->findMyMessage($id, $contact_id);
-        // $contactMessages = $this->message->findContactMessage($contact_id, $id);
 
-        // dump($myMessages);
-        // dd($contactMessages);
-        // if (!$myMessages && !$contactMessages) {
-        //     header('location: '.$this->generateUrl('messages', ['id' => $id]));
-        // }
+        if (!$messages) {
+            header('location: '.$this->generateUrl('messages', ['id' => $id]));
+        }
+
+        foreach ($messages as $value) {
+            if ($value->getRead() == 0 && ($value->getReceiverId() == $_SESSION['auth']->getId())) {
+                $this->message->itWasRead($value->getReceiverId());
+            }
+        }
+
+        if (!empty($_POST)) {
+            $_POST['sender_id'] = $id;
+            $_POST['receiver_id'] = $contact_id;
+            $fields = [];
+            
+            foreach ($_POST as $key => $value) {
+                $fields[$key] = htmlspecialchars($value);
+            }
+
+            if ($this->message->create($fields)) {
+                echo 'ok';
+                die();
+            } else {
+                echo 'error';
+                die();
+            }
+        }
         
         return $this->render('message/show.html', [
             'messages' => $messages,

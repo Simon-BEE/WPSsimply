@@ -13,8 +13,8 @@
         <thead>
             <tr>
                 <th scope="col">Lu</th>
-                <th scope="col">Dernier message de</th>
-                <th scope="col">Aperçu du message</th>
+                <th scope="col">Conversation avec</th>
+                <th scope="col">Aperçu du dernier message</th>
                 <th scope="col">Date du dernier message</th>
             </tr>
         </thead>
@@ -27,15 +27,17 @@
             <td></td>
         </tr>
 {% else %}
+{% set duplicate = [] %}
     {% for contact in users %}
         {% for message in messages %}
-            {% if contact.id is same as(message.senderId) %}
+            {% if contact.id is same as(message.senderId) and contact.id not in duplicate %}
                 <tr>
                     <th>{% if message.read is same as('0') %}<img src="/assets/img/env_close.png" alt="close envelope">{% else %}<img src="/assets/img/env_open.png" alt="open envelope">{% endif %}</th>
                         <td>{{ contact.name }}</td>
-                    <td><a href="{{ uri('message_show', {'id':user.id, 'contact_id':contact.id}) }}">{{ message.message }}</a></td>
-                    <td>{{ message.createdAt }}</td>
+                    <td><a href="{{ uri('message_show', {'id':user.id, 'contact_id':contact.id}) }}">{{ message.message | slice(0, 35) }}...</a></td>
+                    <td>{{ message.createdAt | date('d/m/Y H:i') }}</td>
                 </tr>
+                {% set duplicate = duplicate|merge([contact.id]) %}
             {% endif %}
         {% endfor %}
     {% endfor %}

@@ -42,3 +42,31 @@ for (i = 0; i < acc.length; i++) {
 		document.getElementById('panel').classList.toggle("block");
 	});
 }
+
+function sendMsg(path) {
+	message = $('#message').val();
+	
+	$.post(path, {message : message}, function(data){
+		if (data != 'error') {
+			
+			var msg = document.createElement("DIV")
+			msg.className = "card-right";
+			var p1 = document.createElement('P');
+			var p2 = document.createElement('P');
+			p1.className = "text-right small";
+			p2.className = "text-right";
+			message = document.createTextNode(message);
+			let current_datetime = new Date()
+			let formatted_date = current_datetime.getDate() + '/' + (current_datetime.getMonth() + 1) + '/' + current_datetime.getFullYear() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes();
+			var date = document.createTextNode(formatted_date);
+			p1.appendChild(date);
+			p2.appendChild(message);
+			msg.appendChild(p1);
+			msg.appendChild(p2);
+			document.getElementById('all-msg').appendChild(msg);
+			$('#message').val('');
+		}else{
+			alert('une erreur s\'est produite');
+		}
+	})
+}

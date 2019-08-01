@@ -41,6 +41,11 @@ p{
     }
 }
 
+#all-msg{
+    height: 50vh;
+    overflow: scroll;
+}
+
 .card-right{
     background-color: #ed9d2b;
     width: 50%;

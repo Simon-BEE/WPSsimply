@@ -1,7 +1,7 @@
 {% for message in messages %}
 
     {% if message.senderId is same as(user.id) %}
-        <div class="card-right">
+        <div class="card-right" id="user-msg">
             <p class="small text-right">{{ message.createdAt | date('d/m/Y H:i') }}</p>
             <p class="text-right">{{ message.message }}</p>
         </div>
