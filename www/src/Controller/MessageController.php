@@ -24,11 +24,13 @@ class MessageController extends Controller
         
         $user = $this->user->find($id);
         $messages = $this->message->findAll($id, 'receiver_id');
+        $users = $this->user->allWithoutMe($id);
 
 
         return $this->render('message/index.html',[
             'user' => $user,
-            'messages' => $messages
+            'messages' => $messages,
+            'users' => $users
         ]);
     }
 
@@ -42,13 +44,19 @@ class MessageController extends Controller
     {
         $this->userOnlyById($id);
         $messages = $this->message->findAllByContact($id, $contact_id);
+        // $myMessages = $this->message->findMyMessage($id, $contact_id);
+        // $contactMessages = $this->message->findContactMessage($contact_id, $id);
 
-        if (!$messages) {
-            header('location: '.$this->generateUrl('messages', ['id' => $id]));
-        }
+        // dump($myMessages);
+        // dd($contactMessages);
+        // if (!$myMessages && !$contactMessages) {
+        //     header('location: '.$this->generateUrl('messages', ['id' => $id]));
+        // }
         
         return $this->render('message/show.html', [
-            'messages' => $messages
+            'messages' => $messages,
+            'user' => $this->user->find($id),
+            'contact' => $this->user->find($contact_id)
         ]);
     }
 

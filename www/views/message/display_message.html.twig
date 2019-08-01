@@ -1,0 +1,16 @@
+{% for message in messages %}
+
+    {% if message.senderId is same as(user.id) %}
+        <div class="card-right">
+            <p class="small text-right">{{ message.createdAt | date('d/m/Y H:i') }}</p>
+            <p class="text-right">{{ message.message }}</p>
+        </div>
+    {% else %}
+        <div class="card-left">
+            <p class="small text-left">{{ message.createdAt | date('d/m/Y H:i') }}</p>
+            <p class="text-left">{{ message.message }}</p>
+        </div>
+    {% endif %}
+    
+{% endfor %}
+

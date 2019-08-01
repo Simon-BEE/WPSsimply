@@ -13,7 +13,7 @@
         <thead>
             <tr>
                 <th scope="col">Lu</th>
-                <th scope="col">Utilisateur</th>
+                <th scope="col">Dernier message de</th>
                 <th scope="col">Aperçu du message</th>
                 <th scope="col">Date du dernier message</th>
             </tr>
@@ -27,14 +27,19 @@
             <td></td>
         </tr>
 {% else %}
-    {% for message in messages %}
-        <tr>
-            <th scope="row">{{ message.read }}</th>
-            <td>{{ message.senderId }}</td>
-            <td>{{ message.message }}</td>
-            <td>{{ message.createdAt }}</td>
-        </tr>
+    {% for contact in users %}
+        {% for message in messages %}
+            {% if contact.id is same as(message.senderId) %}
+                <tr>
+                    <th>{% if message.read is same as('0') %}<img src="/assets/img/env_close.png" alt="close envelope">{% else %}<img src="/assets/img/env_open.png" alt="open envelope">{% endif %}</th>
+                        <td>{{ contact.name }}</td>
+                    <td><a href="{{ uri('message_show', {'id':user.id, 'contact_id':contact.id}) }}">{{ message.message }}</a></td>
+                    <td>{{ message.createdAt }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
     {% endfor %}
+    
 {% endif %}
         </tbody>
     </table>

@@ -45,8 +45,8 @@ $app->getRouter($basePath)
     ->get('/logout', 'user#logout', 'logout')
 
     //Messagerie
-    ->get('/profile/[i:id]/message', 'message#index', 'messages')
     ->match('/profile/[i:id]/message/show/[i:contact_id]', 'message#show', 'message_show')
+    ->get('/profile/[i:id]/message', 'message#index', 'messages')
     ->match('/profile/[i:id]/message/new', 'message#new', 'message_new')
 
     //Fournisseurs

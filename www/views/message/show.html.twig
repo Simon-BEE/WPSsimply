@@ -1,16 +1,14 @@
 {% extends '/layout/default.twig' %}
 
-{% block title %}Messages avec {{ user }}{% endblock %}
+{% block title %}Messages avec {{ contact.name }}{% endblock %}
 
 {% block body %}
 
-    <div class="container">
-    {% for message in messages %}
-        <p>{{ message.message | nl2br }}</p>
-    {% endfor %}
+    <div class="container mb-5">
+        {% include "/message/display_message.html.twig" %}
     </div>
 
-    <div class="container">
+    <div class="container mb-5">
         <h2 class="display-5 mb-4">Répondez au message</h2>
         <form method="post">
             <div class="form-group">
