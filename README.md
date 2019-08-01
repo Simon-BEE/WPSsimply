@@ -52,6 +52,14 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 * **Page de profil** affichant son rôle (fournisseur, ou gérant warehouse) et possibilité de modification de ses données personnelles
   * URL : WPSsimply.com/profile
 
+* **Messagerie interne** :
+  * **Pages affichant tous les contact déjà effectués**
+    * URL : WPSsimply.com/profile/id/message
+  * **Pages affichant tous les messages avec un contact et possibilité de répondre**
+    * URL : WPSsimply.com/profile/id/message/show/contact_id
+  * **Page pour ecrire un nouveau message**
+    * URL : WPSsimply.com/profile/id/message/new
+
 * **Ajout de produit et modification**
   * URL : WPSsimply.com/product/add *&&* WPSsimply.com/product/slug-id/edit
 * **Ajout de fournisseur et modification**
@@ -89,8 +97,8 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 * ~~Implementer la connexion via Google~~ et Facebook
 * ~~Refaire première maquette (home mobile)~~
 * ~~Maquette administration~~
-* Boîte de messagerie interne
-* Mettre à jour UML
+* ~~Boîte de messagerie interne~~
+* ~~Mettre à jour UML~~
 * Commenter le code *in progress*
 
 Optionnel :

@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $this->loadModel('user');
         $this->loadModel('supplier');
-        $this->loadModel('message');
+        $this->loadModel('warehouse');
     }
 
     /**
@@ -120,6 +120,8 @@ class UserController extends Controller
 
         if ($this->supplier->find($user->getId(), 'user_id')) {
             $supplier = $this->supplier->find($user->getId(), 'user_id');
+        }elseif ($this->warehouse->find($user->getId(), 'user_id')){
+            $warehouse = $this->warehouse->find($user->getId(), 'user_id');
         }
 
         $form = new FormController();
@@ -143,7 +145,10 @@ class UserController extends Controller
                 $this->flash()->addAlert('Veuillez remplir tous les champs correctement !');
             }
         }
-        return $this->render('user/profile.html', ['user' => $user, 'supplier' => $supplier]);
+        return $this->render('user/profile.html', [
+            'user' => $user, 
+            'supplier' => $supplier,
+            'warehouse' => $warehouse]);
     }
 
     /**
