@@ -21,4 +21,9 @@ class MessageTable extends Table
         return $this->query("UPDATE {$this->table} SET `read` = 1 WHERE receiver_id = $id");
     }
 
+    public function msgStandBy($sender_id)
+    {
+        return $this->query("SELECT * FROM {$this->table} WHERE (sender_id = $sender_id AND receiver_id != $sender_id)");
+    }
+
 }

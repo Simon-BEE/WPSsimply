@@ -23,14 +23,15 @@ class MessageController extends Controller
         $this->userOnlyById($id);
         
         $user = $this->user->find($id);
-        //$messages = $this->message->findAll($id, 'receiver_id');
-        $messages = $this->message->latestMessages($id, 'receiver_id');
+        $messages = $this->message->latestMessages($id);
         $users = $this->user->allWithoutMe($id);
-        //dd($messages);
+        $sending = $this->message->findAll($id, 'sender_id');
+
         return $this->render('message/index.html',[
             'user' => $user,
             'messages' => $messages,
-            'users' => $users
+            'users' => $users, 
+            'sending' => $sending
         ]);
     }
 

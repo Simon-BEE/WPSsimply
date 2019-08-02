@@ -159,6 +159,7 @@ class UserController extends Controller
     public function logout():void
     {
         unset($_SESSION['auth']);
+        unset($_SESSION['google']);
         header('location: /');
     }
 

@@ -83,19 +83,27 @@
                     <div class="col-md-3 mb-md-0 mb-3">
                         <h5 class="text-uppercase text-white">Links</h5>
                         <ul class="list-unstyled">
-                            <li><a href="#!" class="text-warning">Link 1</a></li>
-                            <li><a href="#!" class="text-warning">Link 1</a></li>
-                            <li><a href="#!" class="text-warning">Link 1</a></li>
-                            <li><a href="#!" class="text-warning">Link 1</a></li>
+                            <li><a href="{{ uri('home') }}" class="text-warning">Accueil</a></li>
+                            <li><a href="{{ uri('suppliers_all') }}" class="text-warning">Fournisseurs</a></li>
+                            <li><a href="{{ uri('warehouses_all') }}" class="text-warning">Entrepôts</a></li>
+                            <li><a href="{{ uri('products_all') }}" class="text-warning">Produits</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3 mb-md-0 mb-3">
-                        <h5 class="text-uppercase text-white">Links</h5>
+                        <h5 class="text-uppercase text-white">Member Links</h5>
                         <ul class="list-unstyled">
-                            <li><a href="#!" class="text-warning">Link 1</a></li>
-                            <li><a href="#!" class="text-warning">Link 1</a></li>
-                            <li><a href="#!" class="text-warning">Link 1</a></li>
-                            <li><a href="#!" class="text-warning">Link 1</a></li>
+                            <li><a href="{{ uri('profile') }}" class="text-warning">Profil</a></li>
+                            <li><a href="{{ uri('messages') }}" class="text-warning">Messagerie</a></li>
+                            {% if not session.auth %}
+                            <li><a href="{{ uri('register') }}" class="text-success">S'enregistrer</a></li>
+                            {% endif %}
+                            <li>
+                            {% if session.auth %}
+                                <a href="{{ uri("logout") }}" class="text-danger">Deconnexion</a>
+                            {% else %}
+                                <a href="{{ uri("login") }}" class="text-info">Connexion</a>
+                            {% endif %}
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -109,19 +109,27 @@ Pour la présentation :
 * Ecrire un texte (~2min) en anglais pour présenter le projet
 * Faire un fichier de présentation (slides/powerpoint/...)
 
-## Maquettes :
-
+## Maquettes :  
+Maquette accueil mobile
 ![Maquette home](/www/public/assets/img/maq00.png "Maquette home")
-
+--------------------------
+Maquette d'un formulaire mobile
 ![Maquette form](/www/public/assets/img/maq01.png "Maquette form")
+--------------------------
+Maquette d'une page fournisseur/produit/entrepôt mobile
 ![Maquette listing](/www/public/assets/img/maq02.png "Maquette listing")
-
+--------------------------
+Maquette accueil écran large
 ![Maquette home large](/www/public/assets/img/maq03.png "Maquette home large")
-
+--------------------------
+Maquette d'une page fournisseur/produit/entrepôt écran large
 ![Maquette listing large](/www/public/assets/img/maq04.png "Maquette listing large")
-
+--------------------------
+Maquette d'un formulaire écran large
 ![Maquette form large](/www/public/assets/img/maq05.png "Maquette form large")
-
+--------------------------
+Maquette administration mobile
 ![Maquette admin mobile](/www/public/assets/img/maq06.png "Maquette admin mobile")
-
+--------------------------
+Maquette administration écran large
 ![Maquette admin large](/www/public/assets/img/maq07.png "Maquette admin large")
