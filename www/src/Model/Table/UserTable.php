@@ -37,7 +37,7 @@ class UserTable extends Table
 
     public function delete(UserEntity $user, $id, $column = 'id')
     {
-        if ($user->getRole() == 1) {
+        if ($user->getRole() == 1) {;
             $this->query("DELETE FROM supplier WHERE user_id = '$id'");
         } elseif ($user->getRole() == 2) {
             $this->query("DELETE FROM warehouse WHERE user_id = '$id'");

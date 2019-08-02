@@ -29,11 +29,11 @@ class UserController extends Controller
     public function login(): string
     {
         $this->userForbidden();
-
-        if (!$_SESSION["google"]["email"]) {
-            $google = new AuthController();
-            $googleClient = $google->loginByGoogle();
-        }
+        
+        unset($_SESSION["google"]);
+        $google = new AuthController();
+        $googleClient = $google->loginByGoogle();
+        
 
         if (!$_SESSION["access_token"]) {
             $facebookClient = AuthController::loginByFacebook();

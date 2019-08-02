@@ -127,8 +127,10 @@ class ProductController extends Controller
 
         $supplier = $this->supplier->find($product->getSupplierId(), 'id');
         if ($_SESSION['auth']) {
-            if ($supplier->getUserId() === $_SESSION['auth']->getId()) {
-                $mine = true;
+            if ($supplier) {
+                if ($supplier->getUserId() === $_SESSION['auth']->getId()) {
+                    $mine = true;
+                }
             }
 
             $warehouse = $this->warehouse->find($_SESSION['auth']->getId(), 'user_id');
@@ -149,9 +151,12 @@ class ProductController extends Controller
             }
         }
 
-        $slugify = new Slugify();
-        $slugSupplier = $slugify->slugify($supplier->getSocial());
-        $idSupplier = $supplier->getId();
+        if ($supplier) {
+            $slugify = new Slugify();
+            $slugSupplier = $slugify->slugify($supplier->getSocial());
+            $idSupplier = $supplier->getId();
+        }
+
         $urlSupplier = $this->generateUrl('supplier_show', ['slug' => $slugSupplier, 'id' => $idSupplier]);
         
         return $this->render('product/show.html', [
