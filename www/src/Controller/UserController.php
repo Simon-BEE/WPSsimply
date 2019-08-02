@@ -1,11 +1,12 @@
 <?php
 namespace App\Controller;
 
-use \Core\Controller\Controller;
-use \Core\Controller\URLController;
-use \Core\Controller\MailController;
 use \App\Model\Table\UserTable;
+use \Core\Controller\Controller;
+use App\Controller\AuthController;
+use \Core\Controller\URLController;
 use Core\Controller\FormController;
+use \Core\Controller\MailController;
 
 class UserController extends Controller
 {
@@ -34,6 +35,11 @@ class UserController extends Controller
             $googleClient = $google->loginByGoogle();
         }
 
+        if (!$_SESSION["access_token"]) {
+            $facebookClient = AuthController::loginByFacebook();
+            $facebookClientUrl = $facebookClient->getRedirectLoginHelper()->getLoginUrl('http://localhost:8030/facebook-login');
+        }
+
         $form = new FormController();
         $form->field('mail', ["require"])
             ->field('password', ["require"]);
@@ -59,7 +65,8 @@ class UserController extends Controller
         
         return $this->render('user/login.html', [
             'datas' => $datas,
-            'googleUrl' => $googleClient->createAuthUrl()
+            'googleUrl' => $googleClient->createAuthUrl(),
+            'facebookUrl' => $facebookClientUrl
             ]);
     }
 
@@ -145,6 +152,7 @@ class UserController extends Controller
                 $this->flash()->addAlert('Veuillez remplir tous les champs correctement !');
             }
         }
+
         return $this->render('user/profile.html', [
             'user' => $user, 
             'supplier' => $supplier,

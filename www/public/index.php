@@ -39,6 +39,8 @@ $app->getRouter($basePath)
 
     //Utilisateurs
     ->match('/login', 'user#login', 'login')
+    ->match('/facebook', 'auth#loginByFacebook', 'facebook')
+    ->match('/facebook-login', 'auth#facebook', 'facebook_login')
     ->match('/register', 'user#register', 'register')
     ->match('/profile', 'user#profile', 'profile')
     ->match('/google', 'auth#google', 'user_google')
