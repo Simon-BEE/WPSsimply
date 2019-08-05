@@ -65,13 +65,20 @@ class SAMPLE extends Controller
      */
     public function google(): string
     {
-        if ($_SESSION['google'] == null) {
-            header('location: /');
-            exit();
+        if (($_SESSION['google'] == null) || empty($_SESSION['userData']) ) {
+            if (empty($_SESSION['userData'])) {
+                dd($_SESSION['userData']);
+                header('location: /');
+                exit();
+            }
         }
 
         $email = $_SESSION["google"]["email"];
-        $name = $_SESSION['google']['givenName'] . " " . $_SESSION['google']['familyName'];
+        if ($_SESSION['google']) {
+            $name = $_SESSION['google']['givenName'] . " " . $_SESSION['google']['familyName'];
+        }else{
+            $name = $_SESSION['userData']['first_name'] . " " . $_SESSION['userData']['last_name'];
+        }
         
         if ($this->user->find($email, 'mail')) {
             $user = $this->user->find($email, 'mail');
@@ -83,12 +90,19 @@ class SAMPLE extends Controller
             $form->field('password', ["require", "verify", "length" => 6])
                 ->field('name', ['require'])
                 ->field('role', ['require']);
+            if (!$email) {
+                $form->field('mail', ['require']);
+            }
             $errors =  $form->hasErrors();
             
             if (!isset($errors["post"])) {
                 $datas = $form->getDatas();
                 if (empty($errors)) {
-                    $datas['mail'] = $email;
+
+                    if ($email) {
+                        $datas['mail'] = $email;
+                    }
+                    
                     $datas["password"] = password_hash($datas["password"], PASSWORD_BCRYPT);
                     $this->user->newUser($datas);
 
@@ -97,6 +111,8 @@ class SAMPLE extends Controller
                     $_SESSION['auth'] = $user;
                     header('location: ' . $this->generateUrl("profile"));
                     exit();
+                }else{
+                    $this->flash()->addAlert('Veillez à bien remplir tous les champs');
                 }
                 unset($datas["password"]);
             } else {
@@ -127,12 +143,12 @@ class SAMPLE extends Controller
      * Redirige selon les informations données
      * @return void
      */
-    public function facebook(): void
+    public function facebook()
     {
-        $accessToken = $_SESSION['facebook_access_token'];
         $fb = AuthController::loginByFacebook();
+        $tok = $fb->getRedirectLoginHelper()->getAccessToken();
         
-        $response = $fb->get("/me?fields=id, first_name, last_name, email, picture.type(large)", $accessToken);
+        $response = $fb->get("/me?fields=id, first_name, last_name, email, picture.type(large)", $tok);
         $userData = $response->getGraphNode()->asArray();
         $_SESSION['userData'] = $userData;
 
@@ -147,19 +163,14 @@ class SAMPLE extends Controller
         if ($this->user->find($name, 'name')) {
             $user = $this->user->find($name, 'name');
             $_SESSION['auth'] = $user;
-            unset($_SESSION['FBRLH_state']);
-            unset($_SESSION['facebook_access_token']);
             unset($_SESSION['userData']);
             $this->flash()->addSuccess('Vous êtes connecté !');
             header('location: /profile');
             exit();
 
         }else{
-            unset($_SESSION['FBRLH_state']);
-            unset($_SESSION['facebook_access_token']);
-            unset($_SESSION['userData']);
             $this->flash()->addAlert('Veuillez vous enregistrer avant de vous connecter !');
-            header('location: /register');
+            header('location: /google');
             exit();
         }
     }

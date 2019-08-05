@@ -30,6 +30,8 @@ class App
 
     public static function load()
     {
+        date_default_timezone_set('Europe/Paris');
+
         if (getenv("ENV_DEV")) {
             $whoops = new \Whoops\Run;
             $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);

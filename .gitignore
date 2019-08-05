@@ -1,5 +1,6 @@
 .env
 .vscode
+*.directory
 www/vendor
 www/composer.lock
 www/public/adminer.php
