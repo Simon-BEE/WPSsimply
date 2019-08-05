@@ -67,17 +67,17 @@ class SAMPLE extends Controller
     {
         if (($_SESSION['google'] == null) || empty($_SESSION['userData']) ) {
             if (empty($_SESSION['userData'])) {
-                dd($_SESSION['userData']);
                 header('location: /');
                 exit();
             }
         }
 
-        $email = $_SESSION["google"]["email"];
         if ($_SESSION['google']) {
+            $email = $_SESSION["google"]["email"];
             $name = $_SESSION['google']['givenName'] . " " . $_SESSION['google']['familyName'];
         }else{
             $name = $_SESSION['userData']['first_name'] . " " . $_SESSION['userData']['last_name'];
+            $email = $_SESSION['userData']['email'];
         }
         
         if ($this->user->find($email, 'mail')) {
@@ -131,7 +131,7 @@ class SAMPLE extends Controller
         $fb = new \Facebook\Facebook([
             'app_id' => /* id de l'application */,
             'app_secret' => /* secret id de l'application */,
-            'default_graph_version' => 'v2.10',
+            'default_graph_version' => 'v4.0',
             ]);
             
         return $fb;
@@ -151,17 +151,17 @@ class SAMPLE extends Controller
         $response = $fb->get("/me?fields=id, first_name, last_name, email, picture.type(large)", $tok);
         $userData = $response->getGraphNode()->asArray();
         $_SESSION['userData'] = $userData;
-
+        
         if (!$_SESSION['userData']) {
             unset($_SESSION);
             header('location: /');
             exit();
         }
 
-        $name = $_SESSION['userData']['first_name'] . ' ' . $_SESSION['userData']['last_name'];
+        $mail = $_SESSION['userData']['email'];
 
-        if ($this->user->find($name, 'name')) {
-            $user = $this->user->find($name, 'name');
+        if ($this->user->find($mail, 'mail')) {
+            $user = $this->user->find($mail, 'mail');
             $_SESSION['auth'] = $user;
             unset($_SESSION['userData']);
             $this->flash()->addSuccess('Vous êtes connecté !');
