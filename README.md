@@ -103,13 +103,13 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 
 **Pour la présentation :**
 * ~~Rechercher les fonts utilisées par bootswatch LUX~~
-* ~~Ecrire un texte (~2min) en anglais pour présenter le projet~~
+* ~~Ecrire un texte (2min) en anglais pour présenter le projet~~
 * ~~Faire un fichier de présentation (slides/powerpoint/...)~~
 
 ## Fichiers présentations :
 
 Slide de présentation : [slide presentation](/presentation/slides-WPS.html)  
-Texte en anglais : [here](/presentation/texte-anglais.odt)
+Texte en anglais : [here](/presentation/texte-anglais)
 
 ## Maquettes :  
 
