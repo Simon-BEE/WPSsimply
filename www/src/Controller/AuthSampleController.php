@@ -49,8 +49,7 @@ class SAMPLE extends Controller
                 echo $e->getMessage();
             }
             if ($_SESSION['google']) {
-                header('location: /google');
-                exit();
+                $this->redirect('/google');
             }
         }
         
@@ -65,17 +64,16 @@ class SAMPLE extends Controller
      */
     public function google(): string
     {
-        if (($_SESSION['google'] == null) || empty($_SESSION['userData']) ) {
+        if (($_SESSION['google'] == null) || empty($_SESSION['userData'])) {
             if (empty($_SESSION['userData'])) {
-                header('location: /');
-                exit();
+                $this->redirect();
             }
         }
 
         if ($_SESSION['google']) {
             $email = $_SESSION["google"]["email"];
             $name = $_SESSION['google']['givenName'] . " " . $_SESSION['google']['familyName'];
-        }else{
+        } else {
             $name = $_SESSION['userData']['first_name'] . " " . $_SESSION['userData']['last_name'];
             $email = $_SESSION['userData']['email'];
         }
@@ -83,8 +81,8 @@ class SAMPLE extends Controller
         if ($this->user->find($email, 'mail')) {
             $user = $this->user->find($email, 'mail');
             $_SESSION["auth"] = $user;
-            header('location: /profile');
-            exit();
+            
+            $this->redirect('/profile');
         } else {
             $form = new FormController();
             $form->field('password', ["require", "verify", "length" => 6])
@@ -98,7 +96,6 @@ class SAMPLE extends Controller
             if (!isset($errors["post"])) {
                 $datas = $form->getDatas();
                 if (empty($errors)) {
-
                     if ($email) {
                         $datas['mail'] = $email;
                     }
@@ -109,9 +106,9 @@ class SAMPLE extends Controller
                     $this->flash()->addSuccess("Vous êtes bien enregistré");
                     $user = $this->user->find($this->user->last());
                     $_SESSION['auth'] = $user;
-                    header('location: ' . $this->generateUrl("profile"));
-                    exit();
-                }else{
+                    
+                    $this->redirect($this->generateUrl("profile"));
+                } else {
                     $this->flash()->addAlert('Veillez à bien remplir tous les champs');
                 }
                 unset($datas["password"]);
@@ -135,7 +132,6 @@ class SAMPLE extends Controller
             ]);
             
         return $fb;
-
     }
 
     /**
@@ -154,8 +150,7 @@ class SAMPLE extends Controller
         
         if (!$_SESSION['userData']) {
             unset($_SESSION);
-            header('location: /');
-            exit();
+            $this->redirect();
         }
 
         $mail = $_SESSION['userData']['email'];
@@ -165,13 +160,10 @@ class SAMPLE extends Controller
             $_SESSION['auth'] = $user;
             unset($_SESSION['userData']);
             $this->flash()->addSuccess('Vous êtes connecté !');
-            header('location: /profile');
-            exit();
-
-        }else{
+            $this->redirect('/profile');
+        } else {
             $this->flash()->addAlert('Veuillez vous enregistrer avant de vous connecter !');
-            header('location: /google');
-            exit();
+            $this->redirect('/google');
         }
     }
 }

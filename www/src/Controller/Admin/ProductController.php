@@ -54,8 +54,7 @@ class ProductController extends Controller
     {
         $product = $this->product->find($id);
         if (!$product) {
-            header('location: /admin/product');
-            exit();
+            $this->redirect('/admin/product');
         }
         
         $form = new FormController();
@@ -80,10 +79,9 @@ class ProductController extends Controller
                 $slugify = new Slugify();
                 $slugNew = $slugify->slugify($datas['name']);
                 
-                header('location: '. $this->generateUrl('admin_product_show', [
+                $this->redirect($this->generateUrl('admin_product_show', [
                     'slug' => $slugNew,
                     'id' => $this->product->last()]));
-                exit();
             } else {
                 $this->flash()->addAlert('Veillez à bien remplir tous les champs');
             }
@@ -128,10 +126,9 @@ class ProductController extends Controller
                 $slugify = new Slugify();
                 $slugNew = $slugify->slugify($datas['name']);
                 
-                header('location: '. $this->generateUrl('admin_product_show', [
+                $this->redirect($this->generateUrl('admin_product_show', [
                     'slug' => $slugNew,
                     'id' => $this->product->last()]));
-                exit();
             } else {
                 $this->flash()->addAlert('Veillez à bien remplir tous les champs');
             }

@@ -55,8 +55,7 @@ class SupplierController extends Controller
 
         $supplier = $this->supplier->find($id);
         if (!$supplier) {
-            header('location: /admin/supplier');
-            exit();
+            $this->redirect('/admin/supplier');
         }
         
         $products = $this->product->findAll($id, 'supplier_id');
@@ -75,8 +74,7 @@ class SupplierController extends Controller
                 $slugify = new Slugify();
                 $slugNew = $slugify->slugify($datas['social']);
                 
-                header('location: '. $this->generateUrl('admin_supplier_show', ['slug' => $slugNew, 'id' => $id]));
-                exit();
+                $this->redirect($this->generateUrl('admin_supplier_show', ['slug' => $slugNew, 'id' => $id]));
             }
         }
 
@@ -111,10 +109,9 @@ class SupplierController extends Controller
                 $slugify = new Slugify();
                 $slugNew = $slugify->slugify($datas['social']);
                 
-                header('location: '. $this->generateUrl('admin_supplier_show', [
+                $this->redirect($this->generateUrl('admin_supplier_show', [
                     'slug' => $slugNew,
                     'id' => $this->supplier->last()]));
-                exit();
             } else {
                 $this->flash()->addAlert('Veillez à bien remplir tous les champs');
             }

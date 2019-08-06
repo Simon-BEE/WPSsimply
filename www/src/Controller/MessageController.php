@@ -27,10 +27,10 @@ class MessageController extends Controller
         $users = $this->user->allWithoutMe($id);
         $sending = $this->message->findAll($id, 'sender_id');
 
-        return $this->render('message/index.html',[
+        return $this->render('message/index.html', [
             'user' => $user,
             'messages' => $messages,
-            'users' => $users, 
+            'users' => $users,
             'sending' => $sending
         ]);
     }
@@ -47,7 +47,7 @@ class MessageController extends Controller
         $messages = $this->message->findAllByContact($id, $contact_id);
 
         if (!$messages) {
-            header('location: '.$this->generateUrl('messages', ['id' => $id]));
+            $this->redirect($this->generateUrl('messages', ['id' => $id]));
         }
 
         foreach ($messages as $value) {
@@ -105,9 +105,10 @@ class MessageController extends Controller
 
                 $this->message->create($datas);
                 $this->flash()->addSuccess('Votre message a bien été envoyé');
-                header('location: '. $this->generateUrl('message_show', ['id' => $id, 'contact_id' => $datas['receiver_id']]));
-                exit();
-            }else{
+                $this->redirect($this->generateUrl('message_show', [
+                    'id' => $id,
+                    'contact_id' => $datas['receiver_id']]));
+            } else {
                 $this->flash()->addAlert('Veillez à bien remplir les champs');
             }
         }

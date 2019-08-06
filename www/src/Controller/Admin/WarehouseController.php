@@ -61,8 +61,7 @@ class WarehouseController extends Controller
     {
         $warehouse = $this->warehouse->find($id);
         if (!$warehouse) {
-            header('location: /admin/warehouse');
-            exit();
+            $this->redirect('/admin/warehouse');
         }
 
         $myProducts = $this->productsInWarehouse($warehouse);
@@ -85,10 +84,9 @@ class WarehouseController extends Controller
                 $slugify = new Slugify();
                 $slugNew = $slugify->slugify($datas['name']);
                 
-                header('location: '. $this->generateUrl('admin_warehouse_show', [
+                $this->redirect($this->generateUrl('admin_warehouse_show', [
                     'slug' => $slugNew,
                     'id' => $id]));
-                exit();
             } else {
                 $this->flash()->addAlert('Veillez à bien remplir tous les champs');
             }
@@ -131,10 +129,9 @@ class WarehouseController extends Controller
                 $slugify = new Slugify();
                 $slugNew = $slugify->slugify($datas['name']);
                 
-                header('location: '. $this->generateUrl('admin_warehouse_show', [
+                $this->redirect($this->generateUrl('admin_warehouse_show', [
                     'slug' => $slugNew,
                     'id' => $this->warehouse->last()]));
-                exit();
             } else {
                 $this->flash()->addAlert('Veillez à bien remplir tous les champs');
             }
@@ -195,11 +192,10 @@ class WarehouseController extends Controller
                     }
                 }
                 $this->flash()->addSuccess('Le ou les produits ont bien été ajoutés à cet entrepôt');
-                header('location: '.
-                    $this->generateUrl('admin_warehouse_show', [
+                
+                $this->redirect($this->generateUrl('admin_warehouse_show', [
                     'slug' => $slug,
                     'id' => $id]));
-                exit();
             } else {
                 $this->flash()->addAlert('Veillez à choisir au moins un produit');
             }

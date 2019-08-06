@@ -45,8 +45,7 @@ class SupplierController extends Controller
     {
         $supplier = $this->supplier->find($id);
         if (!$supplier) {
-            header('location: /suppliers');
-            exit();
+            $this->redirect('/suppliers');
         }
 
         if ($_SESSION['auth']) {
@@ -72,7 +71,7 @@ class SupplierController extends Controller
     {
         if ($this->supplier->find($_SESSION['auth']->getId(), 'user_id') &&
         ($_SESSION['auth']->getRole() != 1)) {
-            header('location: /');
+            $this->redirect();
         }
 
         $form = new FormController();
@@ -92,8 +91,7 @@ class SupplierController extends Controller
                 $slug = $slugify->slugify($supplier->getSocial());
                 
                 $url = $this->generateUrl('supplier_show', ['slug' => $slug, 'id' => $supplier->getId()]);
-                header('location: '.$url);
-                exit();
+                $this->redirect($url);
             }
         }
 
@@ -110,13 +108,11 @@ class SupplierController extends Controller
     {
         $supplier = $this->supplier->find($id);
         if (!$supplier) {
-            header('location: /suppliers');
-            exit();
+            $this->redirect('/suppliers');
         }
         
         if ($_SESSION['auth']->getId() !== $supplier->getUserId()) {
-            die('la');
-            header('location: '. $this->generateUrl('supplier_show', ['slug' => $slug, 'id' => $id]));
+            $this->redirect($this->generateUrl('supplier_show', ['slug' => $slug, 'id' => $id]));
         }
 
         $form = new FormController();
@@ -130,8 +126,7 @@ class SupplierController extends Controller
                 $this->supplier->update($id, 'id', $datas);
                 $this->flash()->addSuccess('Votre société a bien été modifié!');
                 
-                header('location: '. $this->generateUrl('supplier_show', ['slug' => $slug, 'id' => $id]));
-                exit();
+                $this->redirect($this->generateUrl('supplier_show', ['slug' => $slug, 'id' => $id]));
             }
         }
         return $this->render('supplier/edit.html', ['supplier' => $supplier]);

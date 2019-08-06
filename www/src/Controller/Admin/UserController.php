@@ -55,8 +55,7 @@ class UserController extends Controller
     {
         $user = $this->user->find($id);
         if (!$user) {
-            header('location: /admin/user');
-            exit();
+            $this->redirect('/admin/user');
         }
         $role = $user->getRole();
 
@@ -147,8 +146,8 @@ class UserController extends Controller
                 $this->user->create($datas);
                 $this->flash()->addSuccess('L\'utilisateur est bien enregistré');
                 $url = $this->generateUrl('admin_user_show', ['id' => $this->user->last()]);
-                header('location: '.$url);
-                exit();
+                
+                $this->redirect($url);
             } else {
                 $this->flash()->addAlert('Veillez à bien remplir les champs !');
             }

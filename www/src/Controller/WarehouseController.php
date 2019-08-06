@@ -47,7 +47,7 @@ class WarehouseController extends Controller
     {
         if ($this->warehouse->find($_SESSION['auth']->getId(), 'user_id') &&
             ($_SESSION['auth']->getRole() != 2)) {
-            header('location: /');
+            $this->redirect();
         }
 
         $form = new FormController();
@@ -68,8 +68,7 @@ class WarehouseController extends Controller
                 $warehouse = $this->warehouse->find($this->warehouse->last());
                 $slug = $slugify->slugify($warehouse->getName());
                 $url = $this->generateUrl('warehouse_show', ['slug' => $slug, 'id' => $warehouse->getId()]);
-                header('location: '.$url);
-                exit();
+                $this->redirect($url);
             }
         }
 
@@ -86,8 +85,7 @@ class WarehouseController extends Controller
     {
         $warehouse = $this->warehouse->find($id);
         if (!$warehouse) {
-            header('location: /warehouses');
-            exit();
+            $this->redirect('/warehouses');
         }
         
         if ($_SESSION['auth']) {
@@ -123,13 +121,11 @@ class WarehouseController extends Controller
     {
         $warehouse = $this->warehouse->find($id);
         if (!$warehouse) {
-            header('location: /warehouses');
-            exit();
+            $this->redirect('/warehouses');
         }
 
         if ($_SESSION['auth']->getId() !== $warehouse->getUserId()) {
-            die('la');
-            header('location: '. $this->generateUrl('warehouse_show', ['slug' => $slug, 'id' => $id]));
+            $this->redirect($this->generateUrl('warehouse_show', ['slug' => $slug, 'id' => $id]));
         }
 
         $form = new FormController();
@@ -144,9 +140,7 @@ class WarehouseController extends Controller
             if (empty($errors)) {
                 $this->warehouse->update($id, 'id', $datas);
                 $this->flash()->addSuccess('Votre société a bien été modifié!');
-                
-                header('location: '. $this->generateUrl('warehouse_show', ['slug' => $slug, 'id' => $id]));
-                exit();
+                $this->redirect($this->generateUrl('warehouse_show', ['slug' => $slug, 'id' => $id]));
             }
         }
         $cities = $this->city->all();

@@ -28,7 +28,7 @@ class ProductController extends Controller
     public function add():string
     {
         if ($_SESSION['auth']->getRole() != 1) {
-            header('location: /');
+            $this->redirect();
         }
 
         $form = new FormController();
@@ -58,8 +58,7 @@ class ProductController extends Controller
                 $slug = $slugify->slugify($product->getName());
                 $url = $this->generateUrl('product_show', ['slug' => $slug, 'id' => $product->getId()]);
                 
-                header('location: '.$url);
-                exit();
+                $this->redirect($url);
             }
         }
 
@@ -76,12 +75,11 @@ class ProductController extends Controller
     {
         $product = $this->product->find($id);
         if (!$product) {
-            header('location: /products');
-            exit();
+            $this->redirect('/products');
         }
         
         if ($_SESSION['auth']->getRole() != 1) {
-            header('location: /');
+            $this->redirect();
         }
 
         $form = new FormController();
@@ -104,8 +102,7 @@ class ProductController extends Controller
                 $this->flash()->addSuccess('Votre produit a bien été modifié!');
                 
                 $url = $this->generateUrl('product_show', ['slug' => $slug, 'id' => $id]);
-                header('location: '.$url);
-                exit();
+                $this->redirect($url);
             }
         }
 
@@ -121,8 +118,7 @@ class ProductController extends Controller
     {
         $product = $this->product->find($id);
         if (!$product) {
-            header('location: /products');
-            exit();
+            $this->redirect('/products');
         }
 
         $supplier = $this->supplier->find($product->getSupplierId(), 'id');

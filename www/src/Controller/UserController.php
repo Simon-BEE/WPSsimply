@@ -37,7 +37,8 @@ class UserController extends Controller
 
         if (!$_SESSION["access_token"]) {
             $facebookClient = AuthController::loginByFacebook();
-            $facebookClientUrl = $facebookClient->getRedirectLoginHelper()->getLoginUrl('http://localhost:8030/facebook-login');
+            $facebookClientUrl = $facebookClient->getRedirectLoginHelper()
+                ->getLoginUrl('http://localhost:8030/facebook-login');
         }
 
         $form = new FormController();
@@ -53,7 +54,7 @@ class UserController extends Controller
                 if ($user) {
                     $this->flash()->addSuccess("Vous êtes bien connecté");
                     $_SESSION['auth'] = $user;
-                    header('location: /profile');
+                    $this->redirect('/profile');
                 } else {
                     $this->flash()->addAlert("L'adresse email et/ou le mot de passe est/son incorrect/s");
                 }
@@ -102,8 +103,7 @@ class UserController extends Controller
 
                 $this->flash()->addSuccess("Vous êtes bien enregistré");
 
-                header('location: ' . $this->generateUrl("login"));
-                exit();
+                $this->redirect($this->generateUrl("login"));
             }
             unset($datas["password"]);
         } else {
@@ -125,9 +125,13 @@ class UserController extends Controller
         
         $user = $_SESSION['auth'];
 
+        if (!$user) {
+            $this->redirect('/');
+        }
+
         if ($this->supplier->find($user->getId(), 'user_id')) {
             $supplier = $this->supplier->find($user->getId(), 'user_id');
-        }elseif ($this->warehouse->find($user->getId(), 'user_id')){
+        } elseif ($this->warehouse->find($user->getId(), 'user_id')) {
             $warehouse = $this->warehouse->find($user->getId(), 'user_id');
         }
 
@@ -154,7 +158,7 @@ class UserController extends Controller
         }
 
         return $this->render('user/profile.html', [
-            'user' => $user, 
+            'user' => $user,
             'supplier' => $supplier,
             'warehouse' => $warehouse]);
     }
@@ -168,7 +172,6 @@ class UserController extends Controller
     {
         unset($_SESSION['auth']);
         unset($_SESSION['google']);
-        header('location: /');
+        $this->redirect();
     }
-
 }

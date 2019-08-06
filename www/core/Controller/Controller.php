@@ -68,44 +68,49 @@ abstract class Controller
     protected function onlyAdmin()
     {
         if (empty($_SESSION['auth']) || $_SESSION['auth']->getRole() != 7) {
-            header('location: /');
-            exit();
+            $this->redirect();
         }
     }
 
     /**
      * Autorise uniquement les utilisateurs à accèder à la page
-     * 
+     *
      * @return void
      */
     protected function userOnly():void
     {
         if (!$_SESSION['auth']) {
-            \header('location: /');
+            $this->redirect();
         }
     }
 
     /**
      * Autorise uniquement les utilisateurs précis à accèder à la page
-     * 
+     *
      * @return void
      */
     protected function userOnlyById($id):void
     {
         if ($_SESSION['auth']->getId() != $id) {
-            \header('location: /');
+            $this->redirect();
         }
     }
 
     /**
      * Autorise uniquement les utilisateurs à accèder à la page
-     * 
+     *
      * @return void
      */
     protected function userForbidden():void
     {
         if ($_SESSION['auth']) {
-            \header('location: /profile');
+            $this->redirect();
         }
+    }
+
+    protected function redirect(string $path = '/')
+    {
+        header('location: '. $path);
+        exit();
     }
 }
