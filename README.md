@@ -21,7 +21,7 @@ Il n'y a qu'un seul entrepôt par ville.
 Un utilisateur peut etre fournisseur ou gérant d'entrepôt.  
 Il ne peut être gérant que d'un entrepôt.  
 
-![Schema UML](/www/public/assets/img/warehouse.png "Schema UML")
+![Schema UML](/presentation/models/warehouse.png "Schema UML")
 
 ## Couleurs :
 Utilisation d'un thème Bootstwatch (modification stylistique de Bootstrap) : **LUX**.
@@ -101,41 +101,38 @@ Les police monospace utilisée par le thème bootswatch : **"SFMono-Regular"**.
 * ~~Mettre à jour UML~~
 * Commenter le code *in progress*
 
-Optionnel :
-* Ajouter un produit si seulement il nous reste de la place
-
-Pour la présentation :
+**Pour la présentation :**
 * ~~Rechercher les fonts utilisées par bootswatch LUX~~
-* Ecrire un texte (~2min) en anglais pour présenter le projet
+* ~~Ecrire un texte (~2min) en anglais pour présenter le projet~~
 * ~~Faire un fichier de présentation (slides/powerpoint/...)~~
 
 ## Fichiers présentations :
 
-Slide de présentation : [slide presentation](https://slides.com/simonbee/wps)  
-Texte en anglais : *non commencé*
+Slide de présentation : [slide presentation](/presentation/slides-WPS.html)  
+Texte en anglais : [here](/presentation/texte-anglais.odt)
 
 ## Maquettes :  
 
 ### Maquette accueil mobile
-![Maquette home](/www/public/assets/img/maq00.png "Maquette home")
+![Maquette home](/presentation/models/maq00.png "Maquette home")
 --------------------------
 ### Maquette d'un formulaire mobile
-![Maquette form](/www/public/assets/img/maq01.png "Maquette form")
+![Maquette form](/presentation/models/maq01.png "Maquette form")
 --------------------------
 ### Maquette d'une page fournisseur/produit/entrepôt mobile
-![Maquette listing](/www/public/assets/img/maq02.png "Maquette listing")
+![Maquette listing](/presentation/models/maq02.png "Maquette listing")
 --------------------------
 ### Maquette accueil écran large
-![Maquette home large](/www/public/assets/img/maq03.png "Maquette home large")
+![Maquette home large](/presentation/models/maq03.png "Maquette home large")
 --------------------------
 ### Maquette d'une page fournisseur/produit/entrepôt écran large
-![Maquette listing large](/www/public/assets/img/maq04.png "Maquette listing large")
+![Maquette listing large](/presentation/models/maq04.png "Maquette listing large")
 --------------------------
 ### Maquette d'un formulaire écran large
-![Maquette form large](/www/public/assets/img/maq05.png "Maquette form large")
+![Maquette form large](/presentation/models/maq05.png "Maquette form large")
 --------------------------
 ### Maquette administration mobile
-![Maquette admin mobile](/www/public/assets/img/maq06.png "Maquette admin mobile")
+![Maquette admin mobile](/presentation/models/maq06.png "Maquette admin mobile")
 --------------------------
 ### Maquette administration écran large
-![Maquette admin large](/www/public/assets/img/maq07.png "Maquette admin large")
+![Maquette admin large](/presentation/models/maq07.png "Maquette admin large")
