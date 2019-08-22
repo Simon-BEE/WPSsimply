@@ -227,7 +227,7 @@ class WarehouseController extends Controller
      *
      * @return array
      */
-    private function productsInWarehouse(WarehouseEntity $warehouse):array
+    private function productsInWarehouse(WarehouseEntity $warehouse):?array
     {
         $productsId = $this->productWarehouse->findAll($warehouse->getId(), 'warehouse_id');
         foreach ($productsId as $id) {
