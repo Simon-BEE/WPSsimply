@@ -8,10 +8,6 @@ services:
     image: blog-dev
     volumes:
       - ${PWD}/www:/var/www
-    ports:
-      - ${CONTAINER_PORT}:80
-    networks:
-      - blog
     env_file:
       - .env
 
@@ -19,21 +15,10 @@ services:
     container_name:  ${CONTAINER_MYSQL}
     restart: unless-stopped
     image: mariadb
-    networks: 
-      - blog
-    env_file:
-      - .env
-  mail:
-    container_name:  ${CONTAINER_NAME}.mailcatcher
-    restart: unless-stopped
-    image: schickling/mailcatcher
-    ports:
-      - ${PORT_MAIL}:1080
-    networks: 
-      - blog
     env_file:
       - .env
 
 networks: 
-  blog:
-    driver: bridge
+  default:
+    external:
+      name: webproxy
